@@ -85,7 +85,13 @@ We need be able to connect, even if our user is the one running the process..
 This is for local development, so no worries (on a MAC I have no idea were is it!)
 
 
-Add the line on this file /etc/postgresql/9.1/main/pg_hba.conf
+Change the line in the file /etc/postgresql/9.1/main/pg_hba.conf
+
+from
+
+    local   all             postgres                                peer
+
+to
 
     local   all         all                               md5
 
@@ -114,6 +120,12 @@ cd to the directory in which you want the Django directory to be created
 
 	./manage.py syncdb
 	
+If you're asked whether you want to create a superuser, answer "yes"
+
+You will also have to follow the instructions to migrate maps -- the app uses south:
+
+	./manage.py migrate
+
 # Launching with honcho
 
 Make sure you have lessc compiler installed.
