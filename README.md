@@ -60,10 +60,10 @@ We will use postgresql as our database backend, therefore we need to install it
 For Ubuntu 10.10
 
 More info here, https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#creating-a-spatial-database-template-for-postgis,
-however we this is the way to do it on an Ubuntu (10.10).
+however we this is the way to do it on an Ubuntu (12.04).
 
-    sudo apt-get install binutils gdal-bin postgresql-8.4-postgis \
-         postgresql-server-dev-8.4
+    sudo apt-get install binutils gdal-bin postgresql-9.1-postgis \
+         postgresql-server-dev-9.1
          
 Now we have to create the template to include spatial information on the database.
 If you want to know everything, just read here 
