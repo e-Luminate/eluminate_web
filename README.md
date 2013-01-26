@@ -57,10 +57,18 @@ cd to the directory in which you want the Django directory to be created
 
 We will use postgresql as our database backend, therefore we need to install it
 
-For Ubuntu 10.10
+For Ubuntu
 
 More info here, https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#creating-a-spatial-database-template-for-postgis,
-however we this is the way to do it on an Ubuntu (12.04).
+however we this is the way to do it on an Ubuntu
+
+For 10.10:
+
+    sudo apt-get install binutils gdal-bin postgresql-8.4-postgis \
+         postgresql-server-dev-8.4
+         
+
+For 12.04:
 
     sudo apt-get install binutils gdal-bin postgresql-9.1-postgis \
          postgresql-server-dev-9.1
