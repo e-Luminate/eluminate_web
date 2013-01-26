@@ -87,6 +87,9 @@ otherwise there is ascript that can do it for you
 Ok, now we can create the user, the database and make sure we can connect
   
     sudo -u postgres createuser e_luminate_user
+
+answer "y" to the question about superuser if you want (doesn't matter)
+
     sudo -u postgres createdb -O e_luminate_user -T template_postgis e_luminate_db
     sudo -u postgres psql -c "alter user e_luminate_user with password 'e_luminate_password';"
 
