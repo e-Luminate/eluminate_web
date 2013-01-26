@@ -27,11 +27,18 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/London"
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = "en-us"
+
+ugettext = lambda s: s
+
+LANGUAGES = (
+    ('en', ugettext('English')),
+)
+DEFAULT_LANGUAGE = 1
 
 SITE_ID = 1
 
@@ -183,3 +190,5 @@ ACCOUNT_EMAIL_AUTHENTICATION = False
 ACCOUNT_LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
+
+
