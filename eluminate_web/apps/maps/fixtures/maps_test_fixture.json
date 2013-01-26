@@ -1,0 +1,136 @@
+[
+    {
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "username": "mattions",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2012-09-23T09:12:33.035Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$O7NhMmYkSbRj$cqu5xIQI63GqV3Ift4LKFxbymgXLqB1Gl/ptI5P1RpM=",
+            "email": "mattions@gmail.com",
+            "date_joined": "2012-09-20T12:06:02Z"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "category.category",
+        "fields": {
+            "image": "category/fruits_30x30_3.png",
+            "name": "Fruits"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "category.category",
+        "fields": {
+            "image": "category/vegetables_30x30_2.png",
+            "name": "Vegetables"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "auth.user",
+        "fields": {
+            "username": "test",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2012-09-23T08:49:54.496Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$puHDN6vvWREv$Iw22Bo0nNYSaoBYt9tXvUUNwkWS6v6/KarOLfx0/LqA=",
+            "email": "test@example.com",
+            "date_joined": "2012-09-20T12:06:51.133Z"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "maps.location",
+        "fields": {
+            "marker": "POINT (0.1150131225585938 52.2022085542400092)",
+            "area": null,
+            "user": 1,
+            "name": "Mathematical Bridge"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "maps.location",
+        "fields": {
+            "marker": "POINT (-1.4776611328125000 52.2143386082581955)",
+            "area": null,
+            "user": 2,
+            "name": "Amazingly Far East"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "maps.location",
+        "fields": {
+            "marker": "POINT (0.1131248474121094 52.2444094808367225)",
+            "area": null,
+            "user": 2,
+            "name": "far in the north"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "maps.location",
+        "fields": {
+            "marker": "POINT (0.1282310485839844 52.2018206008481087)",
+            "area": null,
+            "user": 2,
+            "name": "reality checkpoint"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "inventory.item",
+        "fields": {
+            "category": 2,
+            "available_from": "2012-09-20T18:35:53.601Z",
+            "selected": false,
+            "description": "tasty pears from far away",
+            "name": "pears",
+            "notes": "",
+            "sell_individually": true,
+            "quantity_type": "item",
+            "creation_date": "2012-09-20T18:35:53.601Z",
+            "price": "4.50",
+            "location": 2,
+            "expire_date": "2012-09-30T18:34:00Z",
+            "quantity": "21.00",
+            "swappable": true,
+            "user": 2
+        }
+    },
+    {
+        "pk": 1,
+        "model": "inventory.item",
+        "fields": {
+            "category": 1,
+            "available_from": "2012-09-20T12:28:02.945Z",
+            "selected": false,
+            "description": "yummy carrots",
+            "name": "carrots",
+            "notes": "",
+            "sell_individually": true,
+            "quantity_type": "item",
+            "creation_date": "2012-09-20T12:28:02.945Z",
+            "price": "3.42",
+            "location": 1,
+            "expire_date": "2012-09-30T12:26:00Z",
+            "quantity": "21.00",
+            "swappable": false,
+            "user": 2
+        }
+    }
+]
