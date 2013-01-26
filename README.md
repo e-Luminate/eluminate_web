@@ -52,13 +52,13 @@ however we this is the way to do it on an Ubuntu
 For 10.10:
 
     sudo apt-get install binutils gdal-bin postgresql-8.4-postgis \
-         postgresql-server-dev-8.4
+         postgresql-server-dev-8.4 python-dev
          
 
 For 12.04:
 
     sudo apt-get install binutils gdal-bin postgresql-9.1-postgis \
-         postgresql-server-dev-9.1
+         postgresql-server-dev-9.1 python-dev
          
 Now we have to create the template to include spatial information on the database.
 If you want to know everything, just read here 
