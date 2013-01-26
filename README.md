@@ -57,7 +57,3 @@ cd to the directory in which you want the Django directory to be created
 	./manage.py syncdb
 	./manage.py runserver
 
-P.S.: If you create a superuser with the first syncdb, it does not create the related account automatically,
-so you need to log in in the admin and create the account there.
-
-All the new user will create an account (done in the view).
