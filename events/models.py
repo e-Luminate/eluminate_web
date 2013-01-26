@@ -1,10 +1,10 @@
 from django.db import models
 
+class Day(models.Model):
+    name = models.CharField(max_length = 9)
+
 class Event(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
-    
-class Day(models.Model):
-    name = models.CharField(max_length = 9)
-    events = models.ManyToManyField(Event)
+    days = models.ManyToManyField(Day)
 

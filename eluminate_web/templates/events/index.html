@@ -1,0 +1,15 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}
+Programme
+{% endblock %}
+
+{% block body %}
+<h1>Programme</h1>
+
+<ul>
+  {% for event in event_list %}
+    <li><a href="/events/{{ event.id }}/">{{ event.start_time }} - {{ event.end_time }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
