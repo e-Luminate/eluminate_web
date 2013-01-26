@@ -1,4 +1,8 @@
-h1,
-h2 {
-  color: red;
+body {
+  background: black;
+  color: white;
+}
+.hero-unit {
+  background: black;
+  color: white;
 }
