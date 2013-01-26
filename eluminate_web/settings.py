@@ -1,8 +1,9 @@
 import os
-
+import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
+sys.path.insert(0, os.path.join(PACKAGE_ROOT, "apps"))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -147,10 +148,11 @@ INSTALLED_APPS = [
     "metron",
     "eventlog",
     "south",
+    "crispy_forms",
     
     # project
     "eluminate_web",
-    #"maps",
+    "maps",
     "blah"
 ]
 
@@ -191,6 +193,7 @@ FIXTURE_DIRS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
 ACCOUNT_OPEN_SIGNUP = True
 ACCOUNT_USE_OPENID = False
 ACCOUNT_REQUIRED_EMAIL = False
