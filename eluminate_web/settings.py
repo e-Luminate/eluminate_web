@@ -14,9 +14,11 @@ ADMINS = [
 MANAGERS = ADMINS
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "dev.db",
+    'default': {
+        'ENGINE' : 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'e_luminate_db',
+        'USER': 'e_luminate_user',
+        'PASSWORD': 'e_luminate_password',
     }
 }
 
@@ -132,20 +134,27 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django.contrib.gis',
     
     # theme
     "pinax_theme_bootstrap_account",
     "pinax_theme_bootstrap",
     "django_forms_bootstrap",
     
+    
     # external
     "account",
     "metron",
     "eventlog",
+    "south",
     
     # project
     "eluminate_web",
+    #"maps",
+    "blah"
 ]
+
+#SERIALIZATION_MODULES = { 'geojson' : 'maps.geojson_serializer' }
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

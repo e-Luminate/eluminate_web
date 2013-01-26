@@ -12,3 +12,6 @@ eventlog==0.6
 django-jsonfield==0.8.11
 watchdog==0.6.0
 honcho==0.2.0
+psycopg2==2.4.5
+South==0.7.6
+
