@@ -151,9 +151,10 @@ INSTALLED_APPS = [
     "crispy_forms",
     
     # project
+    "blah",
     "eluminate_web",
+    "events",
     "maps",
-    "blah"
 ]
 
 #SERIALIZATION_MODULES = { 'geojson' : 'maps.geojson_serializer' }
