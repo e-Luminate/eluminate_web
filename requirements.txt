@@ -10,3 +10,5 @@ metron==1.0
 pinax-utils==1.0b1.dev3
 eventlog==0.6
 django-jsonfield==0.8.11
+watchdog==0.6.0
+honcho==0.2.0

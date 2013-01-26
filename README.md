@@ -52,8 +52,14 @@ cd to the directory in which you want the Django directory to be created
 	mkvirtualenv eluminate_env
 	pip install -r requirements.txt
 	
-# Launching the dev server
+# Syncing the db
 
 	./manage.py syncdb
-	./manage.py runserver
+	
+# Launching with honcho
+
+Make sure you have lessc compiler installed.
+Read more here: https://github.com/e-Luminate/eluminate_web/script/Readme.md
+
+	honcho -f Procfile.dev start
 

@@ -1,0 +1,2 @@
+web: ./manage.py runserver
+less: watchmedo shell-command --patterns="*.less" --command='./scripts/build_less.py "${watch_src_path}" ' eluminate_web/static/less/
