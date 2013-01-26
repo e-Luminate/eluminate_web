@@ -145,6 +145,7 @@ INSTALLED_APPS = [
     
     # project
     "eluminate_web",
+    "events",
 ]
 
 # A sample logging configuration. The only tangible logging
