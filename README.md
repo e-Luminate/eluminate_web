@@ -16,6 +16,7 @@ https://docs.google.com/document/d/1QK7sTJmHXAQVOpIdj0TqIjNUqG7L1oAWX1wy6M9lJcA/
 
 # Development
 
+The following instuctions asume a Debian/Ubuntu linux environment
 
 ## Virtualenv package needed
 
