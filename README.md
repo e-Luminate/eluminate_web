@@ -39,12 +39,6 @@ To finish up, make sure to add this two line to your bashrc (or anything that yo
 	export WORKON_HOME=~/.virtualenvs
 	source /usr/local/bin/virtualenvwrapper.sh
 
-# Creating the VirtualEnv and installing the required packages
-
-
-	mkvirtualenv eluminate_env
-	pip install -r requirements.txt
-	
 # get the repository
 
 cd to the directory in which you want the Django directory to be created
@@ -52,8 +46,12 @@ cd to the directory in which you want the Django directory to be created
 	git clone https://github.com/e-Luminate/eluminate_web
 	cd eluminate_web
 
-# Launching the dev server
+# Creating the VirtualEnv and installing the required packages
 
+	mkvirtualenv eluminate_env
+	pip install -r requirements.txt
+	
+# Launching the dev server
 
 	./manage.py syncdb
 	./manage.py runserver
