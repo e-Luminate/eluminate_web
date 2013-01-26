@@ -35,15 +35,9 @@
 				        	<div class="span2"><a class="btn" 
 				        		href="{% url edit_location location.pk %}">Edit the location</a></div>
 				        	<div class="span2">
-				        		{% if location.item_set.all.count == 0 %}
-					        		<a class="btn btn-danger" 
-					        			href=" {% url delete_location location.pk %}"
-					        			title="There is no going back!">Delete Location</a>
-				        		{% else %}	
-			        			<a class="btn disabled btn-danger" 
-			        				href="#"
-			        				title="Items are associated with this location.">Delete Not Possible</a>
-				        		{% endif %}
+				        		<a class="btn btn-danger" 
+				        			href=" {% url delete_location location.pk %}"
+				        			title="There is no going back!">Delete Location</a>
 				        	</div>
 							<script type="text/javascript">
 								$(document).ready(function(){	
