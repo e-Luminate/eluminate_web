@@ -1,0 +1,48 @@
+{% extends "site_base.html" %}
+
+{% load crispy_forms_tags %}
+{% block extra_head %}
+	{{ form.media }}
+<style>
+#map_canvas { height: 400px; }
+</style>
+<!-- Leaflet Map -->
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/leaflet.css" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="{{ STATIC }}css/leaflet.ie.css" />
+<![endif]-->
+<script src="{{ STATIC_URL }}dist/leaflet.js"></script>
+
+{% comment %}
+{# disabling the cluster plugin for now. #}
+<!-- cluster plugin -->
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/MarkerCluster.css" />
+<link rel="stylesheet" href="{{ STATIC_URL }}dist/MarkerCluster.Default.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="{{ STATIC_URL }}dist/MarkerCluster.Default.ie.css" /><![endif]-->
+<script src="{{ STATIC_URL }}dist/leaflet.markercluster.js"></script>
+{% endcomment %}
+
+<!-- our script -->
+<script src="{{ STATIC_URL }}js/map-interaction.js"></script>     
+<!-- /Leaflet Map -->
+{% endblock %}
+{% block head_title %}Add New Location{% endblock %}
+
+{% block body %}
+{% include "maps/_map_edit.html" %}
+
+<h1>New location</h1>
+
+<div class="row">
+
+	<div class="span8">
+		<div class="row">
+		    {% crispy form form.helper %}
+		</div>
+		
+			
+		
+	</div>
+</div>
+
+{% endblock %}
