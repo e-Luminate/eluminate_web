@@ -1,3 +1,4 @@
 *.pyc
 dev.db
 *~
+eluminate_web/site_media

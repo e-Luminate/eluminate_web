@@ -5,17 +5,19 @@ Programme
 {% endblock %}
 
 {% block body %}
-<div class="row">
+<div class="row-fluid">
   <div class="span12">
     <h1>Programme</h1>
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span4">
     <p>Something probably goes here</p>
   </div>
   <div class="span8">
+    {% for day in days %}
+    <h2>{{ day.day.name }}</h2>
     <table class="table">
       <thead>
 	<tr>
@@ -25,15 +27,16 @@ Programme
 	</tr>
       </thead>
       <tbody>
-	{% for event in event_list %}
+	{% for event in day.events %}
 	  <tr>
-	    <td>{{ event.start_time }} - {{ event.end_time }}</td>
-	    <td>Event name here</td>
-	    <td><a href="/events/{{ event.id }}/">Details</a></td>
+	    <td>{{ event.event.start_time }} - {{ event.event.end_time }}</td>
+	    <td><em>{{ event.participant.name }}:</em> {{ event.event.name }}</td>
+	    <td><a href="/events/{{ event.event.id }}/">Details</a></td>
 	  </tr>
 	{% endfor %}
       </tbody>
     </table>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

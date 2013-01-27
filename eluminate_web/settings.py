@@ -156,6 +156,7 @@ INSTALLED_APPS = [
     "events",
     "maps",
     "search",
+    "participant",
 ]
 
 #SERIALIZATION_MODULES = { 'geojson' : 'maps.geojson_serializer' }

@@ -5,26 +5,26 @@
 {% endblock %}
 
 {% block body %}
-<div class="row">
+<div class="row-fluid">
   <div class="span8">
-    <h1>Event Name</h1>
-    <p>Participant name</p>
+    <h1>{{ event.name }}</h1>
+    <p>{{ participant.name }}</p>
   </div>
   <div class="span4">
     <img style="width: 100%; height: 96px">
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span4">
     <ul>
-      <li>Start time: {{ start_time }}</li>
-      <li>End time: {{ end_time }}</li>
+      <li>Start time: {{ event.start_time }}</li>
+      <li>End time: {{ event.end_time }}</li>
       <li>Days: {{ days }}</li>
     </ul>
   </div>
   <div class="span4">
-    Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details Full details full details 
+    {{ event.description }}
   </div>
   <div class="span4">
     <img style="width: 100%; height: 256px">
