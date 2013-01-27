@@ -27,7 +27,7 @@ def edit(request, event_id):
         return redirect('/login/')
 
 def index(request):
-    days = map(lambda x:{'day':x, 'events':x.event_set.all()}, Day.objects.all())
+    days = map(lambda x:{'day':x, 'events':map(lambda y:{'event': y, 'participant': y.participant}, x.event_set.all())}, Day.objects.all())
     return render(request, 'events/index.html', {'days': days})
 
 @require_http_methods(["GET", "POST"])
@@ -59,7 +59,7 @@ def root_dispatch(request):
 def show(request, event_id):
     event = get_object_or_404(Event, pk = event_id)
     days_string = str(', ').join(map(lambda x: x.name, event.days.all()))
-    return render(request, 'events/show.html', {'start_time': event.start_time, 'end_time': event.end_time, 'days': days_string})
+    return render(request, 'events/show.html', {'event': event, 'participant': event.participant, 'days': days_string})
 
 def update(request, event_id):
     if request.user.is_authenticated():
