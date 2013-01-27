@@ -16,6 +16,8 @@ Programme
     <p>Something probably goes here</p>
   </div>
   <div class="span8">
+    {% for day in days %}
+    <h2>{{ day.day.name }}</h2>
     <table class="table">
       <thead>
 	<tr>
@@ -25,7 +27,7 @@ Programme
 	</tr>
       </thead>
       <tbody>
-	{% for event in event_list %}
+	{% for event in day.events %}
 	  <tr>
 	    <td>{{ event.start_time }} - {{ event.end_time }}</td>
 	    <td>Event name here</td>
@@ -34,6 +36,7 @@ Programme
 	{% endfor %}
       </tbody>
     </table>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
