@@ -1,8 +1,9 @@
 import os
-
+import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
+sys.path.insert(0, os.path.join(PACKAGE_ROOT, "apps"))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -14,9 +15,11 @@ ADMINS = [
 MANAGERS = ADMINS
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "dev.db",
+    'default': {
+        'ENGINE' : 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'e_luminate_db',
+        'USER': 'e_luminate_user',
+        'PASSWORD': 'e_luminate_password',
     }
 }
 
@@ -132,21 +135,29 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django.contrib.gis',
     
     # theme
     "pinax_theme_bootstrap_account",
     "pinax_theme_bootstrap",
     "django_forms_bootstrap",
     
+    
     # external
     "account",
     "metron",
     "eventlog",
+    "south",
+    "crispy_forms",
     
     # project
+    "blah",
     "eluminate_web",
     "events",
+    "maps",
 ]
+
+#SERIALIZATION_MODULES = { 'geojson' : 'maps.geojson_serializer' }
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -183,6 +194,7 @@ FIXTURE_DIRS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
 ACCOUNT_OPEN_SIGNUP = True
 ACCOUNT_USE_OPENID = False
 ACCOUNT_REQUIRED_EMAIL = False
