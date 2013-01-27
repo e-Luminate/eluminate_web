@@ -1,0 +1,15 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}
+((Event Name))
+{% endblock %}
+
+{% block body %}
+<h1>((Event Name))</h1>
+
+<ul>
+  <li>Start time: {{ start_time }}</li>
+  <li>End time: {{ end_time }}</li>
+  <li>Days: {{ days }}</li>
+</ul>
+{% endblock %}

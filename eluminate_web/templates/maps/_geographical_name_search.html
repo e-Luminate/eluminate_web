@@ -1,0 +1,22 @@
+{% load url from future %}
+
+{% if lookup_address_length == 1 %}
+	{% for address in lookup_address %}
+		{% with name=address.0 latitude=address.1.0 longitude=address.1.1 %}
+			<a href="{% url "inventory-item-list" %}?searched_lat={{latitude}}&searched_long={{longitude}}">{{name}}</a>
+        {% endwith %}
+	{% endfor %}
+	
+{% elif lookup_address_length > 1 %}
+<div class="address-results">
+	<p class="lead">Did you mean any of these?</p>
+	<ul class="unstyled">
+		{% for address in lookup_address %}
+			{% with name=address.0 latitude=address.1.0 longitude=address.1.1 %}
+			<li><a href="{% url "inventory-item-list" %}?searched_location={{name}}&searched_lat={{latitude}}&searched_long={{longitude}}">{{name}}</a></li>
+			{% endwith %}
+		{% endfor %}
+	</ul>
+</div>
+
+{% endif %}

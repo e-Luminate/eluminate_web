@@ -1,0 +1,24 @@
+{% extends "maps/_map_base.html" %}
+
+{% block map_body %}{% endblock %}
+{% block map_ready %}
+<script type="text/javascript">
+  var MARKER = null;
+
+  function marker_change_cb(e) {
+    var l = e.latlng == undefined ? e.target.getLatLng() : e.latlng;
+    MARKER.setLatLng(l);
+    $("#id_marker").val("POINT (" + l.lng + " " + l.lat + ")");
+  }
+
+  $(document).ready(function(){
+    SSOUK.map_handler.init();
+    var map = SSOUK.map_handler.map;
+    MARKER = L.marker([{{ location.marker.y }}, {{ location.marker.x }}],
+                      {"draggable": true}).addTo(map);
+    map.panTo([{{ location.marker.y }}, {{ location.marker.x }}]);
+    map.on("click", marker_change_cb);
+    MARKER.on("dragend", marker_change_cb);
+  });
+</script>
+{% endblock %}
