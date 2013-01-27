@@ -8,6 +8,29 @@
 //   color: red
 // }
 
+@TextBright: white;
+@TextNormal: #EEE;
+@LightGreyBackground: #333;
+@DarkGreyBackground: #222;
+@headingColor: #DE7EC8;
+@bodyLeading: 140%;
+
+body {
+   color: @TextNormal;
+   background-color: @DarkGreyBackground;
+   line-height: @bodyLeading;
+}
+
+h1, h2, h3 {
+  color: @headingColor;
+}
+
+.legal {
+  font-size: 80%;
+}
+
+ 
+/*
 @media (max-width: 979px)
 {
     .nav-collapse, .nav-collapse.collapse
@@ -24,3 +47,4 @@
 div#container {
     width: 940px;
 }
+*/
