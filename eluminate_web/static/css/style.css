@@ -1,0 +1,16 @@
+@media (max-width: 979px)
+{
+    .nav-collapse, .nav-collapse.collapse
+    {
+	overflow: inherit;
+	clear: none;
+    }
+    .navbar .nav {
+	float: left;
+	margin: 0 10px 0 0;
+    }
+}
+
+div#container {
+    width: 940px;
+}

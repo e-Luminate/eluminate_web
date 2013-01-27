@@ -5,11 +5,35 @@ Programme
 {% endblock %}
 
 {% block body %}
-<h1>Programme</h1>
+<div class="row-fluid">
+  <div class="span12">
+    <h1>Programme</h1>
+  </div>
+</div>
 
-<ul>
-  {% for event in event_list %}
-    <li><a href="/events/{{ event.id }}/">{{ event.start_time }} - {{ event.end_time }}</a></li>
-  {% endfor %}
-</ul>
+<div class="row-fluid">
+  <div class="span4">
+    <p>Something probably goes here</p>
+  </div>
+  <div class="span8">
+    <table class="table">
+      <thead>
+	<tr>
+	  <td>Times</td>
+	  <td>Description</td>
+	  <td></td>
+	</tr>
+      </thead>
+      <tbody>
+	{% for event in event_list %}
+	  <tr>
+	    <td>{{ event.start_time }} - {{ event.end_time }}</td>
+	    <td>Event name here</td>
+	    <td><a href="/events/{{ event.id }}/">Details</a></td>
+	  </tr>
+	{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}

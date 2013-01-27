@@ -155,7 +155,7 @@ INSTALLED_APPS = [
     "eluminate_web",
     "events",
     "maps",
-
+    "search",
     "participant",
 ]
 
