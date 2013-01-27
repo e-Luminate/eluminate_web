@@ -21,6 +21,7 @@ def delete(request, event_id):
 @require_http_methods(["GET"])
 def edit(request, event_id):
     if request.user.is_authenticated():
+        # At some point we need to check that the user is allowed to edit the specific event, when the rest of the system is in place
         return render(request, 'events/edit.html')
     else:
         return redirect('/login/')
@@ -62,6 +63,7 @@ def show(request, event_id):
 
 def update(request, event_id):
     if request.user.is_authenticated():
+        # At some point we need to check that the user is allowed to update the specific event, when the rest of the system is in place
         return redirect('/events/%(id)d' % {'id': event_id})
     else:
         raise Http401
