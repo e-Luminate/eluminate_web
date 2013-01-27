@@ -129,7 +129,7 @@ You will also have to follow the instructions to migrate maps -- the app uses so
 # Launching with honcho
 
 Make sure you have lessc compiler installed.
-Read more here: https://github.com/e-Luminate/eluminate_web/script/Readme.md
+Read more here: https://github.com/e-Luminate/eluminate_web/blob/master/scripts/README.md
 
 	honcho -f Procfile.dev start
 
