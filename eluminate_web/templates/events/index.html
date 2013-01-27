@@ -31,7 +31,7 @@ Programme
 	  <tr>
 	    <td>{{ event.event.start_time }} - {{ event.event.end_time }}</td>
 	    <td><em>{{ event.participant.name }}:</em> {{ event.event.name }}</td>
-	    <td><a href="/events/{{ event.id }}/">Details</a></td>
+	    <td><a href="/events/{{ event.event.id }}/">Details</a></td>
 	  </tr>
 	{% endfor %}
       </tbody>
