@@ -20,7 +20,7 @@ def delete(request, event_id):
 
 @require_http_methods(["GET"])
 def edit(request, event_id):
-    if request.user.is_authenticcated():
+    if request.user.is_authenticated():
         return render(request, 'events/edit.html')
     else:
         return redirect('/login/')
