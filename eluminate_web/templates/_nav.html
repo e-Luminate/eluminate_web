@@ -1,8 +1,12 @@
 {% load url from future %}
 
 {% block nav %}
-	<ul class="nav">
-		<li><a href="{% url "about" %}">About</a></li>
-		<li><a href="{% url "locations_list" %}">Location</a></li>
-	</ul>
+  <ul class="nav">
+    <li><a href="{% url "home" %}">Home</a></li>
+    <li><a href="{% url "locations_list" %}">Programme</a></li>
+    <li><a href="{% url "home" %}">Virtual Exhibition</a></li>
+    <li><a href="{% url "home" %}">Sponsors</a></li>
+    <li><a href="{% url "about" %}">About</a></li>
+    <li><a href="{% url "home" %}">Contact</a></li>
+  </ul>
 {% endblock %}
