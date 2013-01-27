@@ -3,18 +3,28 @@ from events.models import Day, Event
 from django.views.decorators.http import require_http_methods
 
 def create(request):
-    event = Event.objects.create(start_time = request.POST['start_time'], end_time = request.POST['end_time'])
-    for day in Day.objects.all():
-        if str(day.id) in request.POST:
-            event.days.add(day)
-    return redirect('/events')
+    if request.user.is_authenticated():
+        event = Event.objects.create(start_time = request.POST['start_time'], end_time = request.POST['end_time'])
+        for day in Day.objects.all():
+            if str(day.id) in request.POST:
+                event.days.add(day)
+        return redirect('/events/')
+    else:
+        raise Http401
 
 def delete(request, event_id):
-    return redirect('/events')
+    if request.user.is_authenticated():
+        return redirect('/events/')
+    else:
+        raise Http401
 
 @require_http_methods(["GET"])
 def edit(request, event_id):
-    return render(request, 'events/edit.html')
+    if request.user.is_authenticated():
+        # At some point we need to check that the user is allowed to edit the specific event, when the rest of the system is in place
+        return render(request, 'events/edit.html')
+    else:
+        return redirect('/login/')
 
 def index(request):
     event_list = Event.objects.all
@@ -34,7 +44,10 @@ def item_dispatch(request, event_id):
 
 @require_http_methods(["GET"])
 def new(request):
-    return render(request, 'events/new.html', {'all_days': Day.objects.all})
+    if request.user.is_authenticated():
+        return render(request, 'events/new.html', {'all_days': Day.objects.all})
+    else:
+        return redirect('/login')
 
 @require_http_methods(["GET", "POST"])
 def root_dispatch(request):
@@ -49,4 +62,9 @@ def show(request, event_id):
     return render(request, 'events/show.html', {'start_time': event.start_time, 'end_time': event.end_time, 'days': days_string})
 
 def update(request, event_id):
-    return redirect('/events/%(id)d' % {'id': event_id})
+    if request.user.is_authenticated():
+        # At some point we need to check that the user is allowed to update the specific event, when the rest of the system is in place
+        return redirect('/events/%(id)d' % {'id': event_id})
+    else:
+        raise Http401
+    
