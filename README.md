@@ -24,11 +24,15 @@ The following instuctions asume a Debian/Ubuntu linux environment
 - virtualenv http://pypi.python.org/pypi/virtualenv
 - virtualenvwrapper http://www.doughellmann.com/projects/virtualenvwrapper/
 
+## Other stuff also needed
+
+- node-less
+
 ## How to install them:
 
 If you have them install it skip, otherwise
 
-	sudo apt-get install python-pip
+	sudo apt-get install python-pip node-less
 
 After that
 
