@@ -1,23 +1,18 @@
 {% extends "site_base.html" %}
 
 {% block head_title %}
-Programme
+Your Events
 {% endblock %}
 
 {% block body %}
 <div class="row-fluid">
   <div class="span12">
-    <h1>Programme</h1>
+    <h1>Your Events</h1>
   </div>
 </div>
 
 <div class="row-fluid">
-  <div class="span4">
-    <p>Something probably goes here</p>
-  </div>
-  <div class="span8">
-    {% for day in days %}
-    <h2>{{ day.day.name }}</h2>
+  <div class="span12">
     <table class="table">
       <thead>
 	<tr>
@@ -27,16 +22,16 @@ Programme
 	</tr>
       </thead>
       <tbody>
-	{% for event in day.events %}
+	{% for event in events %}
 	  <tr>
-	    <td>{{ event.event.start_time }} - {{ event.event.end_time }}</td>
-	    <td><em>{{ event.participant.name }}:</em> {{ event.event.name }}</td>
-	    <td><a href="/events/{{ event.event.id }}/">Details</a></td>
+	    <td>{{ event.start_time }} - {{ event.end_time }}</td>
+	    <td>{{ event.name }}</td>
+	    <td><a href="/profile/events/{{ event.id }}/edit/">Edit</a> &mdash; <a href="/profile/events/{{ event.id }}/">Delete</a></td>
 	  </tr>
 	{% endfor %}
       </tbody>
     </table>
-    {% endfor %}
+    <p><a href="/profile/events/new/">Add an event</a></p>
   </div>
 </div>
 {% endblock %}

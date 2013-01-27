@@ -27,8 +27,8 @@ def events_edit(request, event_id):
         return redirect('/login/')
 
 def events_index(request):
-    days = map(lambda x:{'day':x, 'events':map(lambda y:{'event': y, 'participant': y.participant}, x.event_set.all())}, Day.objects.all())
-    return render(request, 'participant_profile/events/index.html', {'days': days})
+    events = Event.objects.all()
+    return render(request, 'participant_profile/events/index.html', {'events': events})
 
 @require_http_methods(["POST"])
 def events_item_dispatch(request, event_id):
