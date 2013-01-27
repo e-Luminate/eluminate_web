@@ -155,6 +155,8 @@ INSTALLED_APPS = [
     "eluminate_web",
     "events",
     "maps",
+
+    "participant",
 ]
 
 #SERIALIZATION_MODULES = { 'geojson' : 'maps.geojson_serializer' }
