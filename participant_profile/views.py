@@ -60,5 +60,18 @@ def events_update(request, event_id):
     else:
         raise Http401
     
+@require_http_methods(["GET", "POST"])
 def root_dispatch(request):
-    raise Http404
+    if request.method == 'GET':
+        return show(request)
+    else: # POST
+        if request.POST['__method'] == 'put':
+            return update(request)
+        else:
+            raise Http405
+
+def show(request):
+    return render(request, 'participant_profile/show.html')
+
+def update(request):
+    raise Http405
