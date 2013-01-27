@@ -1,33 +1,45 @@
-{% extends "banner_base.html" %}
+{% extends "site_base.html" %}
 
 {% load url from future %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Welcome" %}{% endblock %}
 
-{% block body_class %}home{% endblock %}
+{% block body %}
 
-{% block banner %}
-    <h1>{% trans "Welcome to E-Luminate site!" %}</h1>
-    <p>
-        {% blocktrans %}
-        E-Luminate a festival about clean tech in Cambridge from the 20th to the 24th
-        {% endblocktrans %}
-    </p>
-    
-    <h2>About Account Project</h2>
-    <p>
-        {% blocktrans %}
-		
-        {% endblocktrans %}
-    </p>
-    
-    {% if user.is_authenticated %}
-    	For now you can check out the <a href="{% url "about"%}">About page</a> 
-    	or add a <a href="{% url "locations_list" %}">Location</a>.
-    {% else %}
-        {% url account_login as login_url %}
-        {% url account_signup as signup_url %}
-        <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn">Log In</a> or <a href="{{ signup_url }}" class="btn primary">Sign Up</a> to try out the site.{% endblocktrans %}</p>
-    {% endif %}
+<div class="row">
+  <div class="span8">
+    <h1>Title of the home page goes here</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg</p>
+  </div>
+  <div class="span4">
+    <img style="width: 100%; height: 256px">
+  </div>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <h2>Browse the programme</h2>
+    <p>Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg</p>
+    <a href="#" class="btn">Find out more</a>
+  </div>
+
+  <div class="span4">
+    <h2>View the virtual exhibition</h2>
+    <p>Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg</p>
+    <a href="#" class="btn">Find out more</a>
+  </div>
+  
+  <div class="span4">
+    <h2>Find out more</h2>
+    <p>Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg Bar bip ggggg</p>
+    <a href="#" class="btn">Find out more</a>
+  </div>
+</div>
+
 {% endblock %}
