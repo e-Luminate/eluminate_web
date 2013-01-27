@@ -2,7 +2,11 @@ from datetime import datetime
 
 from django.contrib import admin
 
-from participant.models import Participant
+from participant.models import Category, Participant
+
+class CategoryAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Category, CategoryAdmin)
 
 class ApprovedListFilter(admin.SimpleListFilter):
     title = u'Approved'
@@ -18,8 +22,8 @@ class ApprovedListFilter(admin.SimpleListFilter):
             return queryset
 
 class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('slug', 'name', 'created', 'approved')
-    list_filter = (ApprovedListFilter,)
+    list_display = ('slug', 'name', 'created', 'approved', 'category')
+    list_filter = (ApprovedListFilter, 'category__name')
     search_fields = ('name',)
     actions = ['bulk_approve']
     date_hierarchy = 'created'
