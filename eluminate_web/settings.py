@@ -151,7 +151,6 @@ INSTALLED_APPS = [
     "crispy_forms",
     
     # project
-    "blah",
     "eluminate_web",
     "events",
     "maps",
