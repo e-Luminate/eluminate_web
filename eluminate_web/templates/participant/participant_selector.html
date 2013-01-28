@@ -1,0 +1,5 @@
+<div id="participant_selector">
+    {% for participant in participant_list %}
+    <a title="{{ participant.name }}" href="{{ participant.get_absolute_url }}"><img width="100px" src="{{ participant.logo.url }}"></a>
+    {% endfor %}
+</div>

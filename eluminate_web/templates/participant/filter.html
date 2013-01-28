@@ -1,0 +1,6 @@
+<div id="category_filter">
+    <p>Show only: </p>
+    {% for category in category_list %}
+    <input type="radio" name="category" value="{{ category.id }}"> {{ category.name }}
+    {% endfor %}
+</div>
