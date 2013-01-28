@@ -15,6 +15,7 @@ class ParticipantLandingView(TemplateView):
 class ParticipantDetailView(DetailView):
     template_name = 'participant/participant_detail.html'
     model = Participant
+    context_object_name = 'current_participant'
 
     def get_context_data(self, **kwargs):
         context = super(ParticipantDetailView, self).get_context_data(**kwargs)
