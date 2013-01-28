@@ -5,9 +5,8 @@
 
 {% block body %}
 
-{% include "participant/filter.html" %}
 {% include "participant/participant_selector.html" %}
-{{ participant }}
+
 <h1>{{ participant.name}}</h1>
 
 {% if participant.website %}
