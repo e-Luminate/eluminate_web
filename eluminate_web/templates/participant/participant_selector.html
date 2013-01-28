@@ -3,3 +3,12 @@
     <a title="{{ participant.name }}" href="{{ participant.get_absolute_url }}"><img width="100px" src="{{ participant.logo.url }}"></a>
     {% endfor %}
 </div>
+
+{% if category_list|length > 1 %}
+<div id="category_filter">
+    <p>Show only: </p>
+    {% for category in category_list %}
+    <input type="radio" name="category" value="{{ category.id }}"> {{ category.name }}
+    {% endfor %}
+</div>
+{% endif %}
