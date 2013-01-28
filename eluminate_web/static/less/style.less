@@ -5,6 +5,7 @@
 
 @TextBright: white;
 @TextNormal: #EEE;
+@LighterGreyBackground: #393939;
 @LightGreyBackground: #313131;
 @DarkGreyBackground: #222;
 @headingColor: #DE7EC8;
@@ -32,6 +33,27 @@ h1, h2, h3 {
 
 #topGraphic img {
   width: 100%;
+}
+
+// Participant screens
+div#participant_action_bar {
+    background-color: @LighterGreyBackground;
+}
+
+div.participant_logo_box {
+    background-color: #000;
+    float: left;
+    margin: 10px 5px;
+}
+
+div.participant_logo_box, div.participant_logo_box>img {
+    width: 130px;
+    height: 55px;
+}
+
+div#category_filter {
+    clear: both;
+    margin: 20px;
 }
 
 // ******************** Footer fixing ****************
