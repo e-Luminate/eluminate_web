@@ -27,14 +27,29 @@ h1, h2, h3 {
 .navbar-inner
 {
   background-image: none;
-  background-color: @DarkGreyBackground;
+  background-color: @LightGreyBackground;
 }
 
 #topGraphic img {
   width: 100%;
 }
+
+// ******************** Footer fixing ****************
+
+footer {
+  height: 100px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+//  left: 0;
+//  margin: 0;
+}
+footer .legal {
+  background-color: @LightGreyBackground;
+}
  
-/*
+/**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
+
 @media (max-width: 979px)
 {
     .nav-collapse, .nav-collapse.collapse

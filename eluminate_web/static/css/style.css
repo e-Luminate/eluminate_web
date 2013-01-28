@@ -3,9 +3,7 @@ body {
   background-color: #313131;
   line-height: 140%;
 }
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   color: #de7ec8;
 }
 .legal {
@@ -13,12 +11,22 @@ h3 {
 }
 .navbar-inner {
   background-image: none;
-  background-color: #222222;
+  background-color: #313131;
 }
 #topGraphic img {
   width: 100%;
 }
-/*
+footer {
+  height: 100px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+}
+footer .legal {
+  background-color: #313131;
+}
+/**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
+
 @media (max-width: 979px)
 {
     .nav-collapse, .nav-collapse.collapse

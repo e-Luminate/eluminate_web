@@ -23,10 +23,24 @@
 	{% include "_nav.html" %}
 {% endblock %}
 
+{% block body_base %}
+  <div class="container">
+    {% include "_messages.html" %}
 
-{% block footer %}
-    {% include "_footer.html" %}
+    {% block body %}
+    {% endblock %}
+
+    {% block footer_base %}
+      <footer class="container">
+	{% block footer %}
+	  {% include "_footer.html" %}
+	{% endblock %}
+      </footer>
+    {% endblock %}
+  </div>
 {% endblock %}
+
+
 
 {% block extra_body_base %}
     {% analytics %}
