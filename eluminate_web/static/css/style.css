@@ -9,6 +9,13 @@ h1, h2, h3 {
 .legal {
   font-size: 80%;
 }
+.navbar-inner {
+  background-image: none;
+  background-color: #222222;
+}
+#topGraphic img {
+  width: 100%;
+}
 /*
 @media (max-width: 979px)
 {
