@@ -1,11 +1,30 @@
 body {
   color: #eeeeee;
   background-color: #313131;
-  line-height: 140%;
+  line-height: 160%;
+  font-family: verdana, sans-serif;
+  font-size: 13px;
 }
 h1, h2, h3 {
   color: #de7ec8;
   font-family: 'Days One', sans-serif;
+  font-weight: normal;
+}
+.lightBackground {
+  background-color: #393939;
+}
+.lightBackground img {
+  height: auto;
+  vertical-align: top;
+}
+.lightBackground p, .lightBackground h2 {
+  margin: 0 25px;
+}
+h1 {
+  font-size: 225%;
+}
+h2 {
+  font-size: 135%;
 }
 .navbar-inner {
   background-image: none;
@@ -13,6 +32,9 @@ h1, h2, h3 {
 }
 #topGraphic img {
   width: 100%;
+}
+.mainBody {
+  margin-bottom: 110px;
 }
 footer {
   height: 103px;
@@ -27,6 +49,7 @@ footer .legal {
   width: 100%;
   color: #aaaaaa;
   font-size: 70%;
+  overflow: hidden;
 }
 #footerDates {
   position: absolute;
