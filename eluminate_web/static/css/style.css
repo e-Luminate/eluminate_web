@@ -5,9 +5,7 @@ body {
 }
 h1, h2, h3 {
   color: #de7ec8;
-}
-.legal {
-  font-size: 80%;
+  font-family: 'Days One', sans-serif;
 }
 .navbar-inner {
   background-image: none;
@@ -17,13 +15,26 @@ h1, h2, h3 {
   width: 100%;
 }
 footer {
-  height: 100px;
+  height: 103px;
   overflow: hidden;
   position: fixed;
   bottom: 0;
 }
 footer .legal {
   background-color: #313131;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #aaaaaa;
+  font-size: 70%;
+}
+#footerDates {
+  position: absolute;
+  right: 20px;
+  bottom: 17px;
+  color: #dede7e;
+  font-family: 'Days One', sans-serif;
+  font-size: 18px;
 }
 /**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
 

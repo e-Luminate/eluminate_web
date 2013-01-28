@@ -5,29 +5,29 @@
 
 @TextBright: white;
 @TextNormal: #EEE;
-@LightGreyBackground: #313131;
-@DarkGreyBackground: #222;
-@headingColor: #DE7EC8;
+@TextLegal: #AAA;
+@LightGreyBackground: #666; // the bars behind some headings
+@DarkGreyBackground: #313131; // the body color
+@headingColor: #DE7EC8; 
 @bodyLeading: 140%;
+@logoYellow: #DEDE7E;
+@headingFont: 'Days One', sans-serif;
 
 body {
    color: @TextNormal;
-   background-color: @LightGreyBackground;
+   background-color: @DarkGreyBackground;
    line-height: @bodyLeading;
 }
 
 h1, h2, h3 {
   color: @headingColor;
-}
-
-.legal {
-  font-size: 80%;
+  font-family: @headingFont;  
 }
 
 .navbar-inner
 {
   background-image: none;
-  background-color: @LightGreyBackground;
+  background-color: @DarkGreyBackground;
 }
 
 #topGraphic img {
@@ -37,7 +37,7 @@ h1, h2, h3 {
 // ******************** Footer fixing ****************
 
 footer {
-  height: 100px;
+  height: 103px;
   overflow: hidden;
   position: fixed;
   bottom: 0;
@@ -45,7 +45,21 @@ footer {
 //  margin: 0;
 }
 footer .legal {
-  background-color: @LightGreyBackground;
+  background-color: @DarkGreyBackground;
+  position: absolute;
+  bottom:0;
+  width: 100%;
+  color: @TextLegal;
+  font-size: 70%;
+}
+
+#footerDates {
+  position: absolute;
+  right: 20px;
+  bottom: 17px;
+  color: @logoYellow;
+  font-family: @headingFont;
+  font-size: 18px;
 }
  
 /**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
