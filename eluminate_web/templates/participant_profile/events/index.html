@@ -1,0 +1,37 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}
+Your Events
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+  <div class="span12">
+    <h1>Your Events</h1>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <table class="table">
+      <thead>
+	<tr>
+	  <td>Times</td>
+	  <td>Description</td>
+	  <td></td>
+	</tr>
+      </thead>
+      <tbody>
+	{% for event in events %}
+	  <tr>
+	    <td>{{ event.start_time }} - {{ event.end_time }}</td>
+	    <td>{{ event.name }}</td>
+	    <td><a href="/profile/events/{{ event.id }}/edit/">Edit</a> &mdash; <a href="/profile/events/{{ event.id }}/">Delete</a></td>
+	  </tr>
+	{% endfor %}
+      </tbody>
+    </table>
+    <p><a href="/profile/events/new/">Add an event</a></p>
+  </div>
+</div>
+{% endblock %}
