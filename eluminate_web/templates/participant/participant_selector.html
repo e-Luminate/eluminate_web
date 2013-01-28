@@ -1,14 +1,21 @@
-<div id="participant_selector">
-    {% for participant in participant_list %}
-    <a title="{{ participant.name }}" href="{{ participant.get_absolute_url }}"><img width="100px" src="{{ participant.logo.url }}"></a>
-    {% endfor %}
-</div>
+<div id="participant_action_bar">
+    <div id="participant_selector">
+        {% for participant in participant_list %}
+        <div class="participant_logo_box">
+            <a title="{{ participant.name }}" href="{{ participant.get_absolute_url }}">
+                {% if participant.logo %}<img class="participant_logo_img"src="{{ participant.logo.url }}">
+                {% else %}<span>{{ participant.name }}</span>{% endif %}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 
-{% if category_list|length > 1 %}
-<div id="category_filter">
-    <p>Show only: </p>
-    {% for category in category_list %}
-    <input type="radio" name="category" value="{{ category.id }}"> {{ category.name }}
-    {% endfor %}
+    {% if category_list|length > 1 %}
+    <div id="category_filter">
+        <span>Show only: </span>
+        {% for category in category_list %}
+        <input type="radio" name="category" value="{{ category.id }}"> {{ category.name }}
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
-{% endif %}
