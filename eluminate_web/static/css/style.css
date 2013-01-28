@@ -18,6 +18,9 @@ h3 {
 #topGraphic img {
   width: 100%;
 }
+#participant_action_bar {
+  background-color: #393939;
+}
 /*
 @media (max-width: 979px)
 {
