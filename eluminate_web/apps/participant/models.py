@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 
 class Category(models.Model):
@@ -25,3 +26,6 @@ class Participant(models.Model):
 
     def approved(self):
         return self.approved_on != None
+
+    def get_absolute_url(self):
+        return reverse('participant_detail', kwargs={'slug': self.slug})
