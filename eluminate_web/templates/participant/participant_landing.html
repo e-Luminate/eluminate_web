@@ -1,15 +1,12 @@
-{% extends "site_base.html" %}
+{% extends "participant/participant_base.html" %}
 {% load i18n %}
 
 {% block head_title %}{% trans "e-Luminate virtual exhibition" %}{% endblock %}
 
-{% block body %}
-
-{% include "participant/participant_selector.html" %}
-
+{% block inner_body %}
 <h1>Welcome to the e-Luminate Virtual Exhibition</h1>
 
 <p>Many of the exhibitors have real displays too, either at their premises or somewhere else in Cambridge. This is indicated in the details for each exhibitor.</p>
 <p>Click on their thumbnail to see exhibitor’s details. You can use the “filter” to select particular categories of exhibitors</p>
 
-{% endblock%}
+{% endblock inner_body %}

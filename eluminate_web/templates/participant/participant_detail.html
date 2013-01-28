@@ -1,12 +1,9 @@
-{% extends "site_base.html" %}
+{% extends "participant/participant_base.html" %}
 {% load i18n %}
 
 {% block head_title %}{{ current_participant.name }}{% endblock %}
 
-{% block body %}
-
-{% include "participant/participant_selector.html" %}
-
+{% block inner_body %}
 <h1>{{ current_participant.name}}</h1>
 
 {% if current_participant.website %}
@@ -18,5 +15,4 @@
 {% endif %}
 
 <p>{{ current_participant.description }}<p>
-
-{% endblock%}
+{% endblock inner_body %}
