@@ -1,9 +1,11 @@
 body {
   color: #eeeeee;
-  background-color: #222222;
+  background-color: #313131;
   line-height: 140%;
 }
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: #de7ec8;
 }
 .legal {
