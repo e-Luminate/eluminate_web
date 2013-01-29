@@ -19,7 +19,7 @@ urlpatterns = patterns("",
     url(r"^admin/", include(admin.site.urls)),
     url(r"^events/", include("events.urls")),  
     url(r'^maps/', include("maps.urls")),
-    url(r'^profile/', include("participant_profile.urls")),
+    #url(r'^profile/', include("participant_profile.urls")),
     url(r'^search/', include("search.urls")),
 )
 

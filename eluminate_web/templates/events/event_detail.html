@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block body %}
+{% with event=object %}
 <div class="row-fluid">
   <div class="span8">
     <h1>{{ event.name }}</h1>
-    <p>{{ participant.name }}</p>
+    <p>{{ event.participant.name }}</p>
   </div>
   <div class="span4">
     <img style="width: 100%; height: 96px">
@@ -20,7 +21,7 @@
     <ul>
       <li>Start time: {{ event.start_time }}</li>
       <li>End time: {{ event.end_time }}</li>
-      <li>Days: {{ days }}</li>
+      <li>Days: {{ event.days }}</li>
     </ul>
   </div>
   <div class="span4">
@@ -30,4 +31,5 @@
     <img style="width: 100%; height: 256px">
   </div>
 </div>
+{% endwith %}
 {% endblock %}

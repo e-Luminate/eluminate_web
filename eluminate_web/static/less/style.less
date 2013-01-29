@@ -5,30 +5,64 @@
 
 @TextBright: white;
 @TextNormal: #EEE;
-@LighterGreyBackground: #393939;
-@LightGreyBackground: #313131;
-@DarkGreyBackground: #222;
-@headingColor: #DE7EC8;
-@bodyLeading: 140%;
+@TextLegal: #AAA;
+@LightGreyBackground: #393939; // the bars behind some headings
+@DarkGreyBackground: #313131; // the body color
+@headingColor: #DE7EC8; 
+@bodyLeading: 160%;
+@logoYellow: #DEDE7E;
+@headingFont: 'Days One', sans-serif;
 
 body {
    color: @TextNormal;
-   background-color: @LightGreyBackground;
+   background-color: @DarkGreyBackground;
    line-height: @bodyLeading;
+   font-family: verdana, sans-serif;
+   font-size: 13px;
 }
 
 h1, h2, h3 {
   color: @headingColor;
+  font-family: @headingFont;
+  font-weight: normal;  
 }
 
-.legal {
-  font-size: 80%;
+// now the light backgrounds for panels on home page
+.lightBackground {
+  background-color: @LightGreyBackground;
+//  padding: 0 25px;
+}
+
+.lightBackground img {
+  height: auto;
+  vertical-align: top;
+}
+
+.lightBackground p, .lightBackground h2 {
+  margin: 0 25px;
+}
+
+
+
+// in responsive designs, I like to specify all font
+// sizes for standard elements in terms of % of body
+//  font-size.
+// This means one change scales everything...
+// It occurs to me that ther are better ways of
+// specifying this in less...
+
+h1 {
+  font-size: 225%;
+}
+
+h2 {
+  font-size: 135%;
 }
 
 .navbar-inner
 {
   background-image: none;
-  background-color: @LightGreyBackground;
+  background-color: @DarkGreyBackground;
 }
 
 #topGraphic img {
@@ -36,10 +70,6 @@ h1, h2, h3 {
 }
 
 // Participant screens
-div#participant_action_bar {
-    background-color: @LighterGreyBackground;
-}
-
 div.participant_logo_box {
     background-color: #000;
     float: left;
@@ -58,8 +88,13 @@ div#category_filter {
 
 // ******************** Footer fixing ****************
 
+// make sure you can scroll to the bottom, missing footer
+.mainBody {
+  margin-bottom: 110px;
+}
+
 footer {
-  height: 100px;
+  height: 103px;
   overflow: hidden;
   position: fixed;
   bottom: 0;
@@ -67,7 +102,22 @@ footer {
 //  margin: 0;
 }
 footer .legal {
-  background-color: @LightGreyBackground;
+  background-color: @DarkGreyBackground;
+  position: absolute;
+  bottom:0;
+  width: 100%;
+  color: @TextLegal;
+  font-size: 70%;
+  overflow: hidden;
+}
+
+#footerDates {
+  position: absolute;
+  right: 20px;
+  bottom: 17px;
+  color: @logoYellow;
+  font-family: @headingFont;
+  font-size: 18px;
 }
  
 /**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
