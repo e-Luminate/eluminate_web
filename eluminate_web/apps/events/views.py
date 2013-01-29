@@ -4,7 +4,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
-from .models import Day, Event
+from .models import Event
 from .forms import EventForm
    
 
