@@ -1,15 +1,48 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from events.models import Day, Event
 from django.views.decorators.http import require_http_methods
+from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
 
-@require_http_methods(["GET"])
-def index(request):
-    days = map(lambda x:{'day':x, 'events':map(lambda y:{'event': y, 'participant': y.participant}, x.event_set.all())}, Day.objects.all())
-    return render(request, 'events/index.html', {'days': days})
+from .models import Day, Event
+from .forms import EventForm
+   
 
-@require_http_methods(["GET"])
-def show(request, event_id):
-    event = get_object_or_404(Event, pk = event_id)
-    days_string = str(', ').join(map(lambda x: x.name, event.days.all()))
-    return render(request, 'events/show.html', {'event': event, 'participant': event.participant, 'days': days_string})
+class EventDetail(DetailView):
+    
+    model = Event
+
+class EventList(ListView):
+    
+    model = Event
+        
+class EventModelOwnerRestrictedMixin(object):
+    model = Event
+    
+    def get_queryset(self):
+        "Restricting to only the Events the user owns."
+        queryset = super(EventCreate, self).get_queryset()
+        queryset.filter(participant__user=request.user) 
+        return queryset        
+
+class EventCreate(CreateView):
+    
+    model = Event
+    form_class = EventForm
+
+    def form_valid(self):
+        
+        form.instance.participant.user = request.user 
+        form.save()
+        return super(EventCreate, self).form_valid(form)
+        
+
+class EventUpdate(EventModelOwnerRestrictedMixin, UpdateView):
+    
+    model = Event
+    form_class = EventForm
+    
+class EventDelete(EventModelOwnerRestrictedMixin, DeleteView):
+    
+    model = Event
     
