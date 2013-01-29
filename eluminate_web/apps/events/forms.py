@@ -1,5 +1,5 @@
 from django import forms
-
+from django.forms.widgets import CheckboxSelectMultiple
 from .models import Event
 
 
@@ -12,3 +12,6 @@ class EventForm(forms.ModelForm):
                   "end_time",
                   "days",
                   "description")
+        widgets = {
+                   'days' : CheckboxSelectMultiple
+                   }
