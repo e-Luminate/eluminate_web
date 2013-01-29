@@ -137,7 +137,7 @@ Read more here: https://github.com/e-Luminate/eluminate_web/blob/master/scripts/
 
 If you've reset your machine, you will need to reactivate the virtualenv:
 
-        source ~/.virtualenvs/eluiminate_env/bin/activate
+        source ~/.virtualenvs/eluminate_env/bin/activate
         
 After that, you can start the less compiler and the development webserver (on 127.0.0.1:8000):
 
