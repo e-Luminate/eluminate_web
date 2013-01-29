@@ -5,7 +5,9 @@ body {
   font-family: verdana, sans-serif;
   font-size: 13px;
 }
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: #de7ec8;
   font-family: 'Days One', sans-serif;
   font-weight: normal;
@@ -17,7 +19,8 @@ h1, h2, h3 {
   height: auto;
   vertical-align: top;
 }
-.lightBackground p, .lightBackground h2 {
+.lightBackground p,
+.lightBackground h2 {
   margin: 0 25px;
 }
 h1 {
@@ -32,6 +35,20 @@ h2 {
 }
 #topGraphic img {
   width: 100%;
+}
+div.participant_logo_box {
+  background-color: #000;
+  float: left;
+  margin: 10px 5px;
+}
+div.participant_logo_box,
+div.participant_logo_box > img {
+  width: 130px;
+  height: 55px;
+}
+div#category_filter {
+  clear: both;
+  margin: 20px;
 }
 .mainBody {
   margin-bottom: 110px;
