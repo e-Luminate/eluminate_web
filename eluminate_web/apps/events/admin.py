@@ -1,5 +1,4 @@
 from django.contrib import admin
-from events.models import Day, Event
+from events.models import Event
 
-admin.site.register(Day)
 admin.site.register(Event)
