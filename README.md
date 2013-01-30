@@ -33,6 +33,8 @@ The following instuctions asume a Debian/Ubuntu linux environment
 If you have them install it skip, otherwise
 
 	sudo apt-get install python-pip node-less
+	
+(Note: the version of lessc provided by node-less needs to be 1.3 or better. Check using "lessc -v". Ubuntu releases before 12.10 do not have a sufficiently up-to-date version.) 
 
 After that
 
