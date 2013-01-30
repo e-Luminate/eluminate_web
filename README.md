@@ -26,13 +26,13 @@ The following instuctions asume a Debian/Ubuntu linux environment
 
 ## Other stuff also needed
 
-- less
+- node-less
 
 ## How to install them:
 
 If you have them install it skip, otherwise
 
-	sudo apt-get install python-pip less
+	sudo apt-get install python-pip node-less
 
 After that
 
