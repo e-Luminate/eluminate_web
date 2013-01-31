@@ -15,6 +15,7 @@ class EventDetail(DetailView):
 class EventList(ListView):
     
     model = Event
+
         
 class EventModelOwnerRestrictedMixin(object):
     model = Event
