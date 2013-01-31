@@ -29,7 +29,7 @@ class ParticipantAdmin(admin.ModelAdmin):
     date_hierarchy = 'created'
 
     prepopulated_fields = {'slug': ('name',)}
-    readonly_fields = ('approved_on',)
+    #readonly_fields = ('approved_on',)
 
     def bulk_approve(self, request, queryset):
         objects_updated = queryset.update(approved_on=datetime.now())
