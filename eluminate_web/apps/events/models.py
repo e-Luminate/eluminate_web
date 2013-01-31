@@ -1,10 +1,10 @@
 from django.db import models
-from participant.models import Participant
-
-from django.db import models
+from django.core.urlresolvers import reverse
 from django import forms
+
 from south.modelsinspector import add_introspection_rules
 
+from participant.models import Participant
 
 class Day(models.Model):
     name = models.CharField(max_length = 200)
@@ -20,3 +20,6 @@ class Event(models.Model):
     days = models.ManyToManyField(Day)
     participant = models.ForeignKey(Participant)
     description = models.TextField()
+    
+    def get_absolute_url(self):
+        return(reverse("event-detail", args=[self.id]))
