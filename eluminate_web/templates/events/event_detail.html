@@ -1,5 +1,5 @@
 {% extends "site_base.html" %}
-
+{% load url from future %}
 {% block head_title %}
 ((Event Name))
 {% endblock %}
@@ -21,8 +21,13 @@
     <ul>
       <li>Start time: {{ event.start_time }}</li>
       <li>End time: {{ event.end_time }}</li>
-      <li>Days: {{ event.days }}</li>
+      <li>Days: 
+      	{% for day in event.days.all %}
+      	{{day}}
+      	{% endfor %}
+      </li>
     </ul>
+    <a href="{% url 'event-detail' event.id %}">Go to the event</a>
   </div>
   <div class="span4">
     {{ event.description }}

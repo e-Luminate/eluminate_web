@@ -1,5 +1,5 @@
 {% extends "site_base.html" %}
-
+{% load url from future %}
 {% block head_title %}
 Programme
 {% endblock %}
@@ -25,7 +25,8 @@ Programme
     		{{day}}
     	{% endfor %}
     	exhibitor: {{event.participant}}<br/>
-    	description: {{event.description}}
+    	description: {{event.description}}<br/>
+    	<a href="{% url 'event-detail' event.id %}">Go to the event</a>
     </div>
     <hr/>
     {% endfor %}

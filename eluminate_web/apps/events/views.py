@@ -32,7 +32,7 @@ class EventCreate(CreateView):
 
     def form_valid(self, form):
         
-        form.instance.participant.user = self.request.user 
+        form.instance.participant = self.request.user.participant
         form.save()
         return super(EventCreate, self).form_valid(form)
         
