@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(unique=True, max_length=20, help_text=u'Cleantech category')   
@@ -11,6 +12,7 @@ class Category(models.Model):
         return self.name
 
 class Participant(models.Model):
+    user = models.OneToOneField(User)
     name = models.CharField(max_length=255, help_text=u'Name of participating company')
     slug = models.SlugField(max_length=255, unique=True, help_text=u'Unique URL-safe version of name')
     website = models.CharField(max_length=2000, help_text=u'Website URL')
