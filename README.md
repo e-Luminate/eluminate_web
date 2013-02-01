@@ -128,9 +128,11 @@ cd to the directory in which you want the Django directory to be created
 	
 If you're asked whether you want to create a superuser, answer "yes"
 
-You will also have to follow the instructions to migrate maps -- the app uses south:
+You will also have to migrate the database -- the app uses south, but you have to do the separate apps in the right order:
 
-	./manage.py migrate
+    ./manage.py migrate participant
+    ./manage.py migrate events
+    ./manage.py migrate maps
 
 # Launching with honcho
 
