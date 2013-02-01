@@ -11,6 +11,7 @@ class EventForm(forms.ModelForm):
                   "start_time",
                   "end_time",
                   "days",
+                  "location",
                   "description")
         widgets = {
                    'days' : CheckboxSelectMultiple
