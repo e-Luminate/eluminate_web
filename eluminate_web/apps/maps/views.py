@@ -45,7 +45,11 @@ def add(request, form_class=AddLocationForm, template='maps/add_location.html'):
             location.user = request.user
             location.save()
             msg = _("%(name)s has been saved.") %{'name': location.name}
-            messages.add_message(request, messages.SUCCESS, msg)  
+            messages.add_message(request, messages.SUCCESS, msg)
+            
+            if request.session.has_key('next'):
+                redirect_url = request.session.get('next')
+                return HttpResponseRedirect(redirect_url)
             return HttpResponseRedirect(reverse('locations_list'))
         else:
             # We re-pass the default location if the form is not valid
@@ -58,6 +62,8 @@ def add(request, form_class=AddLocationForm, template='maps/add_location.html'):
         location.marker = Point(DEFAULT_CENTER_OBJ['x'], DEFAULT_CENTER_OBJ['y'])
         form = form_class(initial={'user' : request.user,
                                    'marker' : location.marker})
+        if request.GET.has_key('next'):
+            request.session['next'] = request.GET['next']
         
     return render_to_response(template,
                               { "form": form, 
