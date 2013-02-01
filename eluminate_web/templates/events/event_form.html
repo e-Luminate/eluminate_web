@@ -1,7 +1,7 @@
 {% extends "site_base.html" %}
 
 {% load url from future %}
-{% load bootstrap_tags %}
+{% load crispy_forms_tags %}
 
 
 {% block head_title %}Create Event {% endblock %}
@@ -10,14 +10,8 @@
 
 <h1>Create a New Event</h1>
 
-<div class="span4">
-	<form method="POST" action={% url "event-create" %}>
-	    {% csrf_token %}
-	    {{form|as_bootstrap}}
-	    <div class="form-actions">
-	      <input name='submit' type="submit" class="btn btn-primary">Save</input>
-	    </div>
-	</form>
+<div class="span8">
+    {% crispy form %}
 </div>
 
 {% endblock%}
