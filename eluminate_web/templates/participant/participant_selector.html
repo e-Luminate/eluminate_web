@@ -1,7 +1,7 @@
 <div id="participant_action_bar" class="lightBackground">
     <div id="participant_selector">
         {% for participant in participant_list %}
-        <a title="{{ participant.name }}" href="{{ participant.get_absolute_url }}">
+        <a title="{{ participant.name }}" href="{{ participant.get_absolute_url }}{% if selected_category_id %}?category={{ selected_category_id }}{% endif %}">
             <div class="participant_logo_box">
                 <img class="participant_logo_img"src="{{ participant.logo.url }}">
             </div>
@@ -12,9 +12,13 @@
     {% if category_list|length > 1 %}
     <div id="category_filter">
         <span>Show only: </span>
-        {% for category in category_list %}
-        <input type="radio" name="category" value="{{ category.id }}"> {{ category.name }}
-        {% endfor %}
+        <form method="GET" action="{% url participant_landing %}">
+            <input type="radio" name="category" value="0" {% ifequal selected_category_id 0 %}checked{% endifequal %}> All
+            {% for category in category_list %}
+            <input type="radio" name="category" value="{{ category.id }}" {% ifequal selected_category_id category.id %}checked{% endifequal %}> {{ category.name }}
+            {% endfor %}
+            <input type="submit" value="Filter"/>
+        </form>
     </div>
     {% endif %}
 </div>
