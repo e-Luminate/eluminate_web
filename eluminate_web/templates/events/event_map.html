@@ -1,0 +1,60 @@
+{% extends "events/event_base.html" %}
+{% load url from future %}
+{% block head_title %}
+Programme
+{% endblock %}
+
+{% block tab %}
+	<ul class="nav nav-tabs">
+	  <li><a href="{% url 'events-list' %}">List</a></li>
+	  <li class="active"><a href="{% url 'events-map' %}">Map</a></li>
+	</ul>
+	<div class="row">
+			<div class="span6">
+	    	{% include "maps/_map.html" %}
+	        <style type="text/css">
+	            #map_canvas{
+	                height: 400px;
+	            }
+	        </style>
+	        {% if map_bounds %}
+				<script type="text/javascript">
+					$(window).ready(function(){ 
+	                	SSOUK.map_handler.map.fitBounds({{map_bounds}});
+	             	});
+	            </script>
+	        {% endif %}
+		</div>	
+		  <div class="span6">
+		  	
+		  	
+		  	{% for event_obj in object_list %}
+		    
+		    <div class="event">
+		    	<h2>{{event_obj.name}}</h2>
+		    	
+		    	time: {{event_obj.start_time}} -- {{event_obj.end_time}}<br/>
+		    	{% for day in days %}
+		    		{{day}}
+		    	{% endfor %}
+		    	exhibitor: <a href="{% url 'participant_detail' slug=event_obj.participant.slug %}">{{event_obj.participant}}</a><br/>
+		    	description: {{event_obj.description}}<br/>
+		    	<a href="{% url 'event-detail' event_obj.id %}">Go to the event</a>
+		    </div>
+		      	<script type="text/javascript">
+               $(document).ready(function(){
+                       
+                       var info_text = "{{ event_obj.name }}";
+                       console.log(info_text);
+                   SSOUK.map_handler.updateMarker({{ event_obj.location.marker.y }}, 
+                                                  {{ event_obj.location.marker.x }},
+                                                  info_text,
+                                                  {{ event_obj.location.id }}
+                                                  );
+               }); 
+    </script>
+		    <hr/>
+		    {% endfor %}
+		</div>
+	</div>
+{% endblock%}

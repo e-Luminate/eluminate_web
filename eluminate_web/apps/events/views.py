@@ -15,14 +15,17 @@ class EventDetail(DetailView):
 class EventList(ListView):
     
     model = Event
+
         
 class EventModelOwnerRestrictedMixin(object):
     model = Event
     
     def get_queryset(self):
         "Restricting to only the Events the user owns."
-        queryset = super(EventCreate, self).get_queryset()
-        queryset.filter(participant__user=request.user) 
+        
+        queryset = super(EventModelOwnerRestrictedMixin, self).get_queryset()
+        queryset.filter(participant__user=self.request.user)
+         
         return queryset        
 
 class EventCreate(CreateView):
