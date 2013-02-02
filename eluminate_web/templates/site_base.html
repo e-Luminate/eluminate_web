@@ -50,8 +50,11 @@
 {% endblock %}
 
 
+{% block script_base %}
+{# We override this block to have the jquery loaded to use with the map. #}
+    {% block extra_script %}{% endblock %}
+{% endblock %}
 
 {% block extra_body_base %}
-    {% analytics %}
     {% block extra_body %}{% endblock %}
 {% endblock %}
