@@ -21,10 +21,12 @@
     <ul>
       <li>Start time: {{ event.start_time }}</li>
       <li>End time: {{ event.end_time }}</li>
-      <li>Days: 
+      <li>Days:
+      	<ul> 
       	{% for day in event.days.all %}
-      	{{day}}
+      	<li>{{day}}</li> 
       	{% endfor %}
+      	</ul>
       </li>
     </ul>
     <a href="{% url 'event-detail' event.id %}">Go to the event</a>
