@@ -1,0 +1,36 @@
+{% extends "site_base.html" %}
+{% load url from future %}
+
+{% block body %}
+<h1>My Events</h1>
+
+<div class="span12">
+	<table class="table table-bordered">
+	{% for event in object_list %}
+		<thead>
+			<tr>
+				<th>Event Name</th>
+				<th>Time</th>
+				<th>Days</th>
+				<th>Description</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{event.name}}</td>
+				<td>{{event.start_time}} -- {{event.end_time}}</td>
+				<td><ul>
+						{% for day in event.days.all %}
+							<li>{{day}}</li>
+						{% endfor %}
+					</ul>
+				</td>
+				<td>{{event.description}}</td>
+				<td><a href="{% url 'event-detail' event.id %}">View</a> | <a href="{% url 'event-update' event.id %}">Edit</a></td>
+			</tr>
+		</tbody>
+	{% endfor %}
+	</table>
+</div>
+{% endblock%}
