@@ -11,6 +11,10 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+class ParticipantsApprovedManager(models.Manager):
+    def get_query_set(self):
+        return super(ParticipantsApprovedManager, self).get_query_set().exclude(approved_on=None)
+
 class Participant(models.Model):
     user = models.OneToOneField(User)
     name = models.CharField(max_length=255, help_text=u'Name of participating company')
@@ -22,6 +26,8 @@ class Participant(models.Model):
     category = models.ForeignKey(Category)
     created = models.DateTimeField(auto_now_add=True, help_text=u'Date/Time when company was first created')
     approved_on = models.DateTimeField(null=True, blank=True, help_text=u'Date/Time when company was approved to appear online')
+
+    objects_approved = ParticipantsApprovedManager()
 
     def __unicode__(self):
         return self.name
