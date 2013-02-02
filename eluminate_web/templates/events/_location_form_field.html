@@ -29,7 +29,12 @@
                     </label>
                 {% else %}
                     {% crispy_field field %} 
-                    <span style="margin-left:10px"><a class="btn btn-small" href="{% url 'add_location' %}?next={% url 'event-create' %}"><i class="icon-plus"></i></a></span>
+                    <span style="margin-left:10px">
+                    	<a class="btn btn-small" 
+                    		href="{% url 'add_location' %}?next={% url 'event-create' %}">
+                    		<i class="icon-plus icon-white"></i>
+                    	</a>
+                    </span>
                     {% include 'bootstrap/layout/help_text_and_errors.html' %}
                     
                 {% endif %}
