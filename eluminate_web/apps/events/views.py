@@ -4,6 +4,8 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
+from braces.views import LoginRequiredMixin
+
 from .models import Event
 from .forms import EventForm
    
@@ -28,7 +30,7 @@ class EventModelOwnerRestrictedMixin(object):
          
         return queryset        
 
-class EventCreate(CreateView):
+class EventCreate(LoginRequiredMixin, CreateView):
     
     model = Event
     form_class = EventForm
@@ -40,12 +42,12 @@ class EventCreate(CreateView):
         return super(EventCreate, self).form_valid(form)
         
 
-class EventUpdate(EventModelOwnerRestrictedMixin, UpdateView):
+class EventUpdate(LoginRequiredMixin, EventModelOwnerRestrictedMixin, UpdateView):
     
     model = Event
     form_class = EventForm
     
-class EventDelete(EventModelOwnerRestrictedMixin, DeleteView):
+class EventDelete(LoginRequiredMixin, EventModelOwnerRestrictedMixin, DeleteView):
     
     model = Event
     
