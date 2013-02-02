@@ -17,3 +17,4 @@ South==0.7.6
 django-crispy-forms==1.2.1
 PIL==1.1.7
 argcomplete==0.3.4
+django-debug-toolbar==0.9.4
