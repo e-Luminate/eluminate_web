@@ -6,13 +6,15 @@
                 <img class="participant_logo_img"src="{{ participant.logo.url }}">
             </div>
         </a>
+        {% empty %}
+        <p>Sorry, no participants matched your query. Try altering the filter below.</p>
         {% endfor %}
     </div>
 
     {% if category_list|length > 1 %}
     <div id="category_filter">
         <span>Show only: </span>
-        <form method="GET" action="{% url participant_landing %}">
+        <form method="GET" action="{% url participant_filter %}">
             <input type="radio" name="category" value="0" {% ifequal selected_category_id 0 %}checked{% endifequal %}> All
             {% for category in category_list %}
             <input type="radio" name="category" value="{{ category.id }}" {% ifequal selected_category_id category.id %}checked{% endifequal %}> {{ category.name }}
