@@ -30,8 +30,9 @@ class EventListUser(LoginRequiredMixin, EventList):
         return super(EventListUser, self).dispatch(request, *args, **kwargs)
     
     def get_queryset(self):
-        queryset = super(EventListUser, self).get_queryset()    
-        queryset.filter(participant=self.request.user.participant)
+        queryset = super(EventListUser, self).get_queryset().filter(
+                                participant=self.request.user.participant
+                                )
         return queryset
         
 class EventModelOwnerRestrictedMixin(object):
@@ -40,9 +41,9 @@ class EventModelOwnerRestrictedMixin(object):
     def get_queryset(self):
         "Restricting to only the Events the user owns."
         
-        queryset = super(EventModelOwnerRestrictedMixin, self).get_queryset()
-        queryset.filter(participant__user=self.request.user)
-         
+        queryset = super(EventModelOwnerRestrictedMixin, self).get_queryset().filter(
+                                    participant=self.request.user.participant
+                                    )
         return queryset        
 
 class EventCreate(LoginRequiredMixin, CreateView):
