@@ -1,0 +1,150 @@
+// Main style file for the website
+// Don't edit the css, edit the less version'
+// The css is automatically compiled from the less version
+
+
+@TextBright: white;
+@TextNormal: #EEE;
+@TextLegal: #AAA;
+@LightGreyBackground: #393939; // the bars behind some headings
+@DarkGreyBackground: #313131; // the body color
+@headingColor: #DE7EC8; 
+@bodyLeading: 160%;
+@logoYellow: #DEDE7E;
+@headingFont: 'Days One', sans-serif;
+
+body {
+   color: @TextNormal;
+   background-color: @DarkGreyBackground;
+   line-height: @bodyLeading;
+   font-family: verdana, sans-serif;
+   font-size: 13px;
+}
+
+h1, h2, h3 {
+  color: @headingColor;
+  font-family: @headingFont;
+  font-weight: normal;  
+}
+
+.lightBackground {
+    background-color: @LightGreyBackground;
+}
+
+
+// in responsive designs, I like to specify all font
+// sizes for standard elements in terms of % of body
+//  font-size.
+// This means one change scales everything...
+// It occurs to me that ther are better ways of
+// specifying this in less...
+
+h1 {
+  font-size: 225%;
+}
+
+h2 {
+  font-size: 135%;
+}
+
+.navbar-inner
+{
+  background-image: none;
+  background-color: @DarkGreyBackground;
+}
+
+#topGraphic img {
+  width: 100%;
+}
+
+// Participant screens
+div#participant_action_bar~h1 {
+    clear:both;
+}
+
+div.participant_logo_box {
+    background-color: #FFF;
+    float: left;
+    margin: 15px 5px;
+    padding: 5px;
+}
+
+div.participant_logo_box, div.participant_logo_box>img {
+    width: 130px;
+    height: 55px;
+}
+
+div.participant_logo_box.current_participant {
+    margin: 5px; 
+    padding: 15px 5px;
+}
+
+div#category_filter {
+    clear: both;
+    padding: 15px 5px 1px 5px;
+}
+
+div#category_filter>span {
+    color: #737373;
+    font-weight: bold;
+    float: left;
+    padding-right: 5px;
+}
+
+div#category_filter>form>input[type=submit] {
+    padding-left: 5px;
+}
+
+// ******************** Footer fixing ****************
+
+// make sure you can scroll to the bottom, missing footer
+.mainBody {
+  margin-bottom: 110px;
+}
+
+footer {
+  height: 103px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+//  left: 0;
+//  margin: 0;
+}
+footer .legal {
+  background-color: @DarkGreyBackground;
+  position: absolute;
+  bottom:0;
+  width: 100%;
+  color: @TextLegal;
+  font-size: 70%;
+  overflow: hidden;
+}
+
+#footerDates {
+  position: absolute;
+  right: 20px;
+  bottom: 17px;
+  color: @logoYellow;
+  font-family: @headingFont;
+  font-size: 18px;
+}
+ 
+/**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
+
+@media (max-width: 979px)
+{
+    .nav-collapse, .nav-collapse.collapse
+    {
+	overflow: inherit;
+	clear: none;
+    }
+    .navbar .nav {
+	float: left;
+	margin: 0 10px 0 0;
+    }
+}
+
+div#container {
+    width: 940px;
+}
+*/

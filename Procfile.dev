@@ -1,2 +1,2 @@
 web: ./manage.py runserver
-less: watchmedo shell-command --patterns="*.less" --command='./scripts/build_less.py "${watch_src_path}" ' eluminate_web/static/less/
+less: watchmedo shell-command --recursive --patterns="*.less" --command='make -C theme_maker' theme_maker

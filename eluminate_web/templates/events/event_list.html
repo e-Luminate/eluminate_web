@@ -14,22 +14,7 @@ Programme
 	  <div class="span12">
 	  	{% for event in object_list %}
 	    
-	    <div class="event">
-	    	name: {{event.name}}<br/>
-	    	time: {{event.start_time}} -- {{event.end_time}}<br/>
-	    	<ul>
-	    	{% for day in event.days.all %}
-	    		<li>{{day}}</li>
-	    	{% endfor %}
-	    	</ul>
-	    	exhibitor: {{event.participant}}<br/>
-	    	description: {{event.description}}<br/>
-	    	<a href="{% url 'event-detail' event.id %}">Go to the event</a>
-	    	
-	    	{% block edit_event %}
-	    	{% endblock %}
-	    </div>
-	    <hr/>
+		{% include "events/_event_snippet.html" %}
 	    {% endfor %}
 	</div>
 {% endblock%}
