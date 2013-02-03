@@ -27,6 +27,7 @@ class Participant(models.Model):
     created = models.DateTimeField(auto_now_add=True, help_text=u'Date/Time when company was first created')
     approved_on = models.DateTimeField(null=True, blank=True, help_text=u'Date/Time when company was approved to appear online')
 
+    objects = models.Manager()
     objects_approved = ParticipantsApprovedManager()
 
     def __unicode__(self):
