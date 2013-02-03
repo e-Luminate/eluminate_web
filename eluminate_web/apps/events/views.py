@@ -56,7 +56,6 @@ class EventCreate(LoginRequiredMixin, CreateView):
     def get_initial(self):
         initial = super(EventCreate, self).get_initial()
         initial['location'] = Location.objects.filter(user=self.request.user)
-#        import ipdb; ipdb.set_trace()
         return initial
 
     def form_valid(self, form):
