@@ -3,28 +3,8 @@ from django.views.generic import RedirectView
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 
-from participant.models import Category, Participant
-
-class ParticipantMixin(object):
-    def set_selected_category(self, request):
-        self.selected_category_id = int(request.GET.get('category', '0'))
-
-    def get_participant_list(self):
-        participant_list = Participant.objects_approved.all()
-        if self.selected_category_id: 
-            participant_list = participant_list.filter(category__id=self.selected_category_id)
-        return participant_list.order_by('name')
-
-    def get_active_category_list(self):
-        active_category_ids = Participant.objects_approved.distinct('category').values_list('category_id', flat=True)
-        return Category.objects.filter(id__in=active_category_ids).order_by('-id')
-
-    def get_participant_context_data(self):
-        context = {}
-        context['selected_category_id'] = self.selected_category_id
-        context['participant_list'] = self.get_participant_list()
-        context['category_list'] = self.get_active_category_list()
-        return context
+from participant.models import Participant
+from participant.mixins import ParticipantMixin
 
 class ParticipantLandingView(TemplateView, ParticipantMixin):
     template_name = 'participant/participant_landing.html'
