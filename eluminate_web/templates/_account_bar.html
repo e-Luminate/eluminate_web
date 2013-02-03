@@ -7,9 +7,14 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{% url account_settings %}"><i class="icon-user"></i>Settings</a></li>
+            	{% if request.user.participant %}
+            		<li><a href="#"><i class="icon-user icon-white"></i>Profile</a></li>
+            		<li><a href="{% url events-list-user %}"><i class="icon-calendar icon-white"></i>Events</a></li>
+            	{% endif %}
+            	<li class="divider"></li>
+                <li><a href="{% url account_settings %}"><i class="icon-cog icon-white"></i>Settings</a></li>
                 <li class="divider"></li>
-                <li><a href="{% url account_logout %}"><i class="icon-off"></i> Log out</a></li>
+                <li><a href="{% url account_logout %}"><i class="icon-off icon-white"></i> Log out</a></li>
             </ul>
         </li>
     {% else %}

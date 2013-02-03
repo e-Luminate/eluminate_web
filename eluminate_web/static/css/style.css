@@ -12,17 +12,6 @@ h3 {
   font-family: 'Days One', sans-serif;
   font-weight: normal;
 }
-.lightBackground {
-  background-color: #393939;
-}
-.lightBackground img {
-  height: auto;
-  vertical-align: top;
-}
-.lightBackground p,
-.lightBackground h2 {
-  margin: 0 25px;
-}
 h1 {
   font-size: 225%;
 }

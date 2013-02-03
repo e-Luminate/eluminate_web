@@ -1,8 +1,10 @@
-from django.shortcuts import get_object_or_404, redirect, render
-from django.views.decorators.http import require_http_methods
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect 
 from django.core.urlresolvers import reverse_lazy
+
+from braces.views import LoginRequiredMixin
 
 from .models import Event
 from .forms import EventForm
@@ -16,6 +18,22 @@ class EventList(ListView):
     
     model = Event
 
+class EventListUser(LoginRequiredMixin, EventList):
+    model = Event
+    template_name = "events/event_list_user.html"
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            request.user.participant
+        except ObjectDoesNotExist:
+            return HttpResponseRedirect(reverse_lazy('home'))
+        return super(EventListUser, self).dispatch(request, *args, **kwargs)
+    
+    def get_queryset(self):
+        queryset = super(EventListUser, self).get_queryset().filter(
+                                participant=self.request.user.participant
+                                )
+        return queryset
         
 class EventModelOwnerRestrictedMixin(object):
     model = Event
@@ -23,12 +41,12 @@ class EventModelOwnerRestrictedMixin(object):
     def get_queryset(self):
         "Restricting to only the Events the user owns."
         
-        queryset = super(EventModelOwnerRestrictedMixin, self).get_queryset()
-        queryset.filter(participant__user=self.request.user)
-         
+        queryset = super(EventModelOwnerRestrictedMixin, self).get_queryset().filter(
+                                    participant=self.request.user.participant
+                                    )
         return queryset        
 
-class EventCreate(CreateView):
+class EventCreate(LoginRequiredMixin, CreateView):
     
     model = Event
     form_class = EventForm
@@ -40,12 +58,12 @@ class EventCreate(CreateView):
         return super(EventCreate, self).form_valid(form)
         
 
-class EventUpdate(EventModelOwnerRestrictedMixin, UpdateView):
+class EventUpdate(LoginRequiredMixin, EventModelOwnerRestrictedMixin, UpdateView):
     
     model = Event
     form_class = EventForm
     
-class EventDelete(EventModelOwnerRestrictedMixin, DeleteView):
+class EventDelete(LoginRequiredMixin, EventModelOwnerRestrictedMixin, DeleteView):
     
     model = Event
     
