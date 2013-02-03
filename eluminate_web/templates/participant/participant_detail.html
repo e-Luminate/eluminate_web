@@ -33,7 +33,7 @@
                 <h2>{{ event.name }}</h2>
                 <p>{{ event.description }}</p>
                 <div class="row-fluid">
-                    <div class="span4">
+                    <div class="span4 participant-event-label">
                         Location:
                     </div>
                     <div class="span8">
@@ -41,11 +41,19 @@
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="span4">
+                    <div class="span4 participant-event-label">
                         Time:
                     </div>
                     <div class="span8">
-                        {{ event.start_time }} until {{ event.end_time }}, {% for day in event.days_set.all %}{{ day.name }}{% endfor %}
+                        {{ event.start_time }} until {{ event.end_time }}
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 participant-event-label">
+                        Days:
+                    </div>
+                    <div class="span8">
+                        {% for day in event.days.all %}{{ day.name }}<br/>{% endfor %}
                     </div>
                 </div>
                 <a href="{% url event-detail event.id %}" class="btn">Find out more</a>
