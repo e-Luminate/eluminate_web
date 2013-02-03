@@ -1,4 +1,5 @@
 {% extends "site_base.html" %}
+{% load url from future %}
 
 {% block head_title %}
 Your Events
@@ -26,12 +27,12 @@ Your Events
 	  <tr>
 	    <td>{{ event.start_time }} - {{ event.end_time }}</td>
 	    <td>{{ event.name }}</td>
-	    <td><a href="/profile/events/{{ event.id }}/edit/">Edit</a> &mdash; <a href="/profile/events/{{ event.id }}/">Delete</a></td>
+        <td><a href="{% url 'events_edit' event.id %}">Edit</a> &mdash; <a href="{% url 'events_item' event.id %}">Delete</a></td>
 	  </tr>
 	{% endfor %}
       </tbody>
     </table>
-    <p><a href="/profile/events/new/">Add an event</a></p>
+    <p><a href="{% url 'events_new' %}">Add an event</a></p>
   </div>
 </div>
 {% endblock %}
