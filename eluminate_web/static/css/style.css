@@ -12,6 +12,9 @@ h3 {
   font-family: 'Days One', sans-serif;
   font-weight: normal;
 }
+.lightBackground {
+  background-color: #393939;
+}
 h1 {
   font-size: 225%;
 }
