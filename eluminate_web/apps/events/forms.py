@@ -34,7 +34,10 @@ class EventForm(forms.ModelForm):
                 Field("start_time"),
                 Field("end_time"),
                 Field("days"),
-                Field("description")
+                Field("description"),
+                FormActions(
+                            Submit('submit', 'Save', css_class="btn btn-primary")
+                            )
                 )
             )
         
