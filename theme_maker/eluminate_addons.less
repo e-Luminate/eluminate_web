@@ -7,7 +7,7 @@
 @TextNormal: #EEE;
 @TextLegal: #AAA;
 @LightGreyBackground: #393939; // the bars behind some headings
-@DarkGreyBackground: #313131; // the body color
+@DarkGreyBackground: @bodyBackground; // the body color
 @headingColor: #DE7EC8; 
 @bodyLeading: 160%;
 @logoYellow: #DEDE7E;
@@ -26,11 +26,6 @@ h1, h2, h3 {
   font-family: @headingFont;
   font-weight: normal;  
 }
-
-.lightBackground {
-    background-color: @LightGreyBackground;
-}
-
 
 // in responsive designs, I like to specify all font
 // sizes for standard elements in terms of % of body
@@ -57,7 +52,8 @@ h2 {
   width: 100%;
 }
 
-// Participant screens
+// ****** Participant screens ******************
+
 div#participant_action_bar~h1 {
     clear:both;
 }
@@ -95,6 +91,47 @@ div#category_filter>form>input[type=submit] {
     padding-left: 5px;
 }
 
+// ******* "rule" under menu (done as border) ********
+
+.navbar-inner .container {
+    border-width: 0 0 2px;
+    border-bottom-color: @LightGreyBackground;
+    //border-style:solid;
+}
+
+// ******************** lightBackground panels *******
+
+.lightBackgroundHost {
+    overflow: hidden;
+}
+.lightBackground {
+    background-color: @LightGreyBackground;
+    height: 300px;
+    position: relative;
+    padding-bottom: 50px;
+    //margin-bottom: -99949px;
+   // padding-bottom: 99999px;
+
+    p, h2 {
+        padding: 0 5% 0 4%;
+	margin-top: 0;
+    }
+
+    h2 {
+	line-height: 150%;
+    }
+
+    img {
+        vertical-align: top;
+    }
+
+    .btn {
+	position: absolute;
+	bottom: 20px;
+	left: 5%;
+    }
+}
+
 // ******************** Footer fixing ****************
 
 // make sure you can scroll to the bottom, missing footer
@@ -110,8 +147,9 @@ footer {
 //  left: 0;
 //  margin: 0;
 }
+
 footer .legal {
-  background-color: @DarkGreyBackground;
+  background-color: @LightGreyBackground;
   position: absolute;
   bottom:0;
   width: 100%;
@@ -128,23 +166,3 @@ footer .legal {
   font-family: @headingFont;
   font-size: 18px;
 }
- 
-/**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
-
-@media (max-width: 979px)
-{
-    .nav-collapse, .nav-collapse.collapse
-    {
-	overflow: inherit;
-	clear: none;
-    }
-    .navbar .nav {
-	float: left;
-	margin: 0 10px 0 0;
-    }
-}
-
-div#container {
-    width: 940px;
-}
-*/
