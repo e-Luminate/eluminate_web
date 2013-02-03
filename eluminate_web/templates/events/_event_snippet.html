@@ -1,0 +1,23 @@
+{% load url from future %}
+
+
+<div class="event">
+	<h2>{{event.name}}</h2>
+	<div>
+		by <a href="{% url 'participant_detail' event.participant.slug %}">{{event.participant}}</a>
+	</div>
+	<div><i class="icon-time icon-white"></i> {{event.start_time}} -- {{event.end_time}}</div>
+	<div><i class="icon-map-marker icon-white"></i> {{event.location.name}} </div>
+	<div>
+		<ul class="unstyled inline">
+			<i class="icon-calendar icon-white"></i>
+			{% for day in event.days.all %}
+				<li>{{day}}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div>{{event.description}}</div>
+	<a href="{% url 'event-detail' event.id %}">Go to the event</a>
+	
+</div>
+<hr/>
