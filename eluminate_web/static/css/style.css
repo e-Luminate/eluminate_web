@@ -34,13 +34,17 @@ div#participant_action_bar ~ h1 {
 div.participant_logo_box {
   background-color: #FFF;
   float: left;
-  margin: 10px 5px;
+  margin: 15px 5px;
   padding: 5px;
 }
 div.participant_logo_box,
 div.participant_logo_box > img {
   width: 130px;
   height: 55px;
+}
+div.participant_logo_box.current_participant {
+  margin: 5px;
+  padding: 15px 5px;
 }
 div#category_filter {
   clear: both;
