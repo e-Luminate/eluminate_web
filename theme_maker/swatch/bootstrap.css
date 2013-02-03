@@ -5919,9 +5919,9 @@ div#category_filter > form > input[type=submit] {
 }
 .lightBackground {
   background-color: #393939;
-  height: 300px;
   position: relative;
   padding-bottom: 50px;
+  min-height: 300px !important;
 }
 .lightBackground p,
 .lightBackground h2 {
@@ -5939,17 +5939,34 @@ div#category_filter > form > input[type=submit] {
   bottom: 20px;
   left: 5%;
 }
+@media (min-width: 768px) and (max-width: 979px) {
+  .lightBackground {
+    min-height: 350px !important;
+  }
+}
+@media (max-width: 767px) {
+  .lightBackground {
+    min-height: 30px !important;
+  }
+}
 .mainBody {
-  margin-bottom: 110px;
+  margin-bottom: 130px;
 }
 footer {
-  height: 103px;
-  overflow: hidden;
+  height: 120px;
+  overflow: hidden !important;
   position: fixed;
   bottom: 0;
 }
+#footerImg {
+  overflow: hidden;
+}
+footer img {
+  max-width: 1400px !important;
+  width: 1400px !important;
+}
 footer .legal {
-  background-color: #393939;
+  background-color: #313131;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -5964,4 +5981,43 @@ footer .legal {
   color: #dede7e;
   font-family: 'Days One', sans-serif;
   font-size: 18px;
+}
+@media (max-width: 767px) {
+  footer {
+    height: auto;
+    left: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+  }
+  #footerRow {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+  footer img {
+    position: relative;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  #footerImg {
+    position: relative;
+    overflow: hidden !important;
+  }
+  #footerDates {
+    color: black;
+    font-size: 9px;
+    margin-bottom: 0px;
+    bottom: 0px;
+  }
+  footer .legal {
+    line-height: 10px;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    padding-left: 20px;
+  }
 }

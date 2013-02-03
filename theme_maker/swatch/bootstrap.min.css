@@ -967,11 +967,14 @@ div#category_filter>span{color:#737373;font-weight:bold;float:left;padding-right
 div#category_filter>form>input[type=submit]{padding-left:5px;}
 .navbar-inner .container{border-width:0 0 2px;border-bottom-color:#393939;}
 .lightBackgroundHost{overflow:hidden;}
-.lightBackground{background-color:#393939;height:300px;position:relative;padding-bottom:50px;}.lightBackground p,.lightBackground h2{padding:0 5% 0 4%;margin-top:0;}
+.lightBackground{background-color:#393939;position:relative;padding-bottom:50px;min-height:300px !important;}.lightBackground p,.lightBackground h2{padding:0 5% 0 4%;margin-top:0;}
 .lightBackground h2{line-height:150%;}
 .lightBackground img{vertical-align:top;}
 .lightBackground .btn{position:absolute;bottom:20px;left:5%;}
-.mainBody{margin-bottom:110px;}
-footer{height:103px;overflow:hidden;position:fixed;bottom:0;}
-footer .legal{background-color:#393939;position:absolute;bottom:0;width:100%;color:#aaaaaa;font-size:70%;overflow:hidden;}
+@media (min-width:768px) and (max-width:979px){.lightBackground{min-height:350px !important;}}@media (max-width:767px){.lightBackground{min-height:30px !important;}}.mainBody{margin-bottom:130px;}
+footer{height:120px;overflow:hidden !important;position:fixed;bottom:0;}
+#footerImg{overflow:hidden;}
+footer img{max-width:1400px !important;width:1400px !important;}
+footer .legal{background-color:#313131;position:absolute;bottom:0;width:100%;color:#aaaaaa;font-size:70%;overflow:hidden;}
 #footerDates{position:absolute;right:20px;bottom:17px;color:#dede7e;font-family:'Days One',sans-serif;font-size:18px;}
+@media (max-width:767px){footer{height:auto;left:0;padding-left:0px;padding-right:0px;width:100% !important;max-width:100% !important;overflow:hidden;} #footerRow{margin-left:20px;margin-right:20px;margin-bottom:10px;} footer img{position:relative;max-width:100% !important;width:100% !important;} #footerImg{position:relative;overflow:hidden !important;} #footerDates{color:black;font-size:9px;margin-bottom:0px;bottom:0px;} footer .legal{line-height:10px;width:100%;position:fixed;bottom:0px;left:0;padding-left:20px;}}

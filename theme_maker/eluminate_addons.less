@@ -104,13 +104,16 @@ div#category_filter>form>input[type=submit] {
 .lightBackgroundHost {
     overflow: hidden;
 }
+
 .lightBackground {
     background-color: @LightGreyBackground;
-    height: 300px;
     position: relative;
     padding-bottom: 50px;
     //margin-bottom: -99949px;
-   // padding-bottom: 99999px;
+    // padding-bottom: 99999px;
+
+    min-height: 300px !important;
+
 
     p, h2 {
         padding: 0 5% 0 4%;
@@ -132,24 +135,45 @@ div#category_filter>form>input[type=submit] {
     }
 }
 
+@media (min-width: 768px) and (max-width: 979px) {
+    .lightBackground {
+	min-height: 350px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .lightBackground {
+	min-height: 30px !important;
+    }
+}
+
 // ******************** Footer fixing ****************
 
 // make sure you can scroll to the bottom, missing footer
 .mainBody {
-  margin-bottom: 110px;
+  margin-bottom: 130px;
 }
 
 footer {
-  height: 103px;
-  overflow: hidden;
+  height: 120px;
+  overflow: hidden !important;
   position: fixed;
   bottom: 0;
 //  left: 0;
 //  margin: 0;
 }
 
+#footerImg {
+    overflow: hidden;
+}
+
+footer img {
+    max-width: 1400px !important;
+    width: 1400px !important;
+}
+
 footer .legal {
-  background-color: @LightGreyBackground;
+  background-color: @DarkGreyBackground;
   position: absolute;
   bottom:0;
   width: 100%;
@@ -165,4 +189,50 @@ footer .legal {
   color: @logoYellow;
   font-family: @headingFont;
   font-size: 18px;
+  //background-color: red;
+}
+
+@media (max-width: 767px) {
+    footer {
+	//background-color: green;
+        height: auto;
+	left:0;
+	padding-left:0px;
+	padding-right:0px;
+	width: 100% !important;
+	max-width: 100% !important;
+	//margin-right: 200px;
+	overflow: hidden;
+	//width: 400px !important;
+    }
+    #footerRow {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	//background-color: @DarkGreyBackground;
+    }
+    footer img {
+	position: relative;
+	max-width: 100% !important;
+	width: 100% !important;
+    }
+    #footerImg {
+	position: relative;
+        overflow: hidden !important;	
+    }
+    #footerDates {
+	color: black;
+	font-size: 9px;
+	margin-bottom: 0px;
+	bottom: 0px;
+    }
+    footer .legal {
+	//background-color: transparent;
+        line-height: 10px;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	left: 0;
+	padding-left: 20px;
+    }
 }
