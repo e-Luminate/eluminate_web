@@ -85,6 +85,9 @@ footer .legal {
   font-family: 'Days One', sans-serif;
   font-size: 18px;
 }
+.leaflet-popup-content {
+  color: black;
+}
 /**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
 
 @media (max-width: 979px)
