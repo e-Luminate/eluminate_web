@@ -13,13 +13,13 @@
 
     {% if category_list|length > 1 %}
     <div id="category_filter">
-        <span>Show only: </span>
+        <span>Show only </span>
         <form method="GET" action="{% url participant_filter %}">
             <input type="radio" name="category" value="0" {% ifequal selected_category_id 0 %}checked{% endifequal %}> <span>All</span>
             {% for category in category_list %}
             <input type="radio" name="category" value="{{ category.id }}" {% ifequal selected_category_id category.id %}checked{% endifequal %}> <span>{{ category.name }}</span>
             {% endfor %}
-            <input type="submit" value="Filter"/>
+            <input class="btn" type="submit" value="Filter"/>
         </form>
     </div>
     {% endif %}
