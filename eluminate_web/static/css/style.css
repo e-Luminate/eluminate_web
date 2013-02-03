@@ -14,6 +14,13 @@ h3 {
 }
 .lightBackground {
   background-color: #393939;
+  padding: 5%;
+}
+.elum-top,
+.elum-top > div[class*="span"] {
+  margin: 0px;
+  min-height: 0px;
+  line-height: 0px;
 }
 h1 {
   font-size: 225%;
@@ -58,6 +65,9 @@ div#category_filter > span {
 }
 div#category_filter > form > input[type=submit] {
   padding-left: 5px;
+}
+.participant_detail_row {
+  margin-top: 10px;
 }
 .mainBody {
   margin-bottom: 110px;

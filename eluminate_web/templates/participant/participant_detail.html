@@ -4,15 +4,78 @@
 {% block head_title %}{{ current_participant.name }}{% endblock %}
 
 {% block inner_body %}
-<h1>{{ current_participant.name}}</h1>
 
-{% if current_participant.website %}
-<a href="{{ current_participant.website }}">Website</a>
-{% endif %}
+<div class="row-fluid participant_detail_row">
+    <div class="span4">
+        {% if current_participant.website %}
+        <a href="{{ current_participant.website }}" target="_blank" title="Go to website">
+            <img src="{{ current_participant.logo.url }}"/>
+        </a>
+        {% else %}
+            <img src="{{ current_participant.logo.url }}"/>
+        {% endif %}
+    </div>
+    <div class="span8">
+        {% if current_participant.website %}
+        <a href="{{ current_participant.website }}" target="_blank" title="Go to website">
+            <h1>{{ current_participant.name }}</h1>
+        </a>
+        {% else %}
+        <h1>{{ current_participant.name }}</h1>
+        {% endif %}
+    </div> 
+</div>
+<div class="row-fluid participant_detail_row">
+    <div class="span4">
+        {% for event in current_participant.event_set.all %}
+        <div class="row-fluid elum-top">
+            <div class="span12">
+                <img src="/site_media/static/img/elum_top.png">
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12 lightBackground">
+                <h2>{{ event.name }}</h2>
+                <p>{{ event.description }}</p>
+                <div class="row-fluid">
+                    <div class="span4">
+                        Location:
+                    </div>
+                    <div class="span8">
+                        {{ event.location.name }}
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        Time:
+                    </div>
+                    <div class="span8">
+                        {{ event.start_time }} until {{ event.end_time }}, {% for day in event.days_set.all %}{{ day.name }}{% endfor %}
+                    </div>
+                </div>
+                <a href="{% url event-detail event.id %}" class="btn">Find out more</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="span8">
+        <div class="row-fluid">
+            {% if current_participant.photo %}
+            <div class="span6">
+            {% else %}
+            <div class="span12">
+            {% endif %}
+                <p>{{ current_participant.description }}<p>
+            </div>
+            {% if current_participant.photo %}
+            <div class="span6">
+                {% if current_participant.photo %}
+                <img src="{{ current_participant.photo.url }}"/>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
-{% if current_participant.photo %}
-<img src="{{ current_participant.photo.url }}"/>
-{% endif %}
-
-<p>{{ current_participant.description }}<p>
 {% endblock inner_body %}
