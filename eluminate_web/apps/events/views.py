@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse_lazy
 
 from braces.views import LoginRequiredMixin
 
+from maps.models import Location
+
 from .models import Event
 from .forms import EventForm
    
@@ -50,6 +52,11 @@ class EventCreate(LoginRequiredMixin, CreateView):
     
     model = Event
     form_class = EventForm
+
+    def get_initial(self):
+        initial = super(EventCreate, self).get_initial()
+        initial['location'] = Location.objects.filter(user=self.request.user)
+        return initial
 
     def form_valid(self, form):
         
