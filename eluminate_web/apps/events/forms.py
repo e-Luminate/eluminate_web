@@ -37,7 +37,15 @@ class EventForm(forms.ModelForm):
                 Field("description")
                 )
             )
+        
         super(EventForm, self).__init__(*args, **kwargs)
+
         # Overriding the help text due to a django bug:
         # https://code.djangoproject.com/ticket/9321
         self.fields['days'].help_text = ''
+        
+        # This is another dirty hack, we should report to django.
+        # The initial from a FormClass initial on a MultiChoiceField
+        # does not get retained, so we override
+        self.fields['location'].queryset = kwargs['initial']['location']
+        
