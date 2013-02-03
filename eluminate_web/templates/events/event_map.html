@@ -28,32 +28,22 @@ Programme
 		  <div class="span6">
 		  	
 		  	
-		  	{% for event_obj in object_list %}
+		  	{% for event in object_list %}
 		    
-		    <div class="event">
-		    	<h2>{{event_obj.name}}</h2>
-		    	
-		    	time: {{event_obj.start_time}} -- {{event_obj.end_time}}<br/>
-		    	{% for day in days %}
-		    		{{day}}
-		    	{% endfor %}
-		    	exhibitor: <a href="{% url 'participant_detail' slug=event_obj.participant.slug %}">{{event_obj.participant}}</a><br/>
-		    	description: {{event_obj.description}}<br/>
-		    	<a href="{% url 'event-detail' event_obj.id %}">Go to the event</a>
-		    </div>
-		      	<script type="text/javascript">
+			{% include "events/_event_snippet.html" %}
+	      	<script type="text/javascript">
                $(document).ready(function(){
                        
-                       var info_text = "{{ event_obj.name }}";
+                       var info_text = "<a href=\"{% url 'event-detail' event.id %}\">{{ event.name }}</a>";
                        console.log(info_text);
-                   SSOUK.map_handler.updateMarker({{ event_obj.location.marker.y }}, 
-                                                  {{ event_obj.location.marker.x }},
+                   SSOUK.map_handler.updateMarker({{ event.location.marker.y }}, 
+                                                  {{ event.location.marker.x }},
                                                   info_text,
-                                                  {{ event_obj.location.id }}
+                                                  {{ event.location.id }}
                                                   );
                }); 
-    </script>
-		    <hr/>
+			</script>
+		    
 		    {% endfor %}
 		</div>
 	</div>
