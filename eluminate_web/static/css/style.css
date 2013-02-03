@@ -25,10 +25,14 @@ h2 {
 #topGraphic img {
   width: 100%;
 }
+div#participant_action_bar ~ h1 {
+  clear: both;
+}
 div.participant_logo_box {
-  background-color: #000;
+  background-color: #FFF;
   float: left;
   margin: 10px 5px;
+  padding: 5px;
 }
 div.participant_logo_box,
 div.participant_logo_box > img {
