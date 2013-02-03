@@ -29,7 +29,7 @@
     <div class="span4">
         {% for event in current_participant.event_set.all %}
         <div class="row-fluid">
-            <div class="span12 lightBackground elum-top">
+            <div class="span12 lightBackground elum-top participant-event">
                 <h2>{{ event.name }}</h2>
                 <p>{{ event.description }}</p>
                 <div class="row-fluid">

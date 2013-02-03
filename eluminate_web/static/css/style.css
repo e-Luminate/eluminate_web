@@ -68,6 +68,9 @@ div#category_filter > form > input[type=submit] {
 .participant_detail_row {
   margin-top: 10px;
 }
+.participant-event {
+  margin-bottom: 10px;
+}
 .mainBody {
   margin-bottom: 110px;
 }
