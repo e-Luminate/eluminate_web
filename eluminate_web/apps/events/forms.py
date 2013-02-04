@@ -21,13 +21,12 @@ class EventForm(forms.ModelForm):
                    'days' : CheckboxSelectMultiple
                    }
         
-    def __init__(self, user=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_id = 'saveLocation'
         self.helper.form_method = 'post'
         self.helper.form_class = 'form-horizontal'
         self.helper.help_text_inline = True
-        self.user = user
         self.helper.layout = Layout(
             Div(Field('location', template="events/_location_form_field.html",),
                 Field('name'),
@@ -48,7 +47,20 @@ class EventForm(forms.ModelForm):
         self.fields['days'].help_text = ''
         
         # This is another dirty hack, we should report to django.
-        # The initial from a FormClass initial on a MultiChoiceField
+        # The initial from a FormClass initial on a ModelChoiceField
         # does not get retained, so we override
-        self.fields['location'].queryset = kwargs['initial']['location']
+#        import ipdb; ipdb.set_trace()
+        if kwargs['initial'].has_key('location'):
+            location_queryset = kwargs['initial']['location']
+            self.fields['location'].queryset = location_queryset
+            if self.instance:
+                #import ipdb; ipdb.set_trace()
+                location_selected = location_queryset.filter(id=self.instance.location.id)
+                self.fields['location'].queryset=location_queryset
+                self.fields['location'].initial = location_selected
+                print self.instance.location
+                                                  
+                
+ 
+                
         

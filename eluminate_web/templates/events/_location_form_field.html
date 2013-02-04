@@ -31,7 +31,7 @@
                     {% crispy_field field %} 
                     <span style="margin-left:10px">
                     	<a class="btn btn-small" 
-                    		href="{% url 'add_location' %}?next={% url 'event-create' %}">
+                    		href="{% url 'add_location' %}?next={{request.path}}">
                     		<i class="icon-plus icon-white"></i>
                     	</a>
                     </span>
