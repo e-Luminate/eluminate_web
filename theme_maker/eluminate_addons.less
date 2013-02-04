@@ -116,14 +116,19 @@ div#category_filter>form>input[type=submit] {
     overflow: hidden;
 }
 
+.lightBackground.span4 {
+    // so far, all span4 light backgrounds have a more button
+    // so leave some padding to avoid text under it
+    padding-bottom: 50px;
+}
+
+.lightBackgroundHost .lightBackground.span4 {
+    min-height: 300px;
+}
+
 .lightBackground {
     background-color: @LightGreyBackground;
     position: relative;
-    padding-bottom: 50px;
-    //margin-bottom: -99949px;
-    // padding-bottom: 99999px;
-
-    min-height: 300px !important;
 
 
     p, h2 {
@@ -147,14 +152,14 @@ div#category_filter>form>input[type=submit] {
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
-    .lightBackground {
-	min-height: 350px !important;
+    .lightBackgroundHost .lightBackground.span4 {
+	min-height: 350px
     }
 }
 
 @media (max-width: 767px) {
-    .lightBackground {
-	min-height: 30px !important;
+    .lightBackgroundHost .lightBackground.span4 {
+	min-height: 30px;
     }
 }
 
