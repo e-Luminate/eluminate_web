@@ -11,6 +11,7 @@ Programme
 	  </li>
 	  <li><a href="{% url 'events-map' %}">Map</a></li>
 	</ul>
+            {% include 'participant/category_filter.html' with action_url_name='events-list' %}
 	  <div class="span12">
 	  	{% for event in object_list %}
 	    
