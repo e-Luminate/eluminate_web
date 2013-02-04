@@ -81,14 +81,25 @@ div#category_filter {
 }
 
 div#category_filter>span {
-    color: #737373;
-    font-weight: bold;
     float: left;
     padding-right: 5px;
 }
 
+div#category_filter>span, div.participant-event-label {
+    color: @gray;
+    font-weight: bold;
+}
+
 div#category_filter>form>input[type=submit] {
     padding-left: 5px;
+}
+
+.participant_detail_row {
+    margin-top: 10px;
+}
+
+.participant-event {
+    margin-bottom: 10px; 
 }
 
 // ******* "rule" under menu (done as border) ********
@@ -190,6 +201,12 @@ footer .legal {
   font-family: @headingFont;
   font-size: 18px;
   //background-color: red;
+}
+ 
+// Map
+
+.leaflet-popup-content {
+  color: black;
 }
 
 @media (max-width: 767px) {

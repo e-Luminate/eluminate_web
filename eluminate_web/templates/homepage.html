@@ -16,7 +16,7 @@
 <div class="row-fluid">
   <div class="span8">
     <p>The inaugural e-Luminate Festival 2013 is an exciting visual display which showcases one of Cambridge's most upwardly mobile sectors: Clean Technology. In a series of collaborations, Clean Tenchnology innovators and visual artists will use light and installation art to demonstrate some of the extraordinary breaktroughs in this modern and environmentally-focussed industry.</p>
-    <p>Our <a href="/events/">programme</a> of events runs from the 20<sup>th</sup> &ndash; 24<sup>th</sup> of February 2013 and includes interactive light displays, workshops, talks and events to delight and educate all ages.</p>
+    <p>Our <a href="{% url 'events-list' %}">programme</a> of events runs from the 20<sup>th</sup> &ndash; 24<sup>th</sup> of February 2013 and includes interactive light displays, workshops, talks and events to delight and educate all ages.</p>
   </div>
   {% comment %} temporary image, to be replaced by carousel {% endcomment %}
   <div class="span4" style="margin-bottom: 30px; height: 200px; background-position: center; background-size: 200%;
@@ -28,26 +28,26 @@
 <div class="row-fluid lightBackgroundHost">
   <div class="span4 lightBackground">
     <img src="{{ STATIC_URL }}img/elum_top.png" />
-    <a href="/events/"><h2>Browse the programme</h2></a>
+    <a href="{% url 'events-list' %}"><h2>Browse the programme</h2></a>
     <p>The festival has art installations and displays in various locations around the city. Some of the CleanTech companies have also organised displays about what they do.</p>
     <p>At various specific times there will be events and talks, most of which are open to the public.</p>
-    <a href="/events/" class="btn">Find out more</a>
+    <a href="{% url 'events-list' %}" class="btn">Find out more</a>
   </div>
 
   <div class="span4 lightBackground">
     <img src="{{ STATIC_URL }}img/elum_top.png" />
-    <a href="/map/"><h2>View the virtual exhibition</h2></a>
+    <a href="{% url 'locations_list' %}"><h2>View the virtual exhibition</h2></a>
     <p>See details of artists and exhibitors.<p>
     <p>Many of the region's top CleanTech companies have contributed to this festival. The work of several artists is also featured. The "Virtual Exhibition" gives a page of information about each contributor. Where the contributor has a real exhibition, or is involved in any events, this is listed too.
 </p>
-    <a href="/map/" class="btn">Find out more&hellip;</a>
+    <a href="{% url 'locations_list' %}" class="btn">Find out more&hellip;</a>
   </div>
   
   <div class="span4 lightBackground">
     <img src="{{ STATIC_URL }}img/elum_top.png" />
-    <a href="/sponsors/"><h2>See our sponsors</h2></a>
+    <a href="{% url 'sponsors' %}"><h2>See our sponsors</h2></a>
     <p>The festival could not have happened without the generous support of many people and organisations. We would like to thank all those listed on the "Sponsors" page. We would also like to thank the team of people who volunteered their time to put the festival together.</p>
-    <a href="/sponsors/" class="btn">Find out more</a>
+    <a href="{% url 'sponsors' %}" class="btn">Find out more</a>
   </div>
 </div>
 {% endblock %}
