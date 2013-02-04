@@ -66,9 +66,15 @@ class EventCreate(LoginRequiredMixin, CreateView):
         
 
 class EventUpdate(LoginRequiredMixin, EventModelOwnerRestrictedMixin, UpdateView):
-    
+        
     model = Event
     form_class = EventForm
+    template_name = "events/event_form_update.html"
+       
+    def get_initial(self):
+        initial = super(EventUpdate, self).get_initial()
+        initial['location'] = Location.objects.filter(user=self.request.user)
+        return initial
     
 class EventDelete(LoginRequiredMixin, EventModelOwnerRestrictedMixin, DeleteView):
     
