@@ -13,7 +13,15 @@ urlpatterns = patterns("",
 
     url(r'^participants/', include("participant.urls")),
     url(r'^sponsors/$', TemplateView.as_view(template_name="sponsors.html"), name="sponsors"),
-    url(r'^about/$', TemplateView.as_view(template_name="about.html"), name="about"),
+
+    url(r'^about/$', TemplateView.as_view(template_name="about_vision.html"), name="about"),
+    url(r'^about/vision/$', TemplateView.as_view(template_name="about_vision.html"), name="vision"),
+    #url(r'^about/history/$', TemplateView.as_view(template_name="about_history.html"), name="history"),
+    url(r'^about/people/$', TemplateView.as_view(template_name="about_people.html"), name="people"),
+    url(r'^about/partners/$', TemplateView.as_view(template_name="about_partners.html"), name="partners"),
+    url(r'^about/press/$', TemplateView.as_view(template_name="about_press.html"), name="press"),
+    url(r'^about/news/$', TemplateView.as_view(template_name="about_news.html"), name="news"),
+
     url(r'^contact/$', TemplateView.as_view(template_name="contact.html"), name="contact"),
     url(r"^account/", include("account.urls")),
     url(r"^admin/", include(admin.site.urls)),

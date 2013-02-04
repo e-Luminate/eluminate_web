@@ -2,11 +2,11 @@
 
 {% block nav %}
   <ul class="nav">
-    <li><a href="{% url "home" %}">Home</a></li>
-    <li><a href="{% url "events-list" %}">Programme</a></li>
-    <li><a href="{% url "participant_landing" %}">Virtual Exhibition</a></li>
-    <li><a href="{% url "sponsors" %}">Sponsors</a></li>
-    <li><a href="{% url "about" %}">About</a></li>
-    <li><a href="{% url "contact" %}">Contact</a></li>
+    <li><a href="{% url "home" %}" {% if request.path == '/' %} class="active"{% endif %}>Home</a></li>
+    <li><a href="{% url "events-list" %}" {% if request.path == '/events/' %} class="active"{% endif %}>Programme</a></li>
+    <li><a href="{% url "participant_landing" %}" {% if request.path == '/participants/' %} class="active"{% endif %}>Virtual Exhibition</a></li>
+    <li><a href="{% url "sponsors" %}" {% if request.path == '/sponsors/' %} class="active"{% endif %}>Sponsors</a></li>
+    <li><a href="{% url "vision" %}" {% if request.path == '/about/' %} class="active"{% endif %}>About</a></li>
+    <li><a href="{% url "contact" %}" {% if request.path == '/contact/' %} class="active"{% endif %}>Contact</a></li>
   </ul>
 {% endblock %}
