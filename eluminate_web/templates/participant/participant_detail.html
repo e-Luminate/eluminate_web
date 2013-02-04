@@ -29,7 +29,8 @@
     <div class="span4">
         {% for event in current_participant.event_set.all %}
         <div class="row-fluid">
-            <div class="span12 lightBackground elum-top participant-event">
+            <div class="span12 lightBackground participant-event">
+                <img src="{{ STATIC_URL }}img/elum_top.png" />
                 <h2>{{ event.name }}</h2>
                 <p>{{ event.description }}</p>
                 <div class="row-fluid">

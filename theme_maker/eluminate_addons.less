@@ -7,7 +7,7 @@
 @TextNormal: #EEE;
 @TextLegal: #AAA;
 @LightGreyBackground: #393939; // the bars behind some headings
-@DarkGreyBackground: #313131; // the body color
+@DarkGreyBackground: @bodyBackground; // the body color
 @headingColor: #DE7EC8; 
 @bodyLeading: 160%;
 @logoYellow: #DEDE7E;
@@ -25,17 +25,6 @@ h1, h2, h3 {
   color: @headingColor;
   font-family: @headingFont;
   font-weight: normal;  
-}
-
-.lightBackground {
-    background-color: @LightGreyBackground;
-}
-
-.elum-top {
-    background-image: url('/site_media/static/img/elum_top.png');
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: contain;
 }
 
 // in responsive designs, I like to specify all font
@@ -63,7 +52,8 @@ h2 {
   width: 100%;
 }
 
-// Participant screens
+// ****** Participant screens ******************
+
 div#participant_action_bar~h1 {
     clear:both;
 }
@@ -112,21 +102,87 @@ div#category_filter>form>input[type=submit] {
     margin-bottom: 10px; 
 }
 
+// ******* "rule" under menu (done as border) ********
+
+.navbar-inner .container {
+    border-width: 0 0 2px;
+    border-bottom-color: @LightGreyBackground;
+    //border-style:solid;
+}
+
+// ******************** lightBackground panels *******
+
+.lightBackgroundHost {
+    overflow: hidden;
+}
+
+.lightBackground {
+    background-color: @LightGreyBackground;
+    position: relative;
+    padding-bottom: 50px;
+    //margin-bottom: -99949px;
+    // padding-bottom: 99999px;
+
+    min-height: 300px !important;
+
+
+    p, h2 {
+        padding: 0 5% 0 4%;
+	margin-top: 0;
+    }
+
+    h2 {
+	line-height: 150%;
+    }
+
+    img {
+        vertical-align: top;
+    }
+
+    .btn {
+	position: absolute;
+	bottom: 20px;
+	left: 5%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .lightBackground {
+	min-height: 350px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .lightBackground {
+	min-height: 30px !important;
+    }
+}
+
 // ******************** Footer fixing ****************
 
 // make sure you can scroll to the bottom, missing footer
 .mainBody {
-  margin-bottom: 110px;
+  margin-bottom: 130px;
 }
 
 footer {
-  height: 103px;
-  overflow: hidden;
+  height: 120px;
+  overflow: hidden !important;
   position: fixed;
   bottom: 0;
 //  left: 0;
 //  margin: 0;
 }
+
+#footerImg {
+    overflow: hidden;
+}
+
+footer img {
+    max-width: 1400px !important;
+    width: 1400px !important;
+}
+
 footer .legal {
   background-color: @DarkGreyBackground;
   position: absolute;
@@ -144,6 +200,7 @@ footer .legal {
   color: @logoYellow;
   font-family: @headingFont;
   font-size: 18px;
+  //background-color: red;
 }
  
 // Map
@@ -152,23 +209,47 @@ footer .legal {
   color: black;
 }
 
-
-/**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
-
-@media (max-width: 979px)
-{
-    .nav-collapse, .nav-collapse.collapse
-    {
-	overflow: inherit;
-	clear: none;
+@media (max-width: 767px) {
+    footer {
+	//background-color: green;
+        height: auto;
+	left:0;
+	padding-left:0px;
+	padding-right:0px;
+	width: 100% !important;
+	max-width: 100% !important;
+	//margin-right: 200px;
+	overflow: hidden;
+	//width: 400px !important;
     }
-    .navbar .nav {
-	float: left;
-	margin: 0 10px 0 0;
+    #footerRow {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	//background-color: @DarkGreyBackground;
+    }
+    footer img {
+	position: relative;
+	max-width: 100% !important;
+	width: 100% !important;
+    }
+    #footerImg {
+	position: relative;
+        overflow: hidden !important;	
+    }
+    #footerDates {
+	color: black;
+	font-size: 9px;
+	margin-bottom: 0px;
+	bottom: 0px;
+    }
+    footer .legal {
+	//background-color: transparent;
+        line-height: 10px;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	left: 0;
+	padding-left: 20px;
     }
 }
-
-div#container {
-    width: 940px;
-}
-*/
