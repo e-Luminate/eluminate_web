@@ -22,7 +22,7 @@ class ApprovedListFilter(admin.SimpleListFilter):
             return queryset
 
 class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('slug', 'name', 'created', 'approved', 'category')
+    list_display = ('slug', 'name', 'created', 'approved', 'category', 'website')
     list_filter = (ApprovedListFilter, 'category__name')
     search_fields = ('name',)
     actions = ['bulk_approve']
