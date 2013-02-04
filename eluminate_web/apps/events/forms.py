@@ -53,8 +53,8 @@ class EventForm(forms.ModelForm):
         if kwargs['initial'].has_key('location'):
             location_queryset = kwargs['initial']['location']
             self.fields['location'].queryset = location_queryset
-            if self.instance:
-                #import ipdb; ipdb.set_trace()
+            if self.instance.location is not None:
+                
                 location_selected = location_queryset.filter(id=self.instance.location.id)
                 self.fields['location'].queryset=location_queryset
                 self.fields['location'].initial = location_selected
