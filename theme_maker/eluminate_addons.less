@@ -31,6 +31,12 @@ h1, h2, h3 {
     background-color: @LightGreyBackground;
 }
 
+.elum-top {
+    background-image: url('/site_media/static/img/elum_top.png');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 
 // in responsive designs, I like to specify all font
 // sizes for standard elements in terms of % of body
@@ -85,14 +91,25 @@ div#category_filter {
 }
 
 div#category_filter>span {
-    color: @gray;
-    font-weight: bold;
     float: left;
     padding-right: 5px;
 }
 
+div#category_filter>span, div.participant-event-label {
+    color: @gray;
+    font-weight: bold;
+}
+
 div#category_filter>form>input[type=submit] {
     padding-left: 5px;
+}
+
+.participant_detail_row {
+    margin-top: 10px;
+}
+
+.participant-event {
+    margin-bottom: 10px; 
 }
 
 // ******************** Footer fixing ****************
@@ -129,6 +146,13 @@ footer .legal {
   font-size: 18px;
 }
  
+// Map
+
+.leaflet-popup-content {
+  color: black;
+}
+
+
 /**** Deprecated (i.e. useless) Kim's first attempt at fixing responsive menu bar ***
 
 @media (max-width: 979px)

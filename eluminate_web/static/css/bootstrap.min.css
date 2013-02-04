@@ -955,6 +955,7 @@ legend,label{color:#999999;border-bottom:0px solid #222;}
 body{color:#eeeeee;background-color:#313131;line-height:160%;font-family:verdana,sans-serif;font-size:13px;}
 h1,h2,h3{color:#de7ec8;font-family:'Days One',sans-serif;font-weight:normal;}
 .lightBackground{background-color:#393939;}
+.elum-top{background-image:url('/site_media/static/img/elum_top.png');background-position:center top;background-repeat:no-repeat;background-size:contain;}
 h1{font-size:225%;}
 h2{font-size:135%;}
 .navbar-inner{background-image:none;background-color:#313131;}
@@ -964,9 +965,13 @@ div.participant_logo_box{background-color:#FFF;float:left;margin:15px 5px;paddin
 div.participant_logo_box,div.participant_logo_box>img{width:130px;height:55px;}
 div.participant_logo_box.current_participant{margin:5px;padding:15px 5px;}
 div#category_filter{clear:both;padding:15px 5px 1px 5px;}
-div#category_filter>span{color:#999999;font-weight:bold;float:left;padding-right:5px;}
+div#category_filter>span{float:left;padding-right:5px;}
+div#category_filter>span,div.participant-event-label{color:#999999;font-weight:bold;}
 div#category_filter>form>input[type=submit]{padding-left:5px;}
+.participant_detail_row{margin-top:10px;}
+.participant-event{margin-bottom:10px;}
 .mainBody{margin-bottom:110px;}
 footer{height:103px;overflow:hidden;position:fixed;bottom:0;}
 footer .legal{background-color:#313131;position:absolute;bottom:0;width:100%;color:#aaaaaa;font-size:70%;overflow:hidden;}
 #footerDates{position:absolute;right:20px;bottom:17px;color:#dede7e;font-family:'Days One',sans-serif;font-size:18px;}
+.leaflet-popup-content{color:black;}
