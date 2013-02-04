@@ -1,4 +1,5 @@
 {% extends "site_base.html" %}
+{% load url from future %}
 
 {% block head_title %}
 Profile
@@ -6,5 +7,5 @@ Profile
 
 {% block body %}
 <h1>Update Profile</h1>
-<p><a href="/profile/events">Manage events here</a></p>
+<p><a href="{% url 'events' %}">Manage events here</a></p>
 {% endblock %}
