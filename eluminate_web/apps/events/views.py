@@ -17,26 +17,18 @@ class EventDetail(DetailView):
     
     model = Event
 
-class EventList(ListView, CategoryFilterMixin):
+class EventList(CategoryFilterMixin, ListView):
     
     model = Event
 
-    def get(self, request, *args, **kwargs):
-        self.set_selected_category(request)
-        return super(EventList, self).get(request, *args, **kwargs)
-
     def get_queryset(self):
-        queryset = super(EventList, self).get_queryset()
+        queryset = super(CategoryFilterMixin, self).get_queryset()
         if self.selected_category_id:
-            queryset = queryset.filter(
-                            participant__category__id=self.selected_category_id
+            queryset = queryset.filter(participant__category=self.selected_category_id
                             )
         return queryset
+    
 
-    def get_context_data(self, **kwargs):
-        context = super(EventList, self).get_context_data(**kwargs)
-        context.update(self.get_category_context_data())
-        return context 
 
 class EventListUser(LoginRequiredMixin, EventList):
     model = Event
