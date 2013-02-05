@@ -57,7 +57,18 @@ class EventList(CategoryFilterMixin, ListView):
                             )
         return queryset
     
-
+class LocationList(CategoryFilterMixin, ListView):
+    
+    model = Location
+    template_name="events/event_map.html"
+    
+    def get_queryset(self):
+        queryset = super(LocationList, self).get_queryset()
+        if self.selected_category_id:
+            queryset = queryset.filter(event__participant__category=self.selected_category_id
+                            )
+        return queryset
+    
 
 class EventListUser(EventParticipantApprovedMixin, EventList):
 
