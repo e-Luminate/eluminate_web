@@ -3,39 +3,31 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect 
 from django.core.urlresolvers import reverse_lazy
-
-from braces.views import LoginRequiredMixin
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from maps.models import Location
 
 from .models import Event
 from .forms import EventForm
    
-
-class EventDetail(DetailView):
+   
+class EventParticipantApprovedMixin(object):
     
-    model = Event
-
-class EventList(ListView):
-    
-    model = Event
-
-class EventListUser(LoginRequiredMixin, EventList):
-    model = Event
-    template_name = "events/event_list_user.html"
-    
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         try:
-            request.user.participant
+            request.user.participant # Checking if the user is participant at all.
+            
+            if not request.user.participant.approved():
+                messages.add_message(request, messages.WARNING, "You Entry has not yet been approved.")
+                return HttpResponseRedirect(reverse_lazy('home'))
         except ObjectDoesNotExist:
             return HttpResponseRedirect(reverse_lazy('home'))
-        return super(EventListUser, self).dispatch(request, *args, **kwargs)
-    
-    def get_queryset(self):
-        queryset = super(EventListUser, self).get_queryset().filter(
-                                participant=self.request.user.participant
-                                )
-        return queryset
+
+        return super(EventParticipantApprovedMixin, self).dispatch(request, *args, **kwargs)
+        
         
 class EventModelOwnerRestrictedMixin(object):
     model = Event
@@ -46,9 +38,29 @@ class EventModelOwnerRestrictedMixin(object):
         queryset = super(EventModelOwnerRestrictedMixin, self).get_queryset().filter(
                                     participant=self.request.user.participant
                                     )
-        return queryset        
+        return queryset
+   
 
-class EventCreate(LoginRequiredMixin, CreateView):
+class EventDetail(DetailView):
+    
+    model = Event
+
+class EventList(ListView):
+    
+    model = Event
+
+class EventListUser(EventParticipantApprovedMixin, EventList):
+    model = Event
+    template_name = "events/event_list_user.html"
+    
+    def get_queryset(self):
+        queryset = super(EventListUser, self).get_queryset().filter(
+                                participant=self.request.user.participant
+                                )
+        return queryset
+                
+
+class EventCreate(EventParticipantApprovedMixin, CreateView):
     
     model = Event
     form_class = EventForm
@@ -65,7 +77,7 @@ class EventCreate(LoginRequiredMixin, CreateView):
         return super(EventCreate, self).form_valid(form)
         
 
-class EventUpdate(LoginRequiredMixin, EventModelOwnerRestrictedMixin, UpdateView):
+class EventUpdate(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin, UpdateView):
         
     model = Event
     form_class = EventForm
@@ -76,7 +88,7 @@ class EventUpdate(LoginRequiredMixin, EventModelOwnerRestrictedMixin, UpdateView
         initial['location'] = Location.objects.filter(user=self.request.user)
         return initial
     
-class EventDelete(LoginRequiredMixin, EventModelOwnerRestrictedMixin, DeleteView):
+class EventDelete(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin, DeleteView):
     
     model = Event
     
