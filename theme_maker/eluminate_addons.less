@@ -87,7 +87,12 @@ div#category_filter>span {
 
 div#category_filter>span, div.participant-event-label {
     color: @gray;
-    font-weight: bold;
+    font-weight: bold;  
+}
+
+div.participant-event-label {
+  min-height: 0 !important; // squashes space after label when in narrow screen
+  padding-left: 4%;
 }
 
 div#category_filter>form>input[type=submit] {
@@ -99,7 +104,8 @@ div#category_filter>form>input[type=submit] {
 }
 
 .participant-event {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
+    padding-bottom: 65px; 
 }
 
 #category_filter {
@@ -113,6 +119,7 @@ div#category_filter>form>input[type=submit] {
     form span { // the radio button labels
         padding-right: 10px;
     }
+
 }
 
 
