@@ -51,7 +51,7 @@ class EventList(CategoryFilterMixin, ListView):
     model = Event
 
     def get_queryset(self):
-        queryset = super(CategoryFilterMixin, self).get_queryset()
+        queryset = super(EventList, self).get_queryset()
         if self.selected_category_id:
             queryset = queryset.filter(participant__category=self.selected_category_id
                             )
