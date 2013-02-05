@@ -29,22 +29,28 @@ Programme
 		  <div class="span6">
 		  	
 		  	
-		  	{% for event in object_list %}
-		    
-			{% include "events/_event_snippet.html" %}
-	      	<script type="text/javascript">
-               $(document).ready(function(){
-                       
-                       var info_text = "<a href=\"{% url 'event-detail' event.id %}\">{{ event.name }}</a>";
-                       console.log(info_text);
-                   SSOUK.map_handler.updateMarker({{ event.location.marker.y }}, 
-                                                  {{ event.location.marker.x }},
-                                                  info_text,
-                                                  {{ event.location.id }}
-                                                  );
-               }); 
-			</script>
-		    
+		  	{% for location in object_list %}
+			  	{% if location.event_set.count > 0 %}
+				    {% for event_obj in location.event_set.all %}
+						{% include "events/_event_snippet.html" %}
+			      	{% endfor %}
+			    <script type="text/javascript">
+	               $(document).ready(function(){
+	                       
+	                   var info_text = "<ul class=\"unstyled\">" 
+	                       {% for event_obj in location.event_set.all %}
+	                       var info_list = "<li><a href=\"{% url 'event-detail' event_obj.id %}\">{{ event_obj.name }}</a></li>";
+	                       info_text = info_text + info_list;   
+	                       {% endfor %}
+	                       info_text = info_text + "</ul>"; 
+	                   SSOUK.map_handler.updateMarker({{ location.marker.y }}, 
+	                                                  {{ location.marker.x }},
+	                                                  info_text,
+	                                                  {{ location.id }}
+	                                                  );
+	               }); 
+				</script>
+				{% endif %}
 		    {% endfor %}
 		</div>
 	</div>
