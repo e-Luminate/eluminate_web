@@ -6,39 +6,21 @@ from django.views.generic.detail import DetailView
 from participant.models import Participant
 from participant.mixins import ParticipantMixin
 
-class ParticipantLandingView(TemplateView, ParticipantMixin):
+class ParticipantLandingView(ParticipantMixin, TemplateView):
     template_name = 'participant/participant_landing.html'
 
-    def get(self, request, *args, **kwargs):
-        self.set_selected_category(request)
-        return super(ParticipantLandingView, self).get(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super(ParticipantLandingView, self).get_context_data(**kwargs)
-        context.update(self.get_participant_context_data())
-        return context
 
-class ParticipantDetailView(DetailView, ParticipantMixin):
+class ParticipantDetailView(ParticipantMixin, DetailView):
     template_name = 'participant/participant_detail.html'
     model = Participant
     context_object_name = 'current_participant'
 
-    def get(self, request, *args, **kwargs):
-        self.set_selected_category(request)
-        return super(ParticipantDetailView, self).get(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super(ParticipantDetailView, self).get_context_data(**kwargs)
-        context.update(self.get_participant_context_data())
-        return context
 
-class ParticipantFilterRedirectView(RedirectView, ParticipantMixin):
+class ParticipantFilterRedirectView(ParticipantMixin, RedirectView):
     url = 'X'
     query_string = True
-
-    def get(self, request, *args, **kwargs):
-        self.set_selected_category(request)
-        return super(ParticipantFilterRedirectView, self).get(request, *args, **kwargs)
 
     def get_redirect_url(self, **kwargs):
         query_string = super(ParticipantFilterRedirectView, self).get_redirect_url(**kwargs)[len(self.url):]
