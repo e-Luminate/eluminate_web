@@ -2,22 +2,33 @@
 
 
 <div class="event">
-	<h2>{{event.name}}</h2>
+	<h2>{{event_obj.name}}</h2>
 	<div>
-		by <a href="{% url 'participant_detail' event.participant.slug %}">{{event.participant}}</a>
+		by <a href="{% url 'participant_detail' event_obj.participant.slug %}">{{event_obj.participant}}</a>
 	</div>
-	<div><i class="icon-time icon-white"></i> {{event.start_time}} -- {{event.end_time}}</div>
-	<div><i class="icon-map-marker icon-white"></i> {{event.location.name}} </div>
+	<div><i class="icon-time icon-white"></i> {{event_obj.start_time}} -- {{event_obj.end_time}}</div>
+	<div><a id="marker_item_{{event_obj.id}}" href=""><i class="icon-map-marker icon-white"></i> {{event_obj.location.name}}</a> </div>
+	<script type="text/javascript">
+		$(document).ready(function(){ 
+        	$("#marker_item_{{event_obj.id}}")
+        	.on("click", {
+        		item_id: {{event_obj.id}},
+                item_location_id: {{event_obj.location.id}},
+                          },
+                SSOUK.map_handler.onInventoryListClick);
+     	});
+    </script>	
+	
 	<div>
 		<ul class="unstyled inline">
 			<i class="icon-calendar icon-white"></i>
-			{% for day in event.days.all %}
+			{% for day in event_obj.days.all %}
 				<li>{{day}}</li>
 			{% endfor %}
 		</ul>
 	</div>
-	<div>{{event.description}}</div>
-	<a href="{% url 'event-detail' event.id %}">Go to the event</a>
+	<div>{{event_obj.description}}</div>
+	<a href="{% url 'event-detail' event_obj.id %}">Go to the event</a>
 	
 </div>
 <hr/>
