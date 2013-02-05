@@ -76,8 +76,8 @@ SSOUK.map_handler = function() {
    }
    
   onInventoryListClick = function(event) {
-
-  		var marker = SSOUK.map_handler.markers[event.data.item_location_id]
+  		event.preventDefault();
+  		var marker = SSOUK.map_handler.markers[event.data.item_location_id];
   		var map = SSOUK.map_handler.map;
   		map.panTo(marker.getLatLng());
   		marker.openPopup();
