@@ -4,17 +4,8 @@
 {% block head_title %}{{ current_participant.name }}{% endblock %}
 
 {% block inner_body %}
-
+<!-- participant_detail.html -->
 <div class="row-fluid participant_detail_row">
-    <div class="span4">
-        {% if current_participant.website %}
-        <a href="{{ current_participant.website }}" target="_blank" title="Go to website">
-            <img src="{{ current_participant.logo.url }}"/>
-        </a>
-        {% else %}
-            <img src="{{ current_participant.logo.url }}"/>
-        {% endif %}
-    </div>
     <div class="span8">
         {% if current_participant.website %}
         <a href="{{ current_participant.website }}" target="_blank" title="Go to website">
@@ -24,6 +15,15 @@
         <h1>{{ current_participant.name }}</h1>
         {% endif %}
     </div> 
+    <div class="span4">
+        {% if current_participant.website %}
+        <a href="{{ current_participant.website }}" target="_blank" title="Go to website">
+            <img id="participant_detail_logo" src="{{ current_participant.logo.url }}"/>
+        </a>
+        {% else %}
+            <img id="participant_detail_logo" src="{{ current_participant.logo.url }}"/>
+        {% endif %}
+    </div>
 </div>
 <div class="row-fluid participant_detail_row">
     <div class="span4">
@@ -57,7 +57,7 @@
                         {% for day in event.days.all %}{{ day.name }}<br/>{% endfor %}
                     </div>
                 </div>
-                <a href="{% url event-detail event.id %}" class="btn">Find out more</a>
+                <a href="{% url event-detail event.id %}" class="btn">Find out more&hellip;</a>
             </div>
         </div>
         {% endfor %}
