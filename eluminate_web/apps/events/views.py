@@ -53,7 +53,7 @@ class EventList(CategoryFilterMixin, ListView):
     def get_queryset(self):
         queryset = super(EventList, self).get_queryset()
         if self.selected_category_id:
-            queryset = queryset.filter(participant__category=self.selected_category_id
+            queryset = queryset.filter(participant__categories=self.selected_category_id
                             )
         return queryset
     
@@ -65,7 +65,7 @@ class LocationList(CategoryFilterMixin, ListView):
     def get_queryset(self):
         queryset = super(LocationList, self).get_queryset()
         if self.selected_category_id:
-            queryset = queryset.filter(event__participant__category=self.selected_category_id
+            queryset = queryset.filter(event__participant__categories=self.selected_category_id
                             )
         return queryset
     
