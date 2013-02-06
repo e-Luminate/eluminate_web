@@ -22,7 +22,7 @@ class EventParticipantApprovedMixin(object):
             request.user.participant # Checking if the user is participant at all.
             
             if not request.user.participant.approved():
-                messages.add_message(request, messages.WARNING, "You Entry has not yet been approved.")
+                messages.add_message(request, messages.WARNING, "Your Entry has not yet been approved.")
                 return HttpResponseRedirect(reverse_lazy('home'))
         except ObjectDoesNotExist:
             return HttpResponseRedirect(reverse_lazy('home'))
