@@ -23,7 +23,7 @@ urlpatterns = patterns("",
     url(r'^about/news/$', TemplateView.as_view(template_name="about_news.html"), name="news"),
 
     url(r'^contact/$', TemplateView.as_view(template_name="contact.html"), name="contact"),
-    url(r"^account/", include("account.urls")),
+    url(r'^account/', include("custom_account.urls")),
     url(r"^admin/", include(admin.site.urls)),
     url(r"^events/", include("events.urls")),  
     url(r'^maps/', include("maps.urls")),
