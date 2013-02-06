@@ -87,10 +87,10 @@ class EventCreate(EventParticipantApprovedMixin, CreateView):
     model = Event
     form_class = EventForm
 
-    def get_initial(self):
-        initial = super(EventCreate, self).get_initial()
-        initial['location'] = Location.objects.filter(user=self.request.user)
-        return initial
+    def get_form(self, form_class):
+        form = super(EventCreate, self).get_form(form_class)
+        form.fields['location'].queryset = Location.objects.filter(user=self.request.user)
+        return form
 
     def form_valid(self, form):
         
@@ -105,10 +105,10 @@ class EventUpdate(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin,
     form_class = EventForm
     template_name = "events/event_form_update.html"
        
-    def get_initial(self):
-        initial = super(EventUpdate, self).get_initial()
-        initial['location'] = Location.objects.filter(user=self.request.user)
-        return initial
+    def get_form(self, form_class):
+        form = super(EventUpdate, self).get_form(form_class)
+        form.fields['location'].queryset = Location.objects.filter(user=self.request.user)
+        return form
     
 class EventDelete(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin, DeleteView):
     

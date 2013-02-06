@@ -45,20 +45,6 @@ class EventForm(forms.ModelForm):
         # Overriding the help text due to a django bug:
         # https://code.djangoproject.com/ticket/9321
         self.fields['days'].help_text = ''
-        
-        # This is another dirty hack, we should report to django.
-        # The initial from a FormClass initial on a ModelChoiceField
-        # does not get retained, so we override
-#        import ipdb; ipdb.set_trace()
-        if kwargs['initial'].has_key('location'):
-            location_queryset = kwargs['initial']['location']
-            self.fields['location'].queryset = location_queryset
-            if self.instance.location is not None:
-                
-                location_selected = location_queryset.filter(id=self.instance.location.id)
-                self.fields['location'].queryset=location_queryset
-                self.fields['location'].initial = location_selected
-                print self.instance.location
                                                   
                 
  
