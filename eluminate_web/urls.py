@@ -27,9 +27,6 @@ urlpatterns = patterns("",
     url(r"^admin/", include(admin.site.urls)),
     url(r"^events/", include("events.urls")),  
     url(r'^maps/', include("maps.urls")),
-    #url(r'^profile/', include("participant_profile.urls")),
-    url(r'^search/', include("search.urls")),
-    #url(r'^sandbox/map$', TemplateView.as_view(template_name="k_map.html"), name="sponsors"),
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
