@@ -22,8 +22,8 @@ class ApprovedListFilter(admin.SimpleListFilter):
             return queryset
 
 class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('slug', 'name', 'created', 'approved', 'category', 'website')
-    list_filter = (ApprovedListFilter, 'category__name')
+    list_display = ('slug', 'name', 'created', 'approved', 'website')
+    list_filter = (ApprovedListFilter, 'categories')
     search_fields = ('name',)
     actions = ['bulk_approve']
     date_hierarchy = 'created'
