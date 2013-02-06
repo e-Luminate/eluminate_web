@@ -23,7 +23,7 @@ class Participant(models.Model):
     logo = models.ImageField(upload_to='participant_logos/%Y/%m/%d', max_length=200, help_text=u'Company logo')
     photo = models.ImageField(upload_to='participant_photos/%Y/%m/%d', max_length=200, blank=True, help_text=u'Company photo')
     description = models.TextField(blank=True, help_text=u'Description of the participating company')
-    category = models.ForeignKey(Category)
+    categories = models.ManyToManyField(Category)
     created = models.DateTimeField(auto_now_add=True, help_text=u'Date/Time when company was first created')
     approved_on = models.DateTimeField(null=True, blank=True, help_text=u'Date/Time when company was approved to appear online')
 

@@ -7,7 +7,7 @@ class CategoryFilterMixin(object):
         self.selected_category_id = int(request.GET.get('category', '0'))
 
     def get_active_category_list(self):
-        active_category_ids = Participant.objects_approved.distinct('category').values_list('category_id', flat=True)
+        active_category_ids = Participant.objects_approved.distinct('categories').values_list('categories', flat=True)
         return Category.objects.filter(id__in=active_category_ids).order_by('-id')
 
     def get_context_data(self, **kwargs):
@@ -25,7 +25,7 @@ class ParticipantMixin(CategoryFilterMixin):
     def get_participant_list(self):
         participant_list = Participant.objects_approved.all()
         if self.selected_category_id: 
-            participant_list = participant_list.filter(category__id=self.selected_category_id)
+            participant_list = participant_list.filter(categories=self.selected_category_id)
         return participant_list.order_by('name')
 
     def get_context_data(self, **kwargs):
