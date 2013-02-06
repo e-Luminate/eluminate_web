@@ -11,9 +11,9 @@ Programme
 	</ul>
             {% include 'participant/category_filter.html' with action_url_name='events-list' %}
 	  <div class="span12">
-	  	{% for event in object_list %}
+	  	{% for event_obj in object_list %}
 	    
 		{% include "events/_event_snippet.html" %}
 	    {% endfor %}
 	</div>
-{% endblock%}
+{% endblock %}
