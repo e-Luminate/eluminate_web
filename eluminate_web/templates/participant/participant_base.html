@@ -3,6 +3,14 @@
 
 {% block head_title %}{% endblock %}
 
+{% block extra_head %}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/spencejones.js"></script>
+  <script type="text/javascript">
+    window.addEventListener("load", init);
+    window.addEventListener("resize", init);
+  </script>
+{% endblock %}
+
 {% block body %}
 {% include "participant/participant_selector.html" %}
 {% block inner_body %}{% endblock %}

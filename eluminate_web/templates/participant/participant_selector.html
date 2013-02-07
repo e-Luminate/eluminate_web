@@ -2,19 +2,33 @@
     <div class="span12">
         <div id="participant_action_bar" class="lightBackground">
             <div class="row-fluid">
-                <div class="span12">
+                <div class="span1" id="participant_leftArrow" onClick="doScrollLeft()" style="background-color:red;">
+		  <img height="10px" width="10px" />
+		</div>
+                <div class="span10" id="menu" style="height:50px; overflow: hidden">
                     <div id="participant_selector">
+		        {% comment %}
+			for each participant...
+			  <a title="name" href="url[?catgory=...]">
+			    <div class="participant_logo_box [current_participant]" style="display: block; float: left;">
+                               <img class="participant_logo_img"src="{{ participant.logo.url }}"/>
+			    </div>
+			  </a>
+			{% endcomment %}
                         {% for participant in participant_list %}
                         <a title="{{ participant.name }}" href="{{ participant.get_absolute_url }}{% if selected_category_id %}?category={{ selected_category_id }}{% endif %}">
-                            <div class="participant_logo_box{% if current_participant.id == participant.id %} current_participant{% endif %}">
-                                <img class="participant_logo_img"src="{{ participant.logo.url }}">
-                            </div>
+                            <!--div class="participant_logo_box{% if current_participant.id == participant.id %} current_participant{% endif %}"-->
+                                <img class="participant_logo_img"src="{{ participant.logo.url }}" style="display: inline; height: 50px; width: auto;" />
+                            <!--/div-->
                         </a>
                         {% empty %}
                         <p>Sorry, no participants matched your query. Try altering the filter below.</p>
                         {% endfor %}
                     </div>
-                </div>
+		</div>
+                <div class="span1" id="participant_rightArrow" onClick="doScrollRight()" style="background-color:red;">
+		  <img height="10px" width="10px" />
+		</div>
             </div>
             {% include 'participant/category_filter.html' with action_url_name='participant_filter' %}
         </div>
