@@ -20,15 +20,28 @@
   {% block extra_head %}{% endblock %}
 {% endblock %}
 
-{% block site_brand %}
-  <div id="topGraphic">
-    <img src="{{ STATIC_URL }}img/elum_top.png" />
-  </div>
+
+{% block topbar %}
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+</a>
+	{% block site_brand %}
+	  <div id="topGraphic">
+	    <img src="{{ STATIC_URL }}img/elum_top.png" />
+	  </div>
+	{% endblock %}
+<div class="nav-collapse">
+    {% block nav %}
+    {% include "_nav.html" %}
+    {% endblock %}
+    {% block account_bar %}{% include "_account_bar.html" %}{% endblock %}
+    {% block nav_search %}
+    {% endblock %}
+</div>
 {% endblock %}
 
-{% block nav %}
-	{% include "_nav.html" %}
-{% endblock %}
 
 {% block body_base %}
   <div class="container mainBody">

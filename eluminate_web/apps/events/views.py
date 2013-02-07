@@ -55,18 +55,32 @@ class EventList(CategoryFilterMixin, ListView):
         if self.selected_category_id:
             queryset = queryset.filter(participant__category=self.selected_category_id
                             )
+        if self.request.GET.has_key("q"):
+            queryset = queryset.filter(name__icontains=self.request.GET["q"])
         return queryset
     
-class LocationList(CategoryFilterMixin, ListView):
+class EventLocationList(CategoryFilterMixin, ListView):
     
     model = Location
     template_name="events/event_map.html"
     
+    def get_context_data(self, **kwargs):
+        
+        context = super(EventLocationList, self).get_context_data(**kwargs)
+        
+        if self.request.GET.has_key("q"):
+            context ['searched_events'] = Event.objects.filter(name__icontains=self.request.GET["q"])
+        
+        return context
+    
     def get_queryset(self):
-        queryset = super(LocationList, self).get_queryset()
+        queryset = super(EventLocationList, self).get_queryset()
         if self.selected_category_id:
             queryset = queryset.filter(event__participant__category=self.selected_category_id
                             )
+        if self.request.GET.has_key("q"):
+            queryset = queryset.filter(event__name__icontains=self.request.GET["q"])
+
         return queryset
     
 
