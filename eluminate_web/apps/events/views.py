@@ -22,7 +22,7 @@ class EventParticipantApprovedMixin(object):
             request.user.participant # Checking if the user is participant at all.
             
             if not request.user.participant.approved():
-                messages.add_message(request, messages.WARNING, "Your Entry has not yet been approved.")
+                messages.add_message(request, messages.WARNING, "You Entry has not yet been approved.")
                 return HttpResponseRedirect(reverse_lazy('home'))
         except ObjectDoesNotExist:
             return HttpResponseRedirect(reverse_lazy('home'))
@@ -52,21 +52,12 @@ class EventList(CategoryFilterMixin, ListView):
 
     def get_queryset(self):
         queryset = super(EventList, self).get_queryset()
+
         if self.selected_category_id:
-            queryset = queryset.filter(participant__categories=self.selected_category_id
-                            )
-        return queryset
-    
-class LocationList(CategoryFilterMixin, ListView):
-    
-    model = Location
-    template_name="events/event_map.html"
-    
-    def get_queryset(self):
-        queryset = super(LocationList, self).get_queryset()
-        if self.selected_category_id:
-            queryset = queryset.filter(event__participant__categories=self.selected_category_id
-                            )
+            queryset = queryset.filter(participant__categories=self.selected_category_id)
+
+        if self.request.GET.has_key("q"):
+            queryset = queryset.filter(name__icontains=self.request.GET["q"])
         return queryset
     
 

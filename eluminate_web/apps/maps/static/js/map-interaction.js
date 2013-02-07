@@ -27,6 +27,7 @@ SSOUK.map_handler = function() {
         //Adding our vars to Namespace
         SSOUK.map_handler.map = map;
         SSOUK.map_handler.markers = markers;
+        SSOUK.map_handler.location_to_item = {};
         //SSOUK.map_handler.markersCluster = markersCluster;
    }
    
