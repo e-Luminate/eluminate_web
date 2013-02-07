@@ -58,12 +58,14 @@
                $(document).ready(function(){
                        
                        var info_text = "{{ event.name }}";
-                       console.log(info_text);
+                       
                    SSOUK.map_handler.updateMarker({{ event.location.marker.y }}, 
                                                   {{ event.location.marker.x }},
                                                   info_text,
                                                   {{ event.location.id }}
                                                   );
+                   SSOUK.map_handler.map.panTo([{{ event.location.marker.y }}, 
+                                               {{ event.location.marker.x }}]);
                }); 
     </script>	
   </div>
