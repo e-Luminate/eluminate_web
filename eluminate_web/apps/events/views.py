@@ -6,6 +6,9 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.utils.timezone import now
+
+from braces.views import LoginRequiredMixin
 
 from maps.models import Location
 from participant.mixins import CategoryFilterMixin
@@ -22,8 +25,9 @@ class EventParticipantApprovedMixin(object):
             request.user.participant # Checking if the user is participant at all.
             
             if not request.user.participant.approved():
-                messages.add_message(request, messages.WARNING, "You Entry has not yet been approved.")
-                return HttpResponseRedirect(reverse_lazy('home'))
+                msg = "Your Event will be visible only when your user will be approved as participant."
+                messages.add_message(request, messages.INFO, msg)
+                
         except ObjectDoesNotExist:
             return HttpResponseRedirect(reverse_lazy('home'))
 
@@ -49,6 +53,7 @@ class EventDetail(DetailView):
 class EventList(CategoryFilterMixin, ListView):
     
     model = Event
+    queryset = Event.objects.filter(participant__approved_on__lt=now())
 
     def get_queryset(self):
         queryset = super(EventList, self).get_queryset()
