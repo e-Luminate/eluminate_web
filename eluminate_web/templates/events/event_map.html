@@ -33,41 +33,43 @@ Programme
 		  <div class="span6">
 		  	
 		  	
-		  	{% for location in object_list %}
-			  	{% if location.event_set.count > 0 %}
-			  		{% if searched_events %}
-				    	{% for event_obj in searched_events %}
-				    		{% include "events/_event_snippet.html" %}
-				    	{% endfor %}
-				    {% else %}						{% for event_obj in location.event_set.all %}
-							{% include "events/_event_snippet.html" %}
-						{% endfor %}					{% endif %}
-						
-		      	
-			    <script type="text/javascript">
-	               $(document).ready(function(){
-	               	var info_text = "<ul class=\"unstyled\">" 
-		  		   	{% if searched_events %}
-			    		{% for event_obj in searched_events %}
-	                       var info_list = "<li><a href=\"{% url 'event-detail' event_obj.id %}\">{{ event_obj.name }}</a></li>";
-	                       info_text = info_text + info_list;   			    		
-			    		{% endfor %}
-			    	{% else %}
-						{% for event_obj in location.event_set.all %}
-	                       var info_list = "<li><a href=\"{% url 'event-detail' event_obj.id %}\">{{ event_obj.name }}</a></li>";
-	                       info_text = info_text + info_list;   
-						{% endfor %}
-					{% endif %}
-                   info_text = info_text + "</ul>"; 
-                   SSOUK.map_handler.updateMarker({{ location.marker.y }}, 
-                                                  {{ location.marker.x }},
-                                                  info_text,
-                                                  {{ location.id }}
-                                                  );
-	               }); 
-				</script>
-				{% endif %}
-		    {% endfor %}
+	  	{% for event_obj in object_list %}		  	
+    		{% include "events/_event_snippet.html" %}  	
+		    <script type="text/javascript">
+               $(document).ready(function(){
+               	var info_text_ul_opening = "<ul class=\"unstyled\">"
+               	var info_list_format = "<li><a href=\"{% url 'event-detail' event_obj.id %}\">{{ event_obj.name }}</a></li>";
+               	var info_text_ul_closing = "</ul>";
+               	
+               	{# if the marker exist we update it#}
+               	if ({{event_obj.location.id}} in SSOUK.map_handler.markers)
+               	{	
+           			var info_list = SSOUK.map_handler.location_to_item[{{event_obj.location.id}}];
+           			info_list += info_list_format;
+           			var info_text = info_text_ul_opening + info_list + info_text_ul_closing;
+       			   	SSOUK.map_handler.location_to_item[{{event_obj.location.id}}] = info_list;
+       			   	marker = SSOUK.map_handler.markers[{{event_obj.location.id}}];
+       			   	marker.data.popuptext = info_text;
+       			   	marker.unbindPopup();
+       			   	marker.bindPopup(info_text);
+               	}
+               	{# otherwise we create it #}
+               	else 
+               	{	
+               		var info_list = info_list_format;
+	               	var info_text = info_text_ul_opening + info_list + info_text_ul_closing;
+	               	SSOUK.map_handler.location_to_item[{{event_obj.location.id}}] = info_list;
+   		           	SSOUK.map_handler.updateMarker({{ event_obj.location.marker.y }}, 
+	                          {{ event_obj.location.marker.x }},
+	                          info_text,
+	                          {{ event_obj.location.id }}
+	                          );
+	                
+	             }
+               }); 
+			</script>
+			
+	    {% endfor %}
 		</div>
 	</div>
 {% endblock%}
