@@ -13,7 +13,10 @@
        	if ({{event_obj.location.id}} in SSOUK.map_handler.markers)
        	{	
    			var info_list = SSOUK.map_handler.location_to_item[{{event_obj.location.id}}];
-   			info_list += info_list_format;
+   			 // We add only if not present.
+   			if (info_list.indexOf(info_list_format) == -1) {
+   				info_list += info_list_format;	
+   			}
    			var info_text = info_text_ul_opening + info_list + info_text_ul_closing;
 		   	SSOUK.map_handler.location_to_item[{{event_obj.location.id}}] = info_list;
 		   	marker = SSOUK.map_handler.markers[{{event_obj.location.id}}];
