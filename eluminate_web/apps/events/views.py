@@ -27,7 +27,7 @@ class EventParticipantApprovedMixin(object):
             request.user.participant # Checking if the user is participant at all.
             
             if not request.user.participant.approved():
-                msg = "Your Event will be visible only when your user will be approved as participant."
+                msg = "Your Event will only be visible once you have been approved as a participant."
                 messages.add_message(request, messages.INFO, msg)
                 
         except ObjectDoesNotExist:
