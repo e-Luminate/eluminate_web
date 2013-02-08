@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from django.core.urlresolvers import reverse
 from django import forms
 
@@ -27,7 +27,7 @@ class Event(models.Model):
     description = models.TextField()
     location = models.ForeignKey(Location, null=True)
     searched_objects = EventSearchManager()
-    objects = models.Manager()
+    objects = models.GeoManager()
     
     def get_absolute_url(self):
         return(reverse("event-detail", args=[self.id]))

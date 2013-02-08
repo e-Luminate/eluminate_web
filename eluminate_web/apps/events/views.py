@@ -1,16 +1,18 @@
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponseRedirect 
+from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
+from django.contrib.gis.geos import Polygon
 
 from braces.views import LoginRequiredMixin
 
 from maps.models import Location
+from maps.utils import get_search_polygon, calculate_bounds
 from participant.mixins import CategoryFilterMixin
 
 from .models import Event
@@ -65,6 +67,28 @@ class EventList(CategoryFilterMixin, ListView):
             queryset = queryset.filter(name__icontains=self.request.GET["q"])
         return queryset
     
+    def get_template_names(self):
+        template = super(EventList, self).get_template_names()
+        if self.request.is_ajax():
+            template = "events/_event_map_list.html"
+        return template
+    
+    def get(self, request, *args, **kwargs):
+#        import ipdb; ipdb.set_trace()
+        if request.is_ajax(): #map has been zoomed or dragged.
+            poly, map_bounds = get_search_polygon(request)
+            self.object_list = self.get_queryset().filter(location__marker__within=poly)
+            context = self.get_context_data(object_list=self.object_list)
+            context['map_bounds'] = map_bounds
+            return self.render_to_response(context, **kwargs)
+        
+        else: # we load the page for the first time.
+            self.object_list = self.get_queryset()
+            context = self.get_context_data(object_list=self.object_list)
+            locations = Location.objects.filter(event__in=self.object_list)
+            map_bounds = calculate_bounds(locations)
+            context['map_bounds'] = map_bounds
+            return self.render_to_response(context, **kwargs)
 
 class EventListUser(EventParticipantApprovedMixin, EventList):
 
