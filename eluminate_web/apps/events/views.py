@@ -49,8 +49,21 @@ class EventModelOwnerRestrictedMixin(object):
    
 
 class EventDetail(DetailView):
-    
     model = Event
+    
+    def render_to_response(self, context, **kwargs):
+        object = self.get_object()
+        if not object.participant.approved():
+            # If the current user is the same that has create the event we show it
+            if self.request.user == object.participant.user:    
+                msg = "Your Event will be visible only when your user will be approved as participant."
+                messages.add_message(self.request, messages.INFO, msg)
+                context = self.get_context_data(**kwargs)
+            else: # for all the other we redirect to the homepage.
+                return HttpResponseRedirect(reverse_lazy('home'))
+        return super(EventDetail, self).render_to_response(context, **kwargs)
+    
+    
 
 class EventList(CategoryFilterMixin, ListView):
     
@@ -74,7 +87,6 @@ class EventList(CategoryFilterMixin, ListView):
         return template
     
     def get(self, request, *args, **kwargs):
-#        import ipdb; ipdb.set_trace()
         if request.is_ajax(): #map has been zoomed or dragged.
             poly, map_bounds = get_search_polygon(request)
             self.object_list = self.get_queryset().filter(location__marker__within=poly)
@@ -90,16 +102,12 @@ class EventList(CategoryFilterMixin, ListView):
             context['map_bounds'] = map_bounds
             return self.render_to_response(context, **kwargs)
 
-class EventListUser(EventParticipantApprovedMixin, EventList):
+class EventListUser(EventModelOwnerRestrictedMixin, ListView):
 
     model = Event
     template_name = "events/event_list_user.html"
     
-    def get_queryset(self):
-        queryset = super(EventListUser, self).get_queryset().filter(
-                                participant=self.request.user.participant
-                                )
-        return queryset
+    
                 
 
 class EventCreate(EventParticipantApprovedMixin, CreateView):

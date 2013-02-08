@@ -1,11 +1,11 @@
 {% extends "site_base.html" %}
 {% load url from future %}
 {% block head_title %}
-((Event Name))
+{{ event.name }}
 {% endblock %}
 
 {% block body %}
-{% with event=object %}
+
 <div class="row">
   <div class="span12">
     <h1>{{ event.name }}</h1>
@@ -70,5 +70,5 @@
     </script>	
   </div>
 </div>
-{% endwith %}
+
 {% endblock %}
