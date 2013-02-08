@@ -20,25 +20,43 @@ DEFAULT_POLY_COORDS = [(0.02780914306640625, 52.158980248467095), #(sw_x,sw_y)
 DEFAULT_CENTER_OBJ = {"x" : 0.12249999999994543, "y" : 52.20005469158063 }
 
 
-def search_items_within_poly(poly_coords, queryset):
-    """Search the items which location is contained within the poly and return 
-    them as a list of queryset.
+def get_search_polygon(request):
+    """Creates a polygon extracing the value from the request.
+     
+     Params
+     ------
+     request: has to have 4 GET parameter:
+     sw_x, sw_y, ne_x, ne_y
+     for example:
+     GET /events/map?sw_y=52.19655&sw_x=0.10316&ne_y=52.21759ne_x=0.15329
+     
+     Return
+     ------
+     polygon - GEOS Polygon
+     bounds - bounds used by leaflet to pan the map
+     """
     
-    Params:
-    -------
-    poly_coords - Must be a set of coords (long, lat) where the last one should 
-                  be equal to the first point. 
-                  Example: default_poly_coords = [(0.08, 52.19), (0.15, 52.19), 
-                                                  (0.15, 52.21), (0.08, 52.21),
-                                                  (0.08, 52.19)] 
-    """
+    try:
+        sw_x = float(request.GET.get('sw_x'))
+        sw_y = float(request.GET.get('sw_y'))
+        ne_x = float(request.GET.get('ne_x'))
+        ne_y = float(request.GET.get('ne_y'))
+        
+    except:
+        msg = 'Did not get proper map boundaries'
+        return HttpResponse(simplejson.dumps(dict(message=msg)))
+    # polygon for the search
+    poly_coords = [(sw_x,sw_y), (ne_x,sw_y), (ne_x,ne_y), 
+                   (sw_x,ne_y), (sw_x,sw_y)]
     
+    # We extracted them from the poly
+    sw_x, sw_y = poly_coords[0][0], poly_coords[0][1]
+    ne_x, ne_y = poly_coords[2][0], poly_coords[2][1]
+    # Swap them to be ready for leaflet
+    bounds = [[sw_y, sw_x], [ne_y, ne_x]]
     poly = Polygon(poly_coords)
-    items_query_set = queryset.filter(item_template__producer__user__profile__location__marker__within=poly)
 
-                     
-    return items_query_set
-
+    return poly, bounds
 
 def calculate_center(locations):
     "Calculate the center of different locations"

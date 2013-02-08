@@ -66,13 +66,13 @@ SSOUK.map_handler = function() {
         //console.log("sw lat "+ sw.lat + " sw lng " + sw.lng + " ne lat " + ne.lat + " ne lng " + ne.lng );
         // get the items from django
         // and update the items 
-        $.get("/inventory/get_items_within_map", {
+        $.get("/events/map", {
             'sw_y' : sw.lat,
             'sw_x' : sw.lng,
             'ne_y' : ne.lat,
             'ne_x' : ne.lng
         }, function (html_response) {
-            $('#inventory-list').replaceWith(html_response);
+            $('#events-map-list').replaceWith(html_response);
         });
    }
    
