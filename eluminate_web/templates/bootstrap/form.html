@@ -1,0 +1,31 @@
+{% comment %}
+Over-ride django_forms_bootstrap/templates/bootstrap/form.html for custom screen.
+{% endcomment %}
+
+{% load bootstrap_tags %}
+{% load url from future %}
+
+{% if form.non_field_errors %}
+    <div class="alert alert-error">
+        {% if form_error_title %}
+            <strong>{{ form_error_title }}</strong>
+        {% endif %}
+        {% for error in form.non_field_errors %}
+            {{ error }}<br />
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if signup %}
+<legend>User details</legend>
+<p>The credentials that will allow you to log in and manage your account.</p>
+{% endif %}
+{% for field in form %}
+    {% ifequal field.html_name "participant_name" %}
+    </fieldset>
+    <fieldset>
+        <legend>Participant details</legend>
+        <p>The details of the organization that you represent which will appear in the <a href="{% url 'participant_landing' %}">Virtual Exhibition</a> once your request has been approved.<p>
+    {% endifequal %}
+    {% include "bootstrap/field.html" %}
+{% endfor %}
