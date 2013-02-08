@@ -56,7 +56,7 @@ class EventDetail(DetailView):
         if not object.participant.approved():
             # If the current user is the same that has create the event we show it
             if self.request.user == object.participant.user:    
-                msg = "Your Event will be visible only when your user will be approved as participant."
+                msg = "Your Event will only be visible once you have been approved as a participant."
                 messages.add_message(self.request, messages.INFO, msg)
                 context = self.get_context_data(**kwargs)
             else: # for all the other we redirect to the homepage.
