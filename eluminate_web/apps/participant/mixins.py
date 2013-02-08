@@ -16,9 +16,9 @@ class CategoryFilterMixin(object):
         context['category_list'] = self.get_active_category_list()
         return context
     
-    def get(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         self.set_selected_category(request)
-        return super(CategoryFilterMixin, self).get(request, *args, **kwargs)
+        return super(CategoryFilterMixin, self).dispatch(request, *args, **kwargs)
 
 class ParticipantMixin(CategoryFilterMixin):
 

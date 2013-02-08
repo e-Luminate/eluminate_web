@@ -1,0 +1,39 @@
+{% load url from future %}
+<div id="events-map-list">
+	<i>{{object_list.count}} Events in the area</i>
+{% for event_obj in object_list %}
+	{% include "events/_event_snippet.html" %}  	
+    <script type="text/javascript">
+       $(document).ready(function(){
+       	var info_text_ul_opening = "<ul class=\"unstyled\">"
+       	var info_list_format = "<li><a href=\"{% url 'event-detail' event_obj.id %}\">{{ event_obj.name }}</a></li>";
+       	var info_text_ul_closing = "</ul>";
+       	
+       	{# if the marker exist we update it#}
+       	if ({{event_obj.location.id}} in SSOUK.map_handler.markers)
+       	{	
+   			var info_list = SSOUK.map_handler.location_to_item[{{event_obj.location.id}}];
+   			info_list += info_list_format;
+   			var info_text = info_text_ul_opening + info_list + info_text_ul_closing;
+		   	SSOUK.map_handler.location_to_item[{{event_obj.location.id}}] = info_list;
+		   	marker = SSOUK.map_handler.markers[{{event_obj.location.id}}];
+		   	marker.data.popuptext = info_text;
+		   	marker.unbindPopup();
+		   	marker.bindPopup(info_text);
+       	}
+       	{# otherwise we create it #}
+       	else 
+       	{	
+       		var info_list = info_list_format;
+           	var info_text = info_text_ul_opening + info_list + info_text_ul_closing;
+           	SSOUK.map_handler.location_to_item[{{event_obj.location.id}}] = info_list;
+           	SSOUK.map_handler.updateMarker({{ event_obj.location.marker.y }}, 
+                      {{ event_obj.location.marker.x }},
+                      info_text,
+                      {{ event_obj.location.id }}
+                      );
+         }
+       }); 
+	</script>
+{% endfor %}
+</div>
