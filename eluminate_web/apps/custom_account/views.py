@@ -15,14 +15,14 @@ class CustomSignupView(SignupView):
     def create_participant(self, form):
         participant = Participant(
             user = self.created_user,
-            name = form.cleaned_data.get("name"),
-            slug = form.cleaned_data.get("slug"),
-            website = form.cleaned_data.get("website"),
-            logo = form.cleaned_data.get("logo"),
-            photo = form.cleaned_data.get("photo"),
-            description = form.cleaned_data.get("description")
+            name = form.cleaned_data.get("participant_name"),
+            slug = form.cleaned_data.get("participant_slug"),
+            website = form.cleaned_data.get("participant_website"),
+            logo = form.cleaned_data.get("participant_logo"),
+            photo = form.cleaned_data.get("participant_photo"),
+            description = form.cleaned_data.get("participant_description")
         )
         participant.save()
-        for category in form.cleaned_data.get("categories"):
+        for category in form.cleaned_data.get("participant_categories"):
             participant.categories.add(category)
         participant.save()

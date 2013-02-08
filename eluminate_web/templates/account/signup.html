@@ -1,0 +1,35 @@
+{% extends "site_base.html" %}
+
+{% comment %}
+Over-ride pinax_theme_bootstrap_account/templates/account/signup.html for custom screen.
+{% endcomment %}
+
+{% load url from future %}
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block head_title %}{% trans "Sign up" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="span8">
+            <h1>Sign up</h1>
+            <p>To register to have your organization's details and events included on the website, sign up below and we'll be in touch when we've approved your request.</p>
+            <form id="signup_form" method="post" action="{% url "account_signup" %}" autocapitalize="off" class="form-horizontal"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+                <fieldset>
+                    {% csrf_token %}
+                    {% include "bootstrap/form.html" with signup="1" %}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">{% trans "Sign up" %}</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="span4">
+            {% include "account/_signup_sidebar.html" %}
+        </div>
+    </div>
+{% endblock %}
