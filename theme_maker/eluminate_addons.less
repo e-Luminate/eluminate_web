@@ -8,7 +8,7 @@
 @TextLegal: #AAA;
 @LightGreyBackground: #393939; // the bars behind some headings
 @DarkGreyBackground: @bodyBackground; // the body color
-@headingColor: #DE7EC8; 
+@headingColor: #CCDD80; //was #DE7EC8; 
 @bodyLeading: 160%;
 @logoYellow: #DEDE7E;
 @headingFont: 'Days One', sans-serif;
@@ -304,4 +304,40 @@ footer .legal {
 .nav-tabs  a.active {
   border-bottom-color: @blue;
   //font-weight: bold;
+}
+
+// ********** Static pages hacks ***************
+// People page
+.people-right, .people-left {
+height: 75px;
+width: 75px;
+margin: 3px 0 5px 0;
+}
+.people-left {
+float: left;
+margin-right: 8px;
+}
+.people-right {
+float: right;
+margin-left: 8px;
+}
+
+.smallerPic {
+  height: 40px;
+  width: 40px;
+}
+
+.smallerText {
+font-size: 80%;
+line-height: 16px;
+clear: both;
+  b {
+    color: @headingColor;
+  }
+}
+.smallerHeading {
+font-size: 120%;
+  b {
+    color: @headingColor;
+  }
 }
