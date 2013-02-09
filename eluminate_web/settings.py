@@ -107,7 +107,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.contrib.messages.context_processors.messages",
     "pinax_utils.context_processors.settings",
     "account.context_processors.account",
-    "events.context_processors.search"
+    "events.context_processors.search",
+    "custom_account.context_processors.theme",
 ]
 
 
@@ -209,7 +210,6 @@ ACCOUNT_LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
-
 THEME_ACCOUNT_CONTACT_EMAIL = "info@e-luminatefestivals.co.uk"
 
 # Django Debug toolbar
