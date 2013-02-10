@@ -27,7 +27,7 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<div>{{event_obj.description}}</div>
+	<div>{{event_obj.description|striptags|urlize|linebreaks|truncatewords_html:15}}</div>
 	<a href="{% url 'event-detail' event_obj.id %}">Go to the event</a>
 	
 </div>
