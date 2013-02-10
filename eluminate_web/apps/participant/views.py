@@ -2,10 +2,17 @@ from django.core.urlresolvers import reverse
 from django.views.generic import RedirectView
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse, reverse_lazy
 
-from participant.models import Participant
-from participant.mixins import ParticipantMixin
+from braces.views import LoginRequiredMixin
+
+from .models import Participant
+from .mixins import ParticipantMixin
+from .forms import ParticipantForm
+
 
 class ParticipantLandingView(ParticipantMixin, TemplateView):
     template_name = 'participant/participant_landing.html'
@@ -42,3 +49,29 @@ class ParticipantFilterRedirectView(ParticipantMixin, RedirectView):
             return reverse('participant_detail', kwargs={'slug': participants[0].slug}) + query_string
         else:
             return reverse('participant_landing') + query_string
+
+class ParticipantCreateView(LoginRequiredMixin, CreateView):
+    model = Participant
+    form_class = ParticipantForm
+    
+    def get(self, request, *args, **kwargs):
+        try:
+            request.user.participant
+            return HttpResponseRedirect(reverse_lazy("participant_update", 
+                                                     kwargs={"slug" : request.user.participant.slug}
+                                                     )
+                                        )
+        except Participant.DoesNotExist:
+            pass # we return the normal form
+        return super (ParticipantCreateView, self).get(request, *args, **kwargs)
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(ParticipantCreateView, self).form_valid(form)
+        
+class ParticipantUpdateView(LoginRequiredMixin, UpdateView):
+    model = Participant
+    form_class = ParticipantForm
+    
+class ParticipantDeleteView(LoginRequiredMixin, DeleteView):
+    model = Participant
