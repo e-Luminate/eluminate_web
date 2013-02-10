@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Category(models.Model):
-    name = models.CharField(unique=True, max_length=20, help_text=u'Cleantech category')   
+    name = models.CharField(unique=True, max_length=20)   
 
     class Meta:
         verbose_name_plural = u'Categories'
