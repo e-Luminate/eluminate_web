@@ -7,6 +7,10 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("participant", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding model 'Day'
         db.create_table('events_day', (
