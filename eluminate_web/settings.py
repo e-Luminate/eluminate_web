@@ -212,6 +212,8 @@ ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 THEME_ACCOUNT_CONTACT_EMAIL = "info@e-luminatefestivals.co.uk"
 
+SERVER_EMAIL = "no-reply@e-luminatefestivals.co.uk"
+
 # Django Debug toolbar
 if DEBUG:
     INTERNAL_IPS = ('127.0.0.1',)
