@@ -1,7 +1,11 @@
-from account.views import SignupView
+from django.contrib import messages
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
+from django.utils.translation import ugettext_lazy as _
+
+from account.views import SignupView, ConfirmEmailView
 
 from custom_account.forms import CustomSignupForm
-
 from participant.models import Participant
 
 class CustomSignupView(SignupView):
@@ -26,3 +30,29 @@ class CustomSignupView(SignupView):
         for category in form.cleaned_data.get("participant_categories"):
             participant.categories.add(category)
         participant.save()
+
+
+class CustomConfirmEmailView(ConfirmEmailView):
+
+    ConfirmEmailView.messages["email_confirmed"]["text"] = _("You have confirmed %(email)s. Now log in as %(username)s and create some Events!")
+    
+    def post(self, *args, **kwargs):
+        self.object = confirmation = self.get_object()
+        confirmation.confirm()
+        user = confirmation.email_address.user
+        user.is_active = True
+        user.save()
+        redirect_url = self.get_redirect_url()
+        if not redirect_url:
+            ctx = self.get_context_data()
+            return self.render_to_response(ctx)
+        if self.messages.get("email_confirmed"):
+            messages.add_message(
+                self.request,
+                self.messages["email_confirmed"]["level"],
+                self.messages["email_confirmed"]["text"] % {
+                    "email": confirmation.email_address.email,
+                    "username": confirmation.email_address.user.username
+                }
+            )
+        return redirect("%s?next=%s" % (reverse(redirect_url), reverse('events-list-user')))

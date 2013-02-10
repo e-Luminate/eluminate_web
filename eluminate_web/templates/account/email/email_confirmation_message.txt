@@ -1,0 +1,6 @@
+{% load i18n %}{% blocktrans with current_site.name as site_name %}User '{{ user }}' at '{{ site_name }}' provided this email address at signup.
+
+To confirm this is correct and activate the account, go to {{ activate_url }}
+
+If you were not expecting this email, please ignore and the account will not be activated.
+{% endblocktrans %}
