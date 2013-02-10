@@ -1,0 +1,21 @@
+{% extends "site_base.html" %}
+
+{% load url from future %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}Create Participant{% endblock %}
+
+{% block body %}
+{{form.media}}
+<h1>Insert your details</h1>
+
+<div class="span8">
+    {% crispy form %}
+</div>
+
+{% endblock%}
+
+{% block extra_body %}
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.slugify.js"></script>
+<script type="text/javascript">$('#id_slug').slugify('#id_name');</script>
+{% endblock %}

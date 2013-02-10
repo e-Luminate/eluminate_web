@@ -8,8 +8,10 @@
             </a>
             <ul class="dropdown-menu">
             	{% if request.user.participant %}
-            		<li><a href="#"><i class="icon-user icon-white"></i>Profile</a></li>
+            		<li><a href="{% url participant_detail slug=request.user.participant.slug %}"><i class="icon-user icon-white"></i>Profile</a></li>
             		<li><a href="{% url events-list-user %}"><i class="icon-calendar icon-white"></i>Events</a></li>
+            	{% else %}
+            		<li><a href="{% url participant_create %}"><i class="icon-user icon-white"></i>Profile</a></li>
             	{% endif %}
             	<li class="divider"></li>
                 <li><a href="{% url account_settings %}"><i class="icon-cog icon-white"></i>Settings</a></li>
