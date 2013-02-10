@@ -70,7 +70,8 @@ class ParticipantCreateView(LoginRequiredMixin, CreateView):
     
     def form_valid(self, form):
         form.instance.user = self.request.user
-        
+        # Calling super to save the object
+        response = super(ParticipantCreateView, self).form_valid(form)
         # We send the email to the Admins
         site = get_current_site(self.request)
         subject_mail = "User %s has just created a new Participant %s for %s" %(
@@ -79,10 +80,15 @@ class ParticipantCreateView(LoginRequiredMixin, CreateView):
         body_mail = """User %s has just created a new Participant %s for %s
         
         You can approved this Participant logging in the admin of the website
-        at %s.""" %(self.request.user, form.instance.name, site.name, site.domain)
+        at http://%s%s.""" %(self.request.user, form.instance.name, 
+                       site.name, site.domain, 
+                       reverse_lazy("admin:participant_participant_change", 
+                                    args=(form.instance.id,)
+                                    )
+                       )
         mail_admins(subject_mail, body_mail, fail_silently=False)
         
-        return super(ParticipantCreateView, self).form_valid(form)
+        return response
         
 class ParticipantUpdateView(LoginRequiredMixin, UpdateView):
     model = Participant
