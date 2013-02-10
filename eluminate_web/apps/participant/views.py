@@ -6,6 +6,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.mail import mail_admins
+from django.conf import settings
+from django.contrib.sites.models import get_current_site
 
 from braces.views import LoginRequiredMixin
 
@@ -67,7 +70,25 @@ class ParticipantCreateView(LoginRequiredMixin, CreateView):
     
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(ParticipantCreateView, self).form_valid(form)
+        # Calling super to save the object
+        response = super(ParticipantCreateView, self).form_valid(form)
+        # We send the email to the Admins
+        site = get_current_site(self.request)
+        subject_mail = "User %s has just created a new Participant %s for %s" %(
+                            self.request.user, form.instance.name, site.name,
+                            )
+        body_mail = """User %s has just created a new Participant %s for %s
+        
+        You can approved this Participant logging in the admin of the website
+        at http://%s%s.""" %(self.request.user, form.instance.name, 
+                       site.name, site.domain, 
+                       reverse_lazy("admin:participant_participant_change", 
+                                    args=(form.instance.id,)
+                                    )
+                       )
+        mail_admins(subject_mail, body_mail, fail_silently=False)
+        
+        return response
         
 class ParticipantUpdateView(LoginRequiredMixin, UpdateView):
     model = Participant
