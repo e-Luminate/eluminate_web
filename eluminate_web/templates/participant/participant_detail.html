@@ -1,5 +1,6 @@
 {% extends "participant/participant_base.html" %}
 {% load i18n %}
+{% load url from future %}
 
 {% block head_title %}{{ current_participant.name }}{% endblock %}
 
@@ -57,7 +58,7 @@
                         {% for day in event.days.all %}{{ day.name }}<br/>{% endfor %}
                     </div>
                 </div>
-                <a href="{% url event-detail event.id %}" class="btn">Find out more&hellip;</a>
+                <a href="{% url 'event-detail' event.id %}" class="btn">Find out more&hellip;</a>
             </div>
         </div>
         {% endfor %}
@@ -80,6 +81,11 @@
             {% endif %}
         </div>
     </div>
+</div>
+<div>
+    {% if current_participant == request.user.participant %}
+    	<a href="{% url 'participant_update' slug=current_participant.slug %}">Update Details</a>
+    {% endif %}
 </div>
 
 {% endblock inner_body %}

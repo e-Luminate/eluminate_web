@@ -6,7 +6,6 @@
 
 <div class="span12">
 	<table class="table table-bordered">
-	{% for event in object_list %}
 		<thead>
 			<tr>
 				<th>Event Name</th>
@@ -17,6 +16,7 @@
 			</tr>
 		</thead>
 		<tbody>
+	{% for event in object_list %}
 			<tr>
 				<td>{{event.name}}</td>
 				<td>{{event.start_time}} -- {{event.end_time}}</td>
@@ -29,8 +29,8 @@
 				<td>{{event.description}}</td>
 				<td><a href="{% url 'event-detail' event.id %}">View</a> | <a href="{% url 'event-update' event.id %}">Edit</a></td>
 			</tr>
-		</tbody>
 	{% endfor %}
+		</tbody>
 	</table>
 	<div>
 		<a class="btn btn-primary" href="{% url 'event-create' %}">Add an Event</a>
