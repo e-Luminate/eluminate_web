@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import RedirectView
 from django.views.generic.base import TemplateView
-from django.views.generic.detail import DetailView
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -13,12 +13,20 @@ from django.contrib.sites.models import get_current_site
 from braces.views import LoginRequiredMixin
 
 from .models import Participant
-from .mixins import ParticipantMixin
+from .mixins import ParticipantMixin, CategoryFilterMixin
 from .forms import ParticipantForm
 
 
 class ParticipantLandingView(ParticipantMixin, TemplateView):
     template_name = 'participant/participant_landing.html'
+    context_object_name = "participant_list"
+    
+    def get_context_data(self, **kwargs):
+        context = super(ParticipantLandingView, self).get_context_data(**kwargs)
+
+        if self.request.GET.has_key("q"):
+            context['participant_list'] = context['participant_list'].filter(name__icontains=self.request.GET["q"])
+        return context
 
 
 
