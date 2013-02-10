@@ -25,7 +25,7 @@ class LocationForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         #self.helper.help_text_inline = True
         self.helper.layout = Layout(
-                Field('name', css_class="span9"),
+                Field('name', css_class="span6"),
                 Field('marker'),
                                )
         self.user = user
