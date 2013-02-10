@@ -1,0 +1,118 @@
+#!/bin/bash
+# Script to frontend a file system backup of postgres databases.  This 
+# script will also tar up  WAL file appropriate for the PITR.  The end 
+# results is two tarballs, one is file system and one for the old WALs. 
+# These WAL form part of previous backups and could technically be deleted 
+# if you dont want to revery prior to the backups just done.
+# Both are in $BACKUP_FOLDER
+#
+# Author: Khalid Sattar Feb 2013
+#
+
+# keep backups and temp file safe from prying eyes
+umask 077
+
+# Exit values to help us debug failure causes
+EXIT_OK=0
+EXIT_FAIL=1
+EXIT_NODATA=3
+EXIT_NOCONF=4
+
+# set spome overwriable Postgres variable
+PGUSER=${PGUSER-postgres}
+PGDATABASE=${PGDATABASE-postgres}
+PGVERBOSE=${PGVERBOSE-0}
+
+# Our run log
+RUN_LOGS=~/postgres_backups.log
+RUN_LOGS_TEMP=~/postgres_backups-temp.log
+
+echo -e "======================================================================\nBackup run started: $(date)" >> ${RUN_LOGS}
+
+# default place where file system backups will be stored
+BACKUP_FOLDER=~postgres/PG_FS_BACKUPS
+
+# Where postgress archives the wal files.
+WAL_ARCHIVES=~postgres/WAL_ARCHIVES
+
+# Temp file used for making WALs tarball
+WAL_FILES_FOR_TAR="WalFilesforTar"
+
+# Where active/live WAL files are within postgres
+LIVE_WAL_DIR=~postgres/9.1/main/pg_xlog
+
+mkdir -p ${BACKUP_FOLDER}
+chmod 700 ${BACKUP_FOLDER}
+
+# the command to do postgres queries
+PSQL="psql -U ${PGUSER} -d ${PGDATABASE} -a"
+
+# try locate conf file for postgres, assumes postgres is running
+PG_CONF=$(${PSQL} -L ${RUN_LOGS} -c 'show config_file;' | sed -n '/\.conf/p')
+
+if [[ -z "${PG_CONF}" ]]; then
+   echo "Cannot determine postgres conf file path, check if postgres is up & running" >&2
+   exit ${EXIT_NOCONF}
+fi
+
+# refine PSQL command so we do output to just file or terminal and file
+if (( PGVERBOSE )); then
+    PSQL="${PSQL} -L ${RUN_LOGS}"
+else
+    PSQL="${PSQL} -o ${RUN_LOGS_TEMP}"
+fi
+
+# We try an figure this out postgres data folder by quering postgres itself
+PG_DATA_DIR=$(sed -n "s/^data_directory.*'\(.*\)'.*/\1/p" ${PG_CONF})
+if [[ -z "${PG_DATA_DIR}" ]]; then
+   echo "Failed to determine postgres data folder" >&2
+   exit ${EXIT_NODATA}
+fi
+
+# Get a datestamp now and construct backup image names
+DATESTAMP=$(date +'%Y%m%d%H%M%S')
+BACKUP_IMAGE="${HOSTNAME}-${DATESTAMP}.tgz"
+OLD_WALS="WALs-Pre-${DATESTAMP}.tgz"
+
+# Tell postgres we are about to start file system backups
+${PSQL} -c "SELECT pg_start_backup('${DATESTAMP}', true);"
+(( ! PGVERBOSE )) && cat ${RUN_LOGS_TEMP} >> ${RUN_LOGS}
+
+tar -C ${PG_DATA_DIR} -czf ${BACKUP_FOLDER}/${BACKUP_IMAGE} --exclude=pg_xlog --exclude=postmaster.* .
+
+# tell postgres we are done
+${PSQL} -c "SELECT pg_stop_backup();"
+(( ! PGVERBOSE )) && cat ${RUN_LOGS_TEMP} >> ${RUN_LOGS}
+rm -f ${RUN_LOGS_TEMP}
+
+if ((PGVERBOSE)); then
+   echo "======================================================================"
+   echo "File system backup of postgres label ${DATESTAMP} completed" | tee -a ${RUN_LOGS}
+   echo "Gathering up WAL files needed with this backups into a tarball" | tee -a ${RUN_LOGS}
+   echo ""
+fi
+
+# Get the backup timestamp created by pg_stop_backup so we can work out
+# which WALs are no longer needed
+BACKUP_STAMP=$(ls ${LIVE_WAL_DIR}/*.backup)
+
+cd ${WAL_ARCHIVES}
+
+# we could get cleaver and do it in one go eg
+#find . -maxdepth 1 type f  \! -newer ${BACKUP_STAMP} -print0 | \
+#    xargs -0 tar -czf ${BACKUP_FOLDER}/${OLD_WALS} --remove-file
+#
+# but for portability we do it via temp file
+
+find . -maxdepth 1 -type f  \! -newer ${BACKUP_STAMP} -print > ${WAL_FILES_FOR_TAR}
+tar czf ${BACKUP_FOLDER}/${OLD_WALS} -T ${WAL_FILES_FOR_TAR} --remove-files
+rm -f ${WAL_FILES_FOR_TAR}
+
+if ((PGVERBOSE)); then
+   echo "Postgres file system backup is ${BACKUP_IMAGE}" | tee -a ${RUN_LOGS}
+   echo "Old WAL files needed for previous filesystem image: ${OLD_WALS}" | tee -a ${RUN_LOGS}
+   echo "======================================================================"
+fi
+
+echo -e "Backups run ended: $(date)\n======================================================================" >> ${RUN_LOGS}
+exit 0
