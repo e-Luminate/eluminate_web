@@ -44,7 +44,14 @@ h1 {
 
 h2 {
   font-size: 135%;
+  line-height: 145%;
 }
+
+// ********* general useful *********
+.nowrap {
+  white-space: nowrap;
+}
+
 
 .navbar-inner
 {
@@ -119,17 +126,13 @@ div#category_filter>form>input[type=submit] {
 }
 
 #category_filter {
-    margin-left: 80px;
-    margin-top: 10px;
-
     .btn {
         left: 20px;
         bottom: 15px;
     }
-    form span { // the radio button labels
-        padding-right: 10px;
+    input {
+	vertical-align: top; // gets the radio buttons in line with text
     }
-
 }
 
 #participant_detail_logo {
