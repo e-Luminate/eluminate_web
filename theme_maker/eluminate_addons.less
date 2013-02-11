@@ -201,40 +201,34 @@ div#category_filter>form>input[type=submit] {
 
 // ******************** Footer fixing ****************
 
-// make sure you can scroll to the bottom, missing footer
-.mainBody {
-  margin-bottom: 130px;
-}
-
 footer {
-  height: 120px;
-  overflow: hidden !important;
-  position: fixed;
-  bottom: 0;
-  z-index: 9999; // Chosen to sit on top of all map elements
-//  left: 0;
-//  margin: 0;
-}
-
-#footerImg {
-    overflow: hidden;
+  overflow: hidden;
+  margin: 20px 0 5px 0;
 }
 
 footer img {
-    max-width: 1400px !important;
-    width: 1400px !important;
+    width: 1400px;
+    max-width: 1400px; // overrides standard "max-width: auto;"
+   float: right;
+    // height: auto; // this is default for img
 }
 
 footer .legal {
-  background-color: @DarkGreyBackground;
-  position: absolute;
-  bottom:0;
-  width: 100%;
   color: @TextLegal;
   font-size: 70%;
-  overflow: hidden;
+  line-height: 12px;
+  float: left;
+  margin: 6px 2px 0 2px;
+  max-width: 33%;
+  &.floatRight {
+      float: right;
+      max-width: 63%;
+      text-align: right;
+  }
+
 }
 
+/*
 #footerDates {
   position: absolute;
   right: 20px;
@@ -244,16 +238,16 @@ footer .legal {
   font-size: 18px;
   //background-color: red;
 }
+*/
  
-// Map
-
-.leaflet-popup-content {
-  color: black;
-}
 
 @media (max-width: 767px) {
-    footer {
-	//background-color: green;
+    footer img {
+	max-width: 300%;
+	//width: 300%;
+    }
+}
+/*    footer {
         height: auto;
 	left:0;
 	padding-left:0px;
@@ -269,11 +263,6 @@ footer .legal {
 	margin-right: 20px;
 	margin-bottom: 10px;
 	//background-color: @DarkGreyBackground;
-    }
-    footer img {
-	position: relative;
-	max-width: 100% !important;
-	width: 100% !important;
     }
     #footerImg {
 	position: relative;
@@ -294,6 +283,13 @@ footer .legal {
 	left: 0;
 	padding-left: 20px;
     }
+}
+*/
+
+// **************** Map **********************
+
+.leaflet-popup-content {
+  color: black;
 }
 
 // ***************** navigation *****

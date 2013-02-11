@@ -1,10 +1,12 @@
 {% load i18n %}
-<div id="footerRow">
-  <div id="footerImg">
-    <img src="{{ STATIC_URL }}img/elum_foot.png" />
-    <p id="footerDates">Cambridge 2013 &bull; {% trans "February" %} 20&thinsp;&minus;&thinsp;24</p>
-    <div class="legal">
-      {% trans "&copy; 2013 e-Luminate Festivals CIC" %}
-    </div>
+<div id="footerRow" class="row-fluid">
+  <div class="span12">
+      <img src="{{ STATIC_URL }}img/elum_foot.png" />
+      <div class="legal">
+	{% trans "&copy;&nbsp;2013 e&#8288;-&#8288;Luminate Festivals CIC" %}
+      </div>
+      <div class="legal floatRight">
+	Website technology  &copy;&nbsp;2013 Kim&nbsp;Spencee&#8288;-&#8288;Jones, Jo&nbsp;Paulger and Michele&nbsp;Mattione
+      </div>
   </div>
 </div>
