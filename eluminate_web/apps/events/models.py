@@ -33,7 +33,7 @@ class Event(models.Model):
     objects = models.GeoManager()
 
     def save(self, *args, **kwargs):
-        if self.participant in self.collaborators.all():
+        if self.id and self.participant in self.collaborators.all():
             raise forms.ValidationError("Participant '%s' is a collaborator - can't be the owner too" % self.participant)
         else:
             super(Event, self).save()
