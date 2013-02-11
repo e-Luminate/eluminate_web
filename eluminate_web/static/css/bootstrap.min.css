@@ -983,9 +983,11 @@ div#category_filter>form>input[type=submit]{padding-left:5px;}
 .lightBackground img{vertical-align:top;}
 .lightBackground .btn{position:absolute;bottom:20px;left:5%;}
 @media (min-width:768px) and (max-width:979px){.lightBackgroundHost .lightBackground.span4{min-height:350px;}}@media (max-width:767px){.lightBackgroundHost .lightBackground.span4{min-height:30px;}}footer{overflow:hidden;margin:20px 0 5px 0;}
-footer img{width:1400px;max-width:1400px;float:right;}
+#footerMain{position:relative;}
+#footerImg{width:1400px;max-width:1400px;float:right;}
+.footerSocialLinks{height:25px;width:auto;position:relative;left:10px;bottom:30px;}.footerSocialLinks img{width:auto;height:25px;border:0;}
 footer .legal{color:#aaaaaa;font-size:70%;line-height:12px;float:left;margin:6px 2px 0 2px;max-width:33%;}footer .legal.floatRight{float:right;max-width:63%;text-align:right;}
-@media (max-width:767px){footer img{max-width:300%;}}.leaflet-popup-content{color:black;}
+@media (max-width:767px){footer img{max-width:300%;}}@media (max-width:330px){footer{padding-top:15px;} .footerSocialLinks{bottom:113px;}}.leaflet-popup-content{color:black;}
 .nav-collapse .active{color:white !important;}
 .nav-tabs a{border-style:solid;border-bottom-width:2px;}
 .nav-tabs a.active{border-bottom-color:#33b5e5;}

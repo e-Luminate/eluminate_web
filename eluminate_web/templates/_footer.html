@@ -1,12 +1,25 @@
 {% load i18n %}
 <div id="footerRow" class="row-fluid">
   <div class="span12">
-      <img src="{{ STATIC_URL }}img/elum_foot.png" />
-      <div class="legal">
-	{% trans "&copy;&nbsp;2013 e&#8288;-&#8288;Luminate Festivals CIC" %}
+    <div id="footerMain">
+      <img id="footerImg" src="{{ STATIC_URL }}img/elum_foot.png" />
+      <div class="footerSocialLinks">
+	<a href="http://www.linkedin.com/company/2842933" target="_blank" id="http://www.linkedin.com/company/2842933">
+	  <img title="Join us on LinkedIn" src="{{ STATIC_URL }}img/linkedin_32.png" alt="linkedin" />
+	</a>
+	<a href="https://www.facebook.com/pages/E-Luminate-Festival/514816211865297 " target="_blank" class="social_link" id="https://www.facebook.com/pages/E-Luminate-Festival/514816211865297 ">
+	  <img title="Like us on Facebook" src="{{ STATIC_URL }}img/facebook_32.png" alt="facebook" />
+	</a>
+	<a href="https://twitter.com/eLuminateFest " target="_blank" class="social_link" id="https://twitter.com/eLuminateFest ">
+	  <img title="Follow us on Twitter" src="{{ STATIC_URL }}img/twitter_32.png" alt="twitter" />
+	</a>
       </div>
-      <div class="legal floatRight">
-	Website technology  &copy;&nbsp;2013 Kim&nbsp;Spencee&#8288;-&#8288;Jones, Jo&nbsp;Paulger and Michele&nbsp;Mattione
-      </div>
+    </div>
+    <div class="legal">
+      {% trans "&copy;&nbsp;2013 e&#8288;-&#8288;Luminate Festivals CIC" %}
+    </div>
+    <div class="legal floatRight">
+      Website technology  &copy;&nbsp;2013 Kim&nbsp;Spencee&#8288;-&#8288;Jones, Jo&nbsp;Paulger and Michele&nbsp;Mattione
+    </div>
   </div>
 </div>
