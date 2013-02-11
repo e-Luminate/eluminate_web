@@ -10,7 +10,7 @@ Programme
 
 {% block tab %}
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="{% url 'events-map' %}">Map</a></li>
+		<li><a href="{% url 'events-map' %}" class="active">Map</a></li>
 	  	<li><a href="{% url 'events-list' %}">List</a></li>
 	</ul>
 	{% include 'participant/category_filter.html' with action_url_name='events-map' %}
