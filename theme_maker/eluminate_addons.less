@@ -102,7 +102,7 @@ div#category_filter>span {
     padding-right: 5px;
 }
 
-div#category_filter>span, div.participant-event-label {
+div#category_filter>div.span1, div.participant-event-label {
     color: @gray;
     font-weight: bold;  
 }
@@ -126,12 +126,13 @@ div#category_filter>form>input[type=submit] {
 }
 
 #category_filter {
+    line-height: 30px; // to give a little more space for mobiles
     .btn {
         left: 20px;
         bottom: 15px;
     }
     input {
-	vertical-align: top; // gets the radio buttons in line with text
+	vertical-align: text-bottom; // gets the radio buttons in line with text
     }
 }
 
