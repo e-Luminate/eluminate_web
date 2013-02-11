@@ -5,10 +5,8 @@
     <li><a href="{% url "home" %}" {% if request.path == '/' %} class="active"{% endif %}>Home</a></li>
     <li><a href="{% url "events-map" %}" {% if request.path == '/events/' %} class="active"{% endif %}>Programme</a></li>
     <li><a href="{% url "participant_landing" %}" {% if request.path == '/participants/' %} class="active"{% endif %}>Collaborators</a></li>
-    <li><a href="{% url "sponsors" %}" {% if request.path == '/sponsors/' %} class="active"{% endif %}>Sponsors &amp; Partners</a></li>
-    <li><a href="{% url "vision" %}" {% if request.path == '/about/' %} class="active"{% endif %}>About</a></li>
+    <li><a href="{% url "sponsors" %}" {% if request.path == '/sponsors/' %} class='active'{% endif %}>Sponsors &amp; Partners</a></li>
+    <li><a href="{% url "vision" %}" {% if request.path == '/about/' or request.path == '/about/vision/' or request.path == '/about/people/' or request.path == '/about/press/' or request.path == '/about/news/' %} class='active'{% endif %}>About</a></li>
     <li><a href="{% url "contact" %}" {% if request.path == '/contact/' %} class="active"{% endif %}>Contact</a></li>
   </ul>
 {% endblock %}
-
-
