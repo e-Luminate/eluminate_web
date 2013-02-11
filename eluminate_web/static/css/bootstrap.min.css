@@ -957,6 +957,7 @@ h1,h2,h3{color:#85c090;font-family:'Days One',sans-serif;font-weight:normal;}
 h1>a,h2>a,h3>a{color:inherit;}
 h1{font-size:225%;}
 h2{font-size:135%;line-height:145%;}
+h3{font-size:100%;line-height:125%;}
 .nowrap{white-space:nowrap;}
 .navbar-inner{background-image:none;background-color:#313131;}
 #topGraphic img{width:100%;}
