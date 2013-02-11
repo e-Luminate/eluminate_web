@@ -2,9 +2,9 @@
 
 
 <div class="event">
-	<h2>{{event_obj.name}}</h2>
+    <a href="{{ event_obj.get_absolute_url }}" title="Go to the event"><h2>{{event_obj.name}}</h2></a>
 	<div>
-		by <a href="{% url 'participant_detail' event_obj.participant.slug %}">{{event_obj.participant}}</a>
+		by {% include "events/_event_collaborator_names_snippet.html" with event=event_obj %}
 	</div>
 	<div><i class="icon-time icon-white"></i> {{event_obj.start_time}} -- {{event_obj.end_time}}</div>
 	<div><a id="marker_item_{{event_obj.id}}" href=""><i class="icon-map-marker icon-white"></i> {{event_obj.location.name}}</a> </div>
@@ -28,7 +28,7 @@
 		</ul>
 	</div>
 	<div>{{event_obj.description}}</div>
-	<a href="{% url 'event-detail' event_obj.id %}">Go to the event</a>
+    <a href="{{ event_obj.get_absolute_url }}">Go to the event</a>
 	
 </div>
 <hr/>

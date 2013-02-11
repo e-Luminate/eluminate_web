@@ -9,11 +9,10 @@
 <div class="row">
   <div class="span12">
     <h1>{{ event.name }}</h1>
-    <div>
-		<img class="img-rounded" src="{{ event.participant.logo.url }}">	
-		<a href="{% url 'participant_detail' slug=event.participant.slug %}">
-    		{{ event.participant}}
-		</a>
+    <div id="event-collaborators">
+        <a href="{{ event.participant.get_absolute_url }}"><img class="img-rounded" src="{{ event.participant.logo.url }}" title="Go to participant"></a>{% for collaborator in event.approved_collaborators %}<a href="{{ collaborator.get_absolute_url }}"><img class="img-rounded" src="{{ collaborator.logo.url }}" title="Go to participant"></a>{% endfor %}
+
+        <h2>Proudly presented by {% include "events/_event_collaborator_names_snippet.html" %}</h2>
     </div>
   </div>
 </div>

@@ -23,7 +23,8 @@ class Event(models.Model):
     start_time = models.TimeField(help_text="When it starts, e.g. 12:00")
     end_time = models.TimeField(help_text="When the event finish, e.g. 16:00")
     days = models.ManyToManyField(Day)
-    participant = models.ForeignKey(Participant)
+    participant = models.ForeignKey(Participant, related_name="own_events")
+    collaborators = models.ManyToManyField(Participant, related_name="collaboration_events", blank=True)
     description = models.TextField()
     location = models.ForeignKey(Location, null=True)
     searched_objects = EventSearchManager()
@@ -33,4 +34,7 @@ class Event(models.Model):
         return(reverse("event-detail", args=[self.id]))
     
     def __str__(self):
-        return self.name 
+        return self.name
+
+    def approved_collaborators(self):
+        return self.collaborators.exclude(approved_on=None)

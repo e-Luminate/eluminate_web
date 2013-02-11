@@ -1,0 +1,31 @@
+{% load url from future %}
+
+<img src="{{ STATIC_URL }}img/elum_top.png" />
+<a href="{{ event.get_absolute_url }}" title="Go to event"><h2>{{ event.name }}</h2></a>
+<p>{{ event.description }}</p>
+<div class="row-fluid">
+    <div class="span4 participant-event-label">
+        Location:
+    </div>
+    <div class="span8">
+        {{ event.location.name }}
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span4 participant-event-label">
+        Time:
+    </div>
+    <div class="span8">
+        {{ event.start_time }} until {{ event.end_time }}
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span4 participant-event-label">
+        Days:
+    </div>
+    <div class="span8">
+        {% for day in event.days.all %}{{ day.name }}<br/>{% endfor %}
+    </div>
+</div>
+<a href="{{ event.get_absolute_url }}" class="btn">Find out more&hellip;</a>
+
