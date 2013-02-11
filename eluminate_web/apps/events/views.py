@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.exceptions import ObjectDoesNotExist
@@ -74,7 +75,10 @@ class EventList(CategoryFilterMixin, ListView):
         queryset = super(EventList, self).get_queryset()
 
         if self.selected_category_id:
-            queryset = queryset.filter(participant__categories=self.selected_category_id)
+            owner_in_category_query = Q(participant__categories=self.selected_category_id)
+            approved_collaborators_query = ~Q(collaborators__approved_on=None)
+            collaborators_in_category_query = Q(collaborators__categories=self.selected_category_id)
+            queryset = queryset.filter(owner_in_category_query | approved_collaborators_query & collaborators_in_category_query).distinct()
 
         if self.request.GET.has_key("q"):
             queryset = queryset.filter(name__icontains=self.request.GET["q"])
