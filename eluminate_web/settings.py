@@ -6,13 +6,11 @@ PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(PACKAGE_ROOT, "apps"))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = [
     # ("Your Name", "your_email@example.com"),
 ]
 
-MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
@@ -22,6 +20,17 @@ DATABASES = {
         'PASSWORD': 'e_luminate_password',
     }
 }
+
+### now overwrite stuff from the production server, if local_settings.py exists
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
+TEMPLATE_DEBUG = DEBUG
+MANAGERS = ADMINS
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

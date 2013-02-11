@@ -50,7 +50,7 @@
             {% else %}
             <div class="span12">
             {% endif %}
-                <p>{{ current_participant.description }}<p>
+                <p>{{ current_participant.description|striptags|urlize|linebreaks }}<p>
             </div>
             {% if current_participant.photo %}
             <div class="span6">
