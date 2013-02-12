@@ -56,7 +56,7 @@
   	<script type="text/javascript">
                $(document).ready(function(){
                        
-                       var info_text = "{{ event.name }}";
+                       var info_text = "{{ event.location.name }}";
                        
                    SSOUK.map_handler.updateMarker({{ event.location.marker.y }}, 
                                                   {{ event.location.marker.x }},
