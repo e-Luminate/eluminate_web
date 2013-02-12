@@ -963,7 +963,7 @@ h3{font-size:100%;line-height:125%;}
 .nowrap{white-space:nowrap;}
 .navbar-inner{background-image:none;background-color:#313131;}
 #topGraphic img{width:100%;}
-div#event-collaborators>a>img{margin-right:5px;}
+div#event-collaborators>a>img{margin-right:5px;max-width:200px;}
 div#participant_action_bar~h1{clear:both;}
 div.participant_logo_box{background-color:#FFF;float:left;margin:15px 5px;padding:5px;}
 div.participant_logo_box,div.participant_logo_box>img{width:130px;height:55px;}
