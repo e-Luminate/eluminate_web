@@ -956,6 +956,7 @@ body{color:#eeeeee;background-color:#313131;line-height:160%;font-family:verdana
 #topGraphic{line-height:0;}
 .navbar-inner{padding-top:0 !important;}
 h1,h2,h3{color:#de7ec8;font-family:'Days One',sans-serif;font-weight:normal;}
+h3{color:#e1de7f;}
 h1>a,h2>a,h3>a{color:inherit;}
 h1{font-size:225%;}
 h2{font-size:135%;line-height:145%;}
