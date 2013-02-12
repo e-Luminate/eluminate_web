@@ -34,7 +34,7 @@ class CustomSignupView(SignupView):
 
 class CustomConfirmEmailView(ConfirmEmailView):
 
-    ConfirmEmailView.messages["email_confirmed"]["text"] = _("You have confirmed %(email)s. Now log in as %(username)s and create some Events!")
+    ConfirmEmailView.messages["email_confirmed"]["text"] = _("You have confirmed %(email)s for user account %(username)s")
     
     def post(self, *args, **kwargs):
         self.object = confirmation = self.get_object()
