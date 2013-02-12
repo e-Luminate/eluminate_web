@@ -12,8 +12,11 @@ Programme
 	<ul class="nav nav-tabs">
 		<li><a href="{% url 'events-map' %}" class="active">Map</a></li>
 	  	<li><a href="{% url 'events-list' %}">List</a></li>
-	</ul>
-	{% comment %}{% include 'participant/category_filter.html' with action_url_name='events-map' %}{% endcomment %}
+    </ul>
+    {% comment %}
+        Bug with category filter on event list map screen - https://github.com/e-Luminate/eluminate_web/issues/155
+	    {% include 'participant/category_filter.html' with action_url_name='events-map' %}
+    {% endcomment %}
 	<div class="row-fluid">
 		<div class="span6">
 	    	{% include "maps/_map.html" %}
