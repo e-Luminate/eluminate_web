@@ -953,6 +953,8 @@ legend,label{color:#999999;border-bottom:0px solid #222;}
 .invisible{visibility:hidden;}
 .affix{position:fixed;}
 body{color:#eeeeee;background-color:#313131;line-height:160%;font-family:verdana,sans-serif;font-size:13px;}
+#topGraphic{line-height:0;}
+.navbar-inner{padding-top:0 !important;}
 h1,h2,h3{color:#de7ec8;font-family:'Days One',sans-serif;font-weight:normal;}
 h1>a,h2>a,h3>a{color:inherit;}
 h1{font-size:225%;}

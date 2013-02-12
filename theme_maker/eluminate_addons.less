@@ -26,6 +26,14 @@ body {
    font-size: 13px;
 }
 
+// two rules to put the top graphic right at the top
+#topGraphic {
+  line-height: 0;
+}
+.navbar-inner {
+  padding-top: 0 !important; // has to override responsive rules
+}
+
 h1, h2, h3 {
   color: @headingColor;
   font-family: @headingFont;
