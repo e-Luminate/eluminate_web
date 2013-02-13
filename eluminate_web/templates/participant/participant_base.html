@@ -3,6 +3,10 @@
 
 {% block head_title %}{% endblock %}
 
+{% block nav_search %}
+	{% include '_search_bar.html' with action_url_name='participant_landing' %}
+{% endblock %}
+
 {% block body %}
 {% include "participant/participant_selector.html" %}
 {% block inner_body %}{% endblock %}

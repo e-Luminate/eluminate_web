@@ -8,7 +8,12 @@
 @TextLegal: #AAA;
 @LightGreyBackground: #393939; // the bars behind some headings
 @DarkGreyBackground: @bodyBackground; // the body color
-@headingColor: #CCDD80; //was #DE7EC8; 
+//@headingColor:  #E07E7F;// orange
+@headingColor2:  #E1DE7F;// yellow 
+//@headingColor:  #7ED5DF;// cyan   
+//@headingColor:  #B680F7;// purple 
+//@headingColor:  #85c090;// green  
+@headingColor:  #DE7EC8;// pinky    
 @bodyLeading: 160%;
 @logoYellow: #DEDE7E;
 @headingFont: 'Days One', sans-serif;
@@ -21,10 +26,26 @@ body {
    font-size: 13px;
 }
 
+// two rules to put the top graphic right at the top
+#topGraphic {
+  line-height: 0;
+}
+.navbar-inner {
+  padding-top: 0 !important; // has to override responsive rules
+}
+
 h1, h2, h3 {
   color: @headingColor;
   font-family: @headingFont;
   font-weight: normal;  
+}
+
+h3 {
+  color: @headingColor2;
+}
+
+h1>a, h2>a, h3>a {
+    color: inherit;
 }
 
 // in responsive designs, I like to specify all font
@@ -40,7 +61,18 @@ h1 {
 
 h2 {
   font-size: 135%;
+  line-height: 145%;
 }
+h3 {
+font-size: 100%;
+line-height: 125%;
+}
+
+// ********* general useful *********
+.nowrap {
+  white-space: nowrap;
+}
+
 
 .navbar-inner
 {
@@ -50,6 +82,13 @@ h2 {
 
 #topGraphic img {
   width: 100%;
+}
+
+// ****** Event screens ******************
+
+div#event-collaborators>a>img {
+    margin-right: 5px;
+    max-width: 200px;
 }
 
 // ****** Participant screens ******************
@@ -85,7 +124,7 @@ div#category_filter>span {
     padding-right: 5px;
 }
 
-div#category_filter>span, div.participant-event-label {
+div#category_filter>div.span1, div.participant-event-label {
     color: @gray;
     font-weight: bold;  
 }
@@ -109,17 +148,14 @@ div#category_filter>form>input[type=submit] {
 }
 
 #category_filter {
-    margin-left: 80px;
-    margin-top: 10px;
-
+    line-height: 30px; // to give a little more space for mobiles
     .btn {
         left: 20px;
         bottom: 15px;
     }
-    form span { // the radio button labels
-        padding-right: 10px;
+    input {
+	vertical-align: text-bottom; // gets the radio buttons in line with text
     }
-
 }
 
 #participant_detail_logo {
@@ -191,99 +227,70 @@ div#category_filter>form>input[type=submit] {
 
 // ******************** Footer fixing ****************
 
-// make sure you can scroll to the bottom, missing footer
-.mainBody {
-  margin-bottom: 130px;
+footer {
+    overflow: hidden;
+    margin: 20px 0 5px 0;
 }
 
-footer {
-  height: 120px;
-  overflow: hidden !important;
-  position: fixed;
-  bottom: 0;
-  z-index: 9999; // Chosen to sit on top of all map elements
-//  left: 0;
-//  margin: 0;
+#footerMain {
+    position: relative; // to allow social icons to be positioned 
 }
 
 #footerImg {
-    overflow: hidden;
+    width: 1400px;
+    max-width: 1400px; // overrides standard "max-width: auto;"
+    float: right;
+    // height: auto; // this is default for img
 }
 
-footer img {
-    max-width: 1400px !important;
-    width: 1400px !important;
+.footerSocialLinks {
+    height: 25px;
+    width: auto;
+    position: relative;
+    left: 10px;
+    bottom: 30px;
+    img {
+	width: auto;
+	height: 25px;
+	border: 0;
+    }
 }
 
 footer .legal {
-  background-color: @DarkGreyBackground;
-  position: absolute;
-  bottom:0;
-  width: 100%;
   color: @TextLegal;
   font-size: 70%;
-  overflow: hidden;
-}
+  line-height: 12px;
+  float: left;
+  margin: 6px 2px 0 2px;
+  max-width: 33%;
+  &.floatRight {
+      float: right;
+      max-width: 63%;
+      text-align: right;
+  }
 
-#footerDates {
-  position: absolute;
-  right: 20px;
-  bottom: 17px;
-  color: @logoYellow;
-  font-family: @headingFont;
-  font-size: 18px;
-  //background-color: red;
-}
- 
-// Map
-
-.leaflet-popup-content {
-  color: black;
 }
 
 @media (max-width: 767px) {
-    footer {
-	//background-color: green;
-        height: auto;
-	left:0;
-	padding-left:0px;
-	padding-right:0px;
-	width: 100% !important;
-	max-width: 100% !important;
-	//margin-right: 200px;
-	overflow: hidden;
-	//width: 400px !important;
-    }
-    #footerRow {
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-bottom: 10px;
-	//background-color: @DarkGreyBackground;
-    }
     footer img {
-	position: relative;
-	max-width: 100% !important;
-	width: 100% !important;
+	max-width: 300%;
+	//width: 300%;
     }
-    #footerImg {
-	position: relative;
-        overflow: hidden !important;	
+}
+
+@media (max-width: 330px) {
+    footer {
+	padding-top:15px;
+    } 
+    .footerSocialLinks {
+	bottom: 113px;
     }
-    #footerDates {
-	color: black;
-	font-size: 9px;
-	margin-bottom: 0px;
-	bottom: 0px;
-    }
-    footer .legal {
-	//background-color: transparent;
-        line-height: 10px;
-	width: 100%;
-	position: fixed;
-	bottom: 0px;
-	left: 0;
-	padding-left: 20px;
-    }
+}
+
+// **************** Map **********************
+
+.leaflet-popup-content {
+  color: black;
 }
 
 // ***************** navigation *****
@@ -346,3 +353,15 @@ font-size: 120%;
     color: @headingColor;
   }
 }
+
+#sponsors img {
+    height: 100px;
+    width: auto;
+    margin:10px;
+    border: 2px solid white;
+    padding: 4px;
+    &.whiteNeeded {
+	background-color: white;
+    }
+}
+

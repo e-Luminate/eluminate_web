@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.exceptions import ObjectDoesNotExist
@@ -8,12 +9,14 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
 from django.contrib.gis.geos import Polygon
+from django.db.models.query import EmptyQuerySet
 
 from braces.views import LoginRequiredMixin
 
 from maps.models import Location
 from maps.utils import get_search_polygon, calculate_bounds
 from participant.mixins import CategoryFilterMixin
+from participant.models import Participant
 
 from .models import Event
 from .forms import EventForm
@@ -46,7 +49,14 @@ class EventModelOwnerRestrictedMixin(object):
                                     participant=self.request.user.participant
                                     )
         return queryset
-   
+
+class EventFormRestrictedQueryset(object):
+    
+    def get_form(self, form_class):
+        form = super(EventFormRestrictedQueryset, self).get_form(form_class)
+        form.fields['location'].queryset = Location.objects.filter(user=self.request.user)
+        form.fields['collaborators'].queryset = Participant.objects.exclude(user=self.request.user)
+        return form
 
 class EventDetail(DetailView):
     model = Event
@@ -74,7 +84,10 @@ class EventList(CategoryFilterMixin, ListView):
         queryset = super(EventList, self).get_queryset()
 
         if self.selected_category_id:
-            queryset = queryset.filter(participant__categories=self.selected_category_id)
+            owner_in_category_query = Q(participant__categories=self.selected_category_id)
+            approved_collaborators_query = ~Q(collaborators__approved_on=None)
+            collaborators_in_category_query = Q(collaborators__categories=self.selected_category_id)
+            queryset = queryset.filter(owner_in_category_query | approved_collaborators_query & collaborators_in_category_query).distinct()
 
         if self.request.GET.has_key("q"):
             queryset = queryset.filter(name__icontains=self.request.GET["q"])
@@ -110,15 +123,10 @@ class EventListUser(EventModelOwnerRestrictedMixin, ListView):
     
                 
 
-class EventCreate(EventParticipantApprovedMixin, CreateView):
+class EventCreate(EventParticipantApprovedMixin, EventFormRestrictedQueryset, CreateView):
     
     model = Event
     form_class = EventForm
-
-    def get_form(self, form_class):
-        form = super(EventCreate, self).get_form(form_class)
-        form.fields['location'].queryset = Location.objects.filter(user=self.request.user)
-        return form
 
     def form_valid(self, form):
         
@@ -127,16 +135,13 @@ class EventCreate(EventParticipantApprovedMixin, CreateView):
         return super(EventCreate, self).form_valid(form)
         
 
-class EventUpdate(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin, UpdateView):
+class EventUpdate(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin, 
+                  EventFormRestrictedQueryset, UpdateView):
         
     model = Event
     form_class = EventForm
     template_name = "events/event_form_update.html"
-       
-    def get_form(self, form_class):
-        form = super(EventUpdate, self).get_form(form_class)
-        form.fields['location'].queryset = Location.objects.filter(user=self.request.user)
-        return form
+    
     
 class EventDelete(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin, DeleteView):
     

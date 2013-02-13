@@ -9,11 +9,10 @@
 <div class="row">
   <div class="span12">
     <h1>{{ event.name }}</h1>
-    <div>
-		<img class="img-rounded" src="{{ event.participant.logo.url }}">	
-		<a href="{% url 'participant_detail' slug=event.participant.slug %}">
-    		{{ event.participant}}
-		</a>
+    <div id="event-collaborators">
+        <a href="{{ event.participant.get_absolute_url }}"><img class="img-rounded" src="{{ event.participant.logo.url }}" title="Go to participant"></a>{% for collaborator in event.approved_collaborators %}<a href="{{ collaborator.get_absolute_url }}"><img class="img-rounded" src="{{ collaborator.logo.url }}" title="Go to participant"></a>{% endfor %}
+
+        <h2>Proudly presented by {% include "events/_event_collaborator_names_snippet.html" %}</h2>
     </div>
   </div>
 </div>
@@ -36,10 +35,27 @@
   </div>
   <div class="span4">
   	<h2>What</h2>
-    {{ event.description }}
+    {{ event.description|striptags|urlize|linebreaks }}
   </div>
   <div class="span4">
 	<h2>Where</h2>
+	<div>
+		<p>
+			<a id="marker_item_{{event.id}}" href="">
+				<i class="icon-map-marker icon-white"></i> {{event.location.name}}</a>
+		</p> 
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){ 
+        	$("#marker_item_{{event.id}}")
+        	.on("click", {
+        		item_id: {{event.id}},
+                item_location_id: {{event.location.id}},
+                          },
+                SSOUK.map_handler.onInventoryListClick);
+     	});
+    </script>
+	
 	    	{% include "maps/_map.html" %}
 	        <style type="text/css">
 	            #map_canvas{
@@ -57,7 +73,7 @@
   	<script type="text/javascript">
                $(document).ready(function(){
                        
-                       var info_text = "{{ event.name }}";
+                       var info_text = "{{ event.location.name }}";
                        
                    SSOUK.map_handler.updateMarker({{ event.location.marker.y }}, 
                                                   {{ event.location.marker.x }},

@@ -7,6 +7,10 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("maps", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding field 'Event.location'
         db.add_column('events_event', 'location',

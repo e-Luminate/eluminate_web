@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Category(models.Model):
-    name = models.CharField(unique=True, max_length=20, help_text=u'Cleantech category')   
+    name = models.CharField(unique=True, max_length=20)   
 
     class Meta:
         verbose_name_plural = u'Categories'
@@ -35,6 +35,9 @@ class Participant(models.Model):
 
     def approved(self):
         return self.approved_on != None
+
+    def approved_collaboration_events(self):
+        return self.collaboration_events.exclude(participant__approved_on=None)
 
     def get_absolute_url(self):
         return reverse('participant_detail', kwargs={'slug': self.slug})

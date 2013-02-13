@@ -1,18 +1,22 @@
 {% load url from future %}
 {% if category_list|length > 1 %}
 <div class="row-fluid">
-    <div class="span12">
-        <div id="category_filter">
-            <span>Show only </span>
-            <form method="GET" action="{% url action_url_name %}">
-                <input type="radio" name="category" value="0" {% ifequal selected_category_id 0 %}checked{% endifequal %}> <span>All</span>
-                {% for category in category_list %}
-                <input type="radio" name="category" value="{{ category.id }}" {% ifequal selected_category_id category.id %}checked{% endifequal %}> <span>{{ category.name }}</span>
-                {% endfor %}
-                <input class="btn" type="submit" value="Filter"/>
-            </form>
-        </div>
+  <div id="category_filter">
+    <div class="span1 offset1">
+      Show:&nbsp;&nbsp;
     </div>
+    <div class="span10">
+      <form method="GET" action="{% url action_url_name %}">
+	<span class="nowrap"><input type="radio" name="category" value="0" onclick="this.form.submit();" {% ifequal selected_category_id 0 %}checked{% endifequal %} > All&nbsp;&nbsp;</span>
+	{% for category in category_list %}
+	<span class="nowrap"><input type="radio" name="category" value="{{ category.id }}" onclick="this.form.submit();" {% ifequal selected_category_id category.id %}checked{% endifequal %}> {{ category.name }}&nbsp;&nbsp;</span>
+	{% endfor %}
+	<noscript>
+	  <input class="btn" type="submit" value="Filter"/>
+	</noscript>
+      </form>
+    </div>
+  </div>
 </div>
 {% endif %}
 
