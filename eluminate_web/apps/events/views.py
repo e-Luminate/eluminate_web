@@ -54,8 +54,8 @@ class EventFormRestrictedQueryset(object):
     
     def get_form(self, form_class):
         form = super(EventFormRestrictedQueryset, self).get_form(form_class)
-        form.fields['collaborators'].queryset = (Participant.objects.exclude(user=self.request.user))
         form.fields['location'].queryset = Location.objects.filter(user=self.request.user)
+        form.fields['collaborators'].queryset = Participant.objects.exclude(user=self.request.user)
         return form
 
 class EventDetail(DetailView):
