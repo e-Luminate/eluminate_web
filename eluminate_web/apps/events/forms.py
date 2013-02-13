@@ -16,7 +16,8 @@ class EventForm(forms.ModelForm):
                   "end_time",
                   "days",
                   "location",
-                  "description")
+                  "description",
+                  "collaborators")
         widgets = {
                    'days' : CheckboxSelectMultiple
                    }
@@ -33,6 +34,7 @@ class EventForm(forms.ModelForm):
                 Field("start_time"),
                 Field("end_time"),
                 Field("days"),
+                Field("collaborators"),
                 Field("description"),
                 FormActions(
                             Submit('submit', 'Save', css_class="btn btn-primary")
@@ -45,6 +47,7 @@ class EventForm(forms.ModelForm):
         # Overriding the help text due to a django bug:
         # https://code.djangoproject.com/ticket/9321
         self.fields['days'].help_text = ''
+        
                                                   
                 
  

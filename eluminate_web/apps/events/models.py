@@ -26,7 +26,8 @@ class Event(models.Model):
     end_time = models.TimeField(help_text="When the event finish, e.g. 16:00")
     days = models.ManyToManyField(Day)
     participant = models.ForeignKey(Participant, related_name="own_events")
-    collaborators = models.ManyToManyField(Participant, related_name="collaboration_events", blank=True)
+    collaborators = models.ManyToManyField(Participant, related_name="collaboration_events", 
+                                           blank=True, null=True)
     description = models.TextField()
     location = models.ForeignKey(Location, null=True)
     searched_objects = EventSearchManager()
