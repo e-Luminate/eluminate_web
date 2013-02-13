@@ -9,12 +9,14 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
 from django.contrib.gis.geos import Polygon
+from django.db.models.query import EmptyQuerySet
 
 from braces.views import LoginRequiredMixin
 
 from maps.models import Location
 from maps.utils import get_search_polygon, calculate_bounds
 from participant.mixins import CategoryFilterMixin
+from participant.models import Participant
 
 from .models import Event
 from .forms import EventForm
@@ -47,7 +49,14 @@ class EventModelOwnerRestrictedMixin(object):
                                     participant=self.request.user.participant
                                     )
         return queryset
-   
+
+class EventFormRestrictedQueryset(object):
+    
+    def get_form(self, form_class):
+        form = super(EventFormRestrictedQueryset, self).get_form(form_class)
+        form.fields['collaborators'].queryset = (Participant.objects.exclude(user=self.request.user))
+        form.fields['location'].queryset = Location.objects.filter(user=self.request.user)
+        return form
 
 class EventDetail(DetailView):
     model = Event
@@ -114,15 +123,10 @@ class EventListUser(EventModelOwnerRestrictedMixin, ListView):
     
                 
 
-class EventCreate(EventParticipantApprovedMixin, CreateView):
+class EventCreate(EventParticipantApprovedMixin, EventFormRestrictedQueryset, CreateView):
     
     model = Event
     form_class = EventForm
-
-    def get_form(self, form_class):
-        form = super(EventCreate, self).get_form(form_class)
-        form.fields['location'].queryset = Location.objects.filter(user=self.request.user)
-        return form
 
     def form_valid(self, form):
         
@@ -131,16 +135,13 @@ class EventCreate(EventParticipantApprovedMixin, CreateView):
         return super(EventCreate, self).form_valid(form)
         
 
-class EventUpdate(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin, UpdateView):
+class EventUpdate(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin, 
+                  EventFormRestrictedQueryset, UpdateView):
         
     model = Event
     form_class = EventForm
     template_name = "events/event_form_update.html"
-       
-    def get_form(self, form_class):
-        form = super(EventUpdate, self).get_form(form_class)
-        form.fields['location'].queryset = Location.objects.filter(user=self.request.user)
-        return form
+    
     
 class EventDelete(EventParticipantApprovedMixin, EventModelOwnerRestrictedMixin, DeleteView):
     
