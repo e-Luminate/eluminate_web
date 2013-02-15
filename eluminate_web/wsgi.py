@@ -23,9 +23,12 @@ try:
 except IOError:
     pass
 
-# activate virtualenv (may be needed on production server; judging by today's effort, it is!)
+# try to activate virtualenv (may be needed on production server; judging by today's effort, it is!)
 activate_this = os.path.expanduser("~/.virtualenvs/eluminate_env/bin/activate_this.py")
-execfile(activate_this, dict(__file__=activate_this))
+try:
+    execfile(activate_this, dict(__file__=activate_this))
+except:
+    pass
 
 import eluminate_web.startup as startup
 startup.run()
