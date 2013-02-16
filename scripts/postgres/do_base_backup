@@ -69,10 +69,13 @@ if [[ -z "${PG_DATA_DIR}" ]]; then
    exit ${EXIT_NODATA}
 fi
 
+# figure out name of previous backup so we can stamp WAL archive with the
+# same name
+OLDBACKUPSTAMP=$(cd ${BACKUP_FOLDER}; ls ${HOSTNAME}*.tgz 2>/dev/null | tail -1 | sed "s/${HOSTNAME}-\(.*\).tgz/\1/")
+
 # Get a datestamp now and construct backup image names
 DATESTAMP=$(date +'%Y%m%d%H%M%S')
 BACKUP_IMAGE="${HOSTNAME}-${DATESTAMP}.tgz"
-OLD_WALS="WALs-Pre-${DATESTAMP}.tgz"
 
 # Tell postgres we are about to start file system backups
 ${PSQL} -c "SELECT pg_start_backup('${DATESTAMP}', true);"
@@ -98,21 +101,22 @@ BACKUP_STAMP=$(ls ${LIVE_WAL_DIR}/*.backup)
 
 cd ${WAL_ARCHIVES}
 
-# we could get cleaver and do it in one go eg
-#find . -maxdepth 1 type f  \! -newer ${BACKUP_STAMP} -print0 | \
-#    xargs -0 tar -czf ${BACKUP_FOLDER}/${OLD_WALS} --remove-file
-#
-# but for portability we do it via temp file
+if [[ -z ${OLDBACKUPSTAMP} ]]; then
+  :
+else
+  OLD_WALS=WALS-${OLDBACKUPSTAMP}.tgz
 
-find . -maxdepth 1 -type f  \! -newer ${BACKUP_STAMP} -print > ${WAL_FILES_FOR_TAR}
-tar czf ${BACKUP_FOLDER}/${OLD_WALS} -T ${WAL_FILES_FOR_TAR} --remove-files
-rm -f ${WAL_FILES_FOR_TAR}
+  find . -maxdepth 1 -type f  \! -newer ${BACKUP_STAMP} -print > ${WAL_FILES_FOR_TAR}
+  tar czf ${BACKUP_FOLDER}/${OLD_WALS} -T ${WAL_FILES_FOR_TAR} --remove-files
+  rm -f ${WAL_FILES_FOR_TAR}
 
-if ((PGVERBOSE)); then
-   echo "Postgres file system backup is ${BACKUP_IMAGE}" | tee -a ${RUN_LOGS}
-   echo "Old WAL files needed for previous filesystem image: ${OLD_WALS}" | tee -a ${RUN_LOGS}
-   echo "======================================================================"
+  if ((PGVERBOSE)); then
+    echo "Postgres file system backup is ${BACKUP_IMAGE}" | tee -a ${RUN_LOGS}
+    echo "Old WAL files needed for previous filesystem image: ${OLD_WALS}" | tee -a ${RUN_LOGS}
+    echo "======================================================================"
+  fi
 fi
 
 echo -e "Backups run ended: $(date)\n======================================================================" >> ${RUN_LOGS}
+
 exit 0
