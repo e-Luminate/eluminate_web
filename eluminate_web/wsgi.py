@@ -18,10 +18,11 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "eluminate_web.settings")
 
 ### now do special stuff for the production server, if local_wsgi.py exists
-try:
-    execfile("eluminate_web/local_wsgi.py")
-except IOError:
-    pass
+## disabled and replaced by more straightforward version below
+#try:
+#    execfile("eluminate_web/local_wsgi.py")
+#except IOError:
+#    pass
 
 # try to activate virtualenv (may be needed on production server; judging by today's effort, it is!)
 activate_this = os.path.expanduser("~/.virtualenvs/eluminate_env/bin/activate_this.py")
