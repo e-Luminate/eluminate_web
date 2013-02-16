@@ -78,7 +78,7 @@ class EventDetail(DetailView):
 class EventList(CategoryFilterMixin, ListView):
     
     model = Event
-    queryset = Event.objects.filter(participant__approved_on__lt=now())
+    queryset = Event.objects.filter(participant__approved_on__lt=now()).order_by('days')
 
     def get_queryset(self):
         queryset = super(EventList, self).get_queryset()
