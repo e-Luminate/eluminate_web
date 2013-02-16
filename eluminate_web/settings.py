@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.join(PACKAGE_ROOT, "apps"))
 DEBUG = True
 
 ADMINS = [
-    # ("Your Name", "your_email@example.com"),
+     ("Kim Spence-Jones", "kim@spencejones.com"),
 ]
 
 
@@ -20,6 +20,9 @@ DATABASES = {
         'PASSWORD': 'e_luminate_password',
     }
 }
+
+THEME_ACCOUNT_CONTACT_EMAIL = "info@someplace.com"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ### now overwrite stuff from the production server, if local_settings.py exists
 
@@ -207,7 +210,6 @@ FIXTURE_DIRS = [
     os.path.join(PROJECT_ROOT, "fixtures"),
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
 ACCOUNT_OPEN_SIGNUP = False
@@ -220,9 +222,6 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_EMAIL_CONFIRMATION_EMAIL = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
-THEME_ACCOUNT_CONTACT_EMAIL = "info@e-luminatefestivals.co.uk"
-
-SERVER_EMAIL = "no-reply@e-luminatefestivals.co.uk"
 
 # Django Debug toolbar
 if DEBUG:

@@ -249,25 +249,32 @@ footer {
     position: relative;
     left: 10px;
     bottom: 30px;
-    img {
+    img, input[type="image"] {
+	margin: 0;
+	padding: 0;
 	width: auto;
 	height: 25px;
 	border: 0;
     }
+    form {
+        display: inline;
+	height: 25px;
+	overflow: hidden;
+    }
 }
 
 footer .legal {
-  color: @TextLegal;
-  font-size: 70%;
-  line-height: 12px;
-  float: left;
-  margin: 6px 2px 0 2px;
-  max-width: 33%;
-  &.floatRight {
-      float: right;
-      max-width: 63%;
-      text-align: right;
-  }
+    color: @TextLegal;
+    font-size: 70%;
+    line-height: 12px;
+    float: left;
+    margin: 6px 2px 0 2px;
+    max-width: 33%;
+    &.floatRight {
+	float: right;
+	max-width: 63%;
+	text-align: right;
+    }
 
 }
 
@@ -357,6 +364,7 @@ font-size: 120%;
 #sponsors img {
     height: 100px;
     width: auto;
+    max-width: 90%;
     margin:10px;
     border: 2px solid white;
     padding: 4px;

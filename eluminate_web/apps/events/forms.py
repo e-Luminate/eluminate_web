@@ -47,6 +47,8 @@ class EventForm(forms.ModelForm):
         # Overriding the help text due to a django bug:
         # https://code.djangoproject.com/ticket/9321
         self.fields['days'].help_text = ''
+        self.fields['collaborators'].help_text = 'Hold down "Control", or "Command" on a Mac, to select more than one.\
+                                           To de-select, hold down "Control", or "Command" on a Mac, and click on the selected option'
         
                                                   
                 
