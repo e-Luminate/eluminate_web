@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.join(PACKAGE_ROOT, "apps"))
 DEBUG = True
 
 ADMINS = [
-    # ("Your Name", "your_email@example.com"),
+     ("Kim Spence-Jones", "kim@spencejones.com"),
 ]
 
 
@@ -223,6 +223,12 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 THEME_ACCOUNT_CONTACT_EMAIL = "info@e-luminatefestivals.co.uk"
 
 SERVER_EMAIL = "no-reply@e-luminatefestivals.co.uk"
+
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_HOST_USER = 'eluminate'
+EMAIL_HOST_PASSWORD ='1209foxFlower'
+DEFAULT_FROM_EMAIL = 'no-reply@e-luminatefestivals.co.uk'
+
 
 # Django Debug toolbar
 if DEBUG:
