@@ -5,6 +5,8 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(PACKAGE_ROOT, "apps"))
 
+## First, the defaults for settings overridden by local_settings.py
+
 DEBUG = True
 
 ADMINS = [
@@ -23,6 +25,9 @@ DATABASES = {
 
 THEME_ACCOUNT_CONTACT_EMAIL = "info@someplace.com"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = "5cp+0%ee(yyq&amp;++izz088#xiw=vy%@k4^yv(4@o1)%1(fshwwz"
 
 ### now overwrite stuff from the production server, if local_settings.py exists
 
@@ -99,8 +104,6 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = "5cp+0%ee(yyq&amp;++izz088#xiw=vy%@k4^yv(4@o1)%1(fshwwz"
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = [
