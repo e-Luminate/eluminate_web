@@ -3,7 +3,7 @@
 # script will also tar up  WAL file appropriate for the PITR.  The end 
 # results is two tarballs, one is file system and one for the old WALs. 
 # These WAL form part of previous backups and could technically be deleted 
-# if you dont want to revery prior to the backups just done.
+# if you dont want to recover prior to the backups just done.
 # Both are in $BACKUP_FOLDER
 #
 # Author: Khalid Sattar Feb 2013
@@ -18,7 +18,8 @@ EXIT_FAIL=1
 EXIT_NODATA=3
 EXIT_NOCONF=4
 
-# set spome overwriable Postgres variable
+# set some overwriable Postgres variable, you can also change these
+# via environment variables.
 PGUSER=${PGUSER-postgres}
 PGDATABASE=${PGDATABASE-postgres}
 PGVERBOSE=${PGVERBOSE-0}
@@ -58,8 +59,6 @@ fi
 # refine PSQL command so we do output to just file or terminal and file
 if (( PGVERBOSE )); then
     PSQL="${PSQL} -L ${RUN_LOGS}"
-else
-    PSQL="${PSQL} -o ${RUN_LOGS_TEMP}"
 fi
 
 # We try an figure this out postgres data folder by quering postgres itself
@@ -69,19 +68,24 @@ if [[ -z "${PG_DATA_DIR}" ]]; then
    exit ${EXIT_NODATA}
 fi
 
-# Get a datestamp now and construct backup image names
+# figure out name of previous backup so we can stamp WAL archive with the
+# same name.  Will be null if this is the 1st backups.
+OLDBACKUPSTAMP=$(cd ${BACKUP_FOLDER}; ls ${HOSTNAME}*.tgz 2>/dev/null | tail -1 | sed "s/${HOSTNAME}-\(.*\).tgz/\1/")
+
+# Get a datestamp of now and construct backup image names
 DATESTAMP=$(date +'%Y%m%d%H%M%S')
 BACKUP_IMAGE="${HOSTNAME}-${DATESTAMP}.tgz"
-OLD_WALS="WALs-Pre-${DATESTAMP}.tgz"
 
 # Tell postgres we are about to start file system backups
-${PSQL} -c "SELECT pg_start_backup('${DATESTAMP}', true);"
+${PSQL} -c "SELECT pg_start_backup('${DATESTAMP}', true);" > ${RUN_LOGS_TEMP}
 (( ! PGVERBOSE )) && cat ${RUN_LOGS_TEMP} >> ${RUN_LOGS}
 
+# Do files system Base backups, excluion are those recommended by postgres
+# documnent 9.1
 tar -C ${PG_DATA_DIR} -czf ${BACKUP_FOLDER}/${BACKUP_IMAGE} --exclude=pg_xlog --exclude=postmaster.* .
 
 # tell postgres we are done
-${PSQL} -c "SELECT pg_stop_backup();"
+${PSQL} -c "SELECT pg_stop_backup();" > ${RUN_LOGS_TEMP} 2>&1
 (( ! PGVERBOSE )) && cat ${RUN_LOGS_TEMP} >> ${RUN_LOGS}
 rm -f ${RUN_LOGS_TEMP}
 
@@ -98,21 +102,22 @@ BACKUP_STAMP=$(ls ${LIVE_WAL_DIR}/*.backup)
 
 cd ${WAL_ARCHIVES}
 
-# we could get cleaver and do it in one go eg
-#find . -maxdepth 1 type f  \! -newer ${BACKUP_STAMP} -print0 | \
-#    xargs -0 tar -czf ${BACKUP_FOLDER}/${OLD_WALS} --remove-file
-#
-# but for portability we do it via temp file
+if [[ -z ${OLDBACKUPSTAMP} ]]; then
+  :                  # none found, must be virgin run
+else
+  OLD_WALS=WALS-${OLDBACKUPSTAMP}.tgz
 
-find . -maxdepth 1 -type f  \! -newer ${BACKUP_STAMP} -print > ${WAL_FILES_FOR_TAR}
-tar czf ${BACKUP_FOLDER}/${OLD_WALS} -T ${WAL_FILES_FOR_TAR} --remove-files
-rm -f ${WAL_FILES_FOR_TAR}
+  find . -maxdepth 1 -type f  \! -newer ${BACKUP_STAMP} -print > ${WAL_FILES_FOR_TAR}
+  tar czf ${BACKUP_FOLDER}/${OLD_WALS} -T ${WAL_FILES_FOR_TAR} --remove-files
+  rm -f ${WAL_FILES_FOR_TAR}
 
-if ((PGVERBOSE)); then
-   echo "Postgres file system backup is ${BACKUP_IMAGE}" | tee -a ${RUN_LOGS}
-   echo "Old WAL files needed for previous filesystem image: ${OLD_WALS}" | tee -a ${RUN_LOGS}
-   echo "======================================================================"
+  if ((PGVERBOSE)); then
+    echo "Postgres file system backup is ${BACKUP_IMAGE}" | tee -a ${RUN_LOGS}
+    echo "Old WAL files needed for previous filesystem image: ${OLD_WALS}" | tee -a ${RUN_LOGS}
+    echo "======================================================================"
+  fi
 fi
 
 echo -e "Backups run ended: $(date)\n======================================================================" >> ${RUN_LOGS}
+
 exit 0

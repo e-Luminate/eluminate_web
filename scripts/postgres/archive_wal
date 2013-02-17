@@ -1,6 +1,12 @@
 #!/bin/bash
 #
+# Script called by postgress to archive off its WAL file
+# Its expected to be called with two parameters, teh 1st is the full 
+# path of the WAL file that need to be copied and 2nd param is just the
+# filename
 #
+# Khalid Sattar Feb 2013
+
 
 EXIT_OK=0
 EXIT_FAIL=1
@@ -26,8 +32,12 @@ if [[ -f ${ARCHIVE_FOLDER}/${WAL_FILENAME} ]]; then
     echo "${WAL_FILENAME} alreday exists in ${ARCHIVE_FOLDER}" >&2
     exit ${EXIT_FILE_EXISTS}
 else 
-    cp -p ${SRC_FILENAME} ${ARCHIVE_FOLDER}/${WAL_FILENAME}
-    exit $?
+    if cp -p ${SRC_FILENAME} ${ARCHIVE_FOLDER}/${WAL_FILENAME}; then
+	:
+    else
+	echo "Copy failed with exit value $?"
+	exit ${EXIT_FAIL}
+    fi
 fi
 
 exit ${EXIT_OK}
