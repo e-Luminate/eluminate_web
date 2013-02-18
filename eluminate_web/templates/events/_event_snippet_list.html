@@ -1,0 +1,40 @@
+{% load url from future %}
+
+
+<div class="event row-fluid">
+  <div class="span3">
+    <a href="{{ event_obj.get_absolute_url }}" title="See event details"><h2 class="negTopMargin">{{event_obj.name}}</h2></a>
+    by {% include "events/_event_collaborator_names_snippet.html" with event=event_obj %}
+  </div>
+ <div class="span3">
+
+    <div><i class="icon-time icon-white"></i> {{event_obj.start_time}} -- {{event_obj.end_time}}</div>
+    <div><a id="marker_item_{{event_obj.id}}" href=""><i class="icon-map-marker icon-white"></i> {{event_obj.location.name}}</a> </div>
+    <script type="text/javascript">
+      $(document).ready(function(){ 
+      $("#marker_item_{{event_obj.id}}")
+      .on("click", {
+      item_id: {{event_obj.id}},
+      item_location_id: {{event_obj.location.id}},
+      },
+      SSOUK.map_handler.onInventoryListClick);
+      });
+    </script>	
+    
+    <div>
+      <ul class="unstyled inline">
+	<i class="icon-calendar icon-white"></i>
+	{% for day in event_obj.days.all %}
+	<li>{{day|make_list|slice:":3"|join:""}}</li>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="span4">
+    <div>{{event_obj.description|striptags|urlize|linebreaks|truncatewords_html:15}}</div>
+   </div>
+  <div class="span2">
+    <a href="{{ event_obj.get_absolute_url }}" class="btn">See full event details</a>
+  </div>
+</div>
+<hr/>
