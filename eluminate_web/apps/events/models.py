@@ -32,6 +32,7 @@ class Event(models.Model):
     location = models.ForeignKey(Location, null=True)
     searched_objects = EventSearchManager()
     objects = models.GeoManager()
+    sortingHint=models.IntegerField(default=0, help_text="Ordering hint. Larger numbers appear first")
 
     def save(self, *args, **kwargs):
         if self.id and self.participant in self.collaborators.all():
