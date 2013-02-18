@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, Min
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.exceptions import ObjectDoesNotExist
@@ -78,7 +78,8 @@ class EventDetail(DetailView):
 class EventList(CategoryFilterMixin, ListView):
     
     model = Event
-    queryset = Event.objects.filter(participant__approved_on__lt=now()) #.order_by('days') ## disabled because results in multiple instances of events
+    queryset = Event.objects.filter(participant__approved_on__lt=now())\
+        .annotate(first_day=Min('days')).order_by('first_day', 'start_time')
 
     def get_queryset(self):
         queryset = super(EventList, self).get_queryset()
