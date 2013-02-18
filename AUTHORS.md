@@ -3,6 +3,7 @@
 - Michele Mattioni
 - Jo Paulger
 - [Kim Spence-Jones](kim@spencejones.com)
+- Khalid Sattar
 
 ##Web pages & graphics
 - Michele Mattioni
