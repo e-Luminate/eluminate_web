@@ -1005,4 +1005,4 @@ footer .legal{color:#aaaaaa;font-size:70%;line-height:12px;float:left;margin:6px
 .smallerText.first{padding-top:0;}
 .smallerHeading{font-size:120%;}.smallerHeading b{color:#de7ec8;}
 #sponsors img{height:100px;width:auto;max-width:90%;margin:10px;border:2px solid white;padding:4px;}#sponsors img.whiteNeeded{background-color:white;}
-.btn-primary{background-color:#de7ec8;background-image:-webkit-linear-gradient(top, #de7ec8, #ac5a96);}.btn-primary:hover{background-color:#ef8fd9;background-image:-webkit-linear-gradient(top, #de7ec8, #f088dc);}
+.btn-primary{background-color:#de7ec8;background-image:linear-gradient(to bottom, #de7ec8, #ac5a96);background-image:-webkit-linear-gradient(top, #de7ec8, #ac5a96);}.btn-primary:hover{background-color:#ef8fd9;background-image:-webkit-linear-gradient(top, #de7ec8, #f088dc);}
