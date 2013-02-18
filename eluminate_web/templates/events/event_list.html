@@ -13,11 +13,8 @@ Programme
 	  <li><a href="{% url 'events-map' %}">Map</a></li>
 	  <li><a href="{% url 'events-list' %}" class="active">List</a></li>
 	</ul>
-            {% comment %}{% include 'participant/category_filter.html' with action_url_name='events-list' %}{% endcomment %}
-	  <div class="span12">
-	  	{% for event_obj in object_list %}
-	    
+        {% comment %}{% include 'participant/category_filter.html' with action_url_name='events-list' %}{% endcomment %}
+	{% for event_obj in object_list %}
 		{% include "events/_event_snippet_list.html" %}
-	    {% endfor %}
-	</div>
+	{% endfor %}
 {% endblock %}
