@@ -49,15 +49,20 @@ for (i=0;i < ARRcookies.length;i++)
 function cookiesAccepted() {
 setCookie("viewed_cookie_policy", "yes", 3650);
 document.getElementById("cookie-law-info-bar").style.display="none";
+document.body.style.paddingTop=origPadding;
 return false;
 }
 
 // jquery add onload function
+var origPadding;
 
 $(document).ready(function() {
 var c=getCookie("viewed_cookie_policy");
 if (c!="yes") {
 document.getElementById("cookie-law-info-bar").style.display="block";
+//origPadding=document.body.style.paddingTop;
+origPadding = $("body").css("paddingTop");
+$("body").css("paddingTop", Number(/\d+/.exec(origPadding))+40+"px");
 }
 });
 </script>
@@ -71,11 +76,11 @@ document.getElementById("cookie-law-info-bar").style.display="block";
 {% block topbar %}
 {% comment %} Cookie law top bar {% endcomment %}
 <div  id="cookie-law-info-bar" class="row-fluid" style="display: none; border-bottom-width: 4px; border-bottom-style: solid; border-bottom-color: rgb(68, 68, 68);">
-<div class="span10" style=" padding-left: 10px; padding-top: 10px;"><i class="icon-white icon-hand-right"></i> This website uses cookies to improve your experience. If you continue to use this site, we'll assume you're ok with this.
+<div class="span9" style=" padding-left: 10px; padding-top: 10px;"><i class="icon-white icon-hand-right"></i> This website uses cookies to improve your experience. If you continue to use this site, we'll assume you're ok with that.
 </div>
-<div class="span2">
+<div class="span3">
   <a href="" id="cookie_action_close_header" class="btn btn-primary pull-right" style="margin: 5px;" onClick="cookiesAccepted();">
-    Accept
+    Hide this message
   </a>
 </div>
 </div>
