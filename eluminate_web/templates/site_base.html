@@ -17,11 +17,69 @@
   <!-- our js -->
   <!-- our namespace js -->
   <script type="text/javascript" src="{{ STATIC_URL }}js/namespace.js"></script>
+
+{% comment %}
+<!-- Begin Cookie Consent -->
+<!-- cookie used: viewed_cookie_policy, path / (compatible with wordpress Cookie Law plugin) -->
+{% endcomment %}
+<script type="text/javascript">
+function setCookie(c_name,value,exdays)
+{
+var exdate=new Date();
+exdate.setDate(exdate.getDate() + exdays);
+var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+document.cookie=c_name + "=" + c_value;
+}
+
+function getCookie(c_name)
+{
+var i,x,y,ARRcookies=document.cookie.split(";");
+for (i=0;i < ARRcookies.length;i++)
+{
+  x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+  y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+  x=x.replace(/^\s+|\s+$/g,"");
+  if (x==c_name)
+    {
+    return unescape(y);
+    }
+  }
+}
+
+function cookiesAccepted() {
+setCookie("viewed_cookie_policy", "yes", 3650);
+document.getElementById("cookie-law-info-bar").style.display="none";
+return false;
+}
+
+// jquery add onload function
+
+$(document).ready(function() {
+var c=getCookie("viewed_cookie_policy");
+if (c!="yes") {
+document.getElementById("cookie-law-info-bar").style.display="block";
+}
+});
+</script>
+{% comment %}
+<!-- End Cookie Consent plugin -->
+{% endcomment %}
   {% block extra_head %}{% endblock %}
 {% endblock %}
 
 
 {% block topbar %}
+{% comment %} Cookie law top bar {% endcomment %}
+<div  id="cookie-law-info-bar" class="row-fluid" style="display: none; background-color: rgb(234, 227, 5); color: rgb(0, 0, 0); border-bottom-width: 4px; border-bottom-style: solid; border-bottom-color: rgb(68, 68, 68);">
+<div class="span10" style=" padding-left: 10px; padding-top: 10px;">This website uses cookies to improve your experience. If you continue to use this site, we'll assume you're ok with this.
+</div>
+<div class="span2">
+  <a href="" id="cookie_action_close_header" class="btn btn-primary pull-right" style="margin: 5px;" onClick="cookiesAccepted();">
+    Accept
+  </a>
+</div>
+</div>
+
   <div id="topGraphic">
     <img src="{{ STATIC_URL }}img/elum_top.png" />
   </div>
