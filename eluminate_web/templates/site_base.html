@@ -28,7 +28,8 @@ function setCookie(c_name,value,exdays)
 var exdate=new Date();
 exdate.setDate(exdate.getDate() + exdays);
 var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-document.cookie=c_name + "=" + c_value;
+domainTop=/^http:\/\/w*\.?([^/:]*)/i.exec(document.URL)[1];
+document.cookie=c_name + "=" + c_value + ";domain="+domainTop+";path=/";
 }
 
 function getCookie(c_name)
@@ -60,7 +61,6 @@ $(document).ready(function() {
 var c=getCookie("viewed_cookie_policy");
 if (c!="yes") {
 document.getElementById("cookie-law-info-bar").style.display="block";
-//origPadding=document.body.style.paddingTop;
 origPadding = $("body").css("paddingTop");
 $("body").css("paddingTop", Number(/\d+/.exec(origPadding))+40+"px");
 }
