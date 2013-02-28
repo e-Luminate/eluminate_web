@@ -18,41 +18,45 @@
 <div class="row-fluid">
   <div class="span8">
     <h2 style="margin-top: 0">Welcome</h2>
-    <p>The inaugural e-Luminate Festival 2013 is an exciting visual display which showcases one of Cambridge's most upwardly mobile sectors: Clean Technology. In a series of collaborations, Clean Tenchnology innovators and visual artists will use light and installation art to demonstrate some of the extraordinary breakthroughs in this modern and environmentally-focussed industry.</p>
-    <p><b><i>Our <a href="{% url 'events-list' %}">programme</a> of events runs from the 20<sup>th</sup> &ndash; 24<sup>th</sup> of February 2013 and includes interactive light displays, workshops, talks and events to delight and educate all ages.</i></b><br/>&nbsp;</p>
+    <p>The inaugural e-Luminate Festival 2013 was an exciting visual display which showcased one of Cambridge's most upwardly mobile sectors: Clean Technology. In a series of collaborations, Clean Tenchnology innovators and visual artists used light and installation art to demonstrate some of the extraordinary breakthroughs in this modern and environmentally-focussed industry.</p>
+    <p>Our <a href="{% url 'events-list' %}">programme</a> of events ran from the 20<sup>th</sup> &ndash; 24<sup>th</sup> of February 2013 and included interactive light displays, workshops, talks and events to delight and educate all ages.<br/>&nbsp;</p>
+<p><b><i>
+Watch out for details of upcomming events from the e-Luminate team.
+</i></b></p>
+{% comment %}
     <div class="row-fluid">
       <div class="span3">
         <h2 style="margin-top: 0;">Featured events:</h2>
       </div>
       <div class="span9"style="margin-bottom: 10px;" >
-	{% comment %}<a class="btn btn-primary" style="margin-bottom: 5px; margin-right:5px;" href="/events/11/">Wed 20<sup>th</sup> &ndash; <b>Grand Switch-on</b></a> <a class="btn btn-primary" style="margin-bottom: 5px;" href="/events/18/">Fri 22<sup>nd</sup> &ndash; <b>Concert by<br/>Dowsing Sound Collective</b></a>&nbsp; <a class="btn btn-primary" style="margin-bottom: 5px;" href="/events/9/">Sat 23<sup>rd</sup> &ndash; <b>Talk by<br/>Prof. Crawford-Brown</b></a>{% endcomment %}
+	<a class="btn btn-primary" style="margin-bottom: 5px; margin-right:5px;" href="/events/11/">Wed 20<sup>th</sup> &ndash; <b>Grand Switch-on</b></a> <a class="btn btn-primary" style="margin-bottom: 5px;" href="/events/18/">Fri 22<sup>nd</sup> &ndash; <b>Concert by<br/>Dowsing Sound Collective</b></a>&nbsp; <a class="btn btn-primary" style="margin-bottom: 5px;" href="/events/9/">Sat 23<sup>rd</sup> &ndash; <b>Talk by<br/>Prof. Crawford-Brown</b></a>
 <a class="btn btn-primary" style="margin-bottom: 5px;" href="/participants/cambridge-science-centre/">Sun 24<sup>th</sup> &ndash; <b>At the Cambridge Science Centre&hellip; an Illustrator, and a Talk</b></a>&nbsp; 
       </div>
     </div>
+{% endcomment %}
   </div>
   <div class="span4">
     {% comment %} temporary image, to be replaced by carousel {% endcomment %}
-    <div style="margin-bottom: 0px; margin-top: 20px; height: 200px; background-position: center; background-size: 200%;
-		background-image: url('http://susieolczak.files.wordpress.com/2012/06/light-2009.jpg')"
-	 >&nbsp;
+    <div style="">
+    <img src="{{ STATIC_URL }}img/LighthouseOliverCross_cropped.jpg" alt="Eco Greenhouse - Susie Olczak" style="width:100%; height: auto;"/>
     </div>
-    <p class="smallerText" style="margin-bottom: 20px; text-align: right">Photo courtesy Susie Olczak</p>
+    <p class="smallerText" style="margin-bottom: 20px; text-align: right">"Energy, Growth, Movement" by Susie Olczak, 2013<br>Photo courtesy Oliver Cross</p>
   </div>
 
   <div class="row-fluid lightBackgroundHost">
     <div class="span4 lightBackground">
       <img src="{{ STATIC_URL }}img/elum_top.png" />
       <a href="{% url 'events-list' %}"><h2>Browse the programme</h2></a>
-      <p>The festival has art installations and displays in various locations around the city. Some of the CleanTech companies have also organised displays about what they do.</p>
-    <p>At various specific times there will be events and talks, most of which are open to the public.</p>
+      <p>The festival had art installations and displays in various locations around the city. Some of the CleanTech companies also organised displays about what they do.</p>
+    <p>At various specific times there were events and talks, most of which were open to the public.</p>
     <a href="{% url 'events-map' %}" class="btn">Find out more&hellip;</a>
   </div>
 
   <div class="span4 lightBackground">
     <img src="{{ STATIC_URL }}img/elum_top.png" />
     <a href="{% url 'participant_landing' %}"><h2>See who is collaborating</h2></a>
-    <p>See details of artists and the Cleantech companies they are collaborating with.<p>
-    <p>There are many educational activities associated with the festival too, which are well worth a look. Our educational collaborators have excelled themselves.</p>
+    <p>See details of artists and the Cleantech companies they collaborated with.<p>
+    <p>There were many educational activities associated with the festival too, which were well worth a look. Our educational collaborators have excelled themselves.</p>
     <a href="{% url 'participant_landing' %}" class="btn">Find out more&hellip;</a>
   </div>
   
