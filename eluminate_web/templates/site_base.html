@@ -10,6 +10,11 @@
     {% endblock %}
 {% endblock %}
 
+{% block meta_tags %}
+    <meta property="og:image" content="http://www.e-luminatefestivals.co.uk/wp-content/uploads/2012/10/meetstech.png"/>
+    {% block extra_meta %}
+    {% endblock %}
+{% endblock %}
 
 {% block extra_head_base %}
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
