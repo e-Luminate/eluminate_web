@@ -28,6 +28,7 @@ class Event(models.Model):
     participant = models.ForeignKey(Participant, related_name="own_events")
     collaborators = models.ManyToManyField(Participant, related_name="collaboration_events", 
                                            blank=True, null=True)
+    photo = models.ImageField(upload_to='event_photos/%Y/%m/%d', max_length=200, blank=True, help_text=u'Event photo', default='')
     description = models.TextField()
     location = models.ForeignKey(Location, null=True)
     searched_objects = EventSearchManager()

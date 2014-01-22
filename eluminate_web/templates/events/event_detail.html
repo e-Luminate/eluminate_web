@@ -28,6 +28,11 @@
     {% if request.user.participant == event.participant %}
     	<a href="{% url 'event-update' event.id %}">Edit</a>
     {% endif %}
+    {% if event.photo %}
+      <br />
+      <img src="{{ event.photo.url }}"/>
+    {% endif %}
+
   </div>
   <div class="span4">
   	<h2>What</h2>
