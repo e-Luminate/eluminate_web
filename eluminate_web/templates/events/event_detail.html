@@ -1,5 +1,6 @@
 {% extends "site_base.html" %}
 {% load url from future %}
+{% load tidy from date_tidy %}
 {% block head_title %}
 {{ event.name }}
 {% endblock %}
@@ -22,12 +23,7 @@
   	<h2>When</h2>
 	    	<div><i class="icon-time icon-white"></i> {{event.start_time}} -- {{event.end_time}}</div>
 	    	<div>
-	    		<ul class="unstyled inline">
-	    			<i class="icon-calendar icon-white"></i>
-	    			{% for day in event.days.all %}
-	    				<li>{{day}}</li>
-	    			{% endfor %}
-	    		</ul>
+	    			<i class="icon-calendar icon-white"></i> {{ event.days|tidy }}
 	    	</div>
     {% if request.user.participant == event.participant %}
     	<a href="{% url 'event-update' event.id %}">Edit</a>

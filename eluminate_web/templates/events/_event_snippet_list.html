@@ -1,4 +1,5 @@
 {% load url from future %}
+{% load tidy from date_tidy %}
 
 
 <div class="event row-fluid">
@@ -22,12 +23,7 @@
     </script>	
     
     <div>
-      <ul class="unstyled inline">
-	<i class="icon-calendar icon-white"></i>
-	{% for day in event_obj.days.all %}
-	<li>{{day|make_list|slice:":3"|join:""}}</li>
-	{% endfor %}
-      </ul>
+      <i class="icon-calendar icon-white"></i> {{ event_obj.days|tidy }}
     </div>
   </div>
   <div class="span4">
