@@ -1,3 +1,4 @@
+{% load tidy from date_tidy %}
 
 
 <div class="event">
@@ -19,12 +20,7 @@
     </script>	
 	
 	<div>
-		<ul class="unstyled inline">
-			<i class="icon-calendar icon-white"></i>
-			{% for day in event_obj.days.all %}
-				<li>{{day}}</li>
-			{% endfor %}
-		</ul>
+	    <i class="icon-calendar icon-white"></i> {{ event_obj.days|tidy }}
 	</div>
 	<div>{{event_obj.description|striptags|urlize|linebreaks|truncatewords_html:15}}</div>
     <a href="{{ event_obj.get_absolute_url }}">See full event details</a>

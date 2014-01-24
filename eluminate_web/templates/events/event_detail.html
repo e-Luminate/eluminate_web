@@ -1,4 +1,5 @@
 {% extends "site_base.html" %}
+{% load tidy from date_tidy %}
 {% block head_title %}
 {{ event.name }}
 {% endblock %}
@@ -9,7 +10,7 @@
   <div class="span12">
     <h1>{{ event.name }}</h1>
     <div id="event-collaborators">
-        <a href="{{ event.participant.get_absolute_url }}"><img class="img-rounded" src="{{ event.participant.logo.url }}" title="Go to participant"></a>{% for collaborator in event.approved_collaborators %}<a href="{{ collaborator.get_absolute_url }}"><img class="img-rounded" src="{{ collaborator.logo.url }}" title="Go to participant"></a>{% endfor %}
+        <a href="{{ event.participant.get_absolute_url }}"><img src="{{ event.participant.logo.url }}" title="Go to participant"></a>{% for collaborator in event.approved_collaborators %}<a href="{{ collaborator.get_absolute_url }}"><img src="{{ collaborator.logo.url }}" title="Go to participant"></a>{% endfor %}
 
         <h2>Proudly presented by {% include "events/_event_collaborator_names_snippet.html" %}</h2>
     </div>
@@ -21,16 +22,16 @@
   	<h2>When</h2>
 	    	<div><i class="icon-time icon-white"></i> {{event.start_time}} -- {{event.end_time}}</div>
 	    	<div>
-	    		<ul class="unstyled inline">
-	    			<i class="icon-calendar icon-white"></i>
-	    			{% for day in event.days.all %}
-	    				<li>{{day}}</li>
-	    			{% endfor %}
-	    		</ul>
+	    			<i class="icon-calendar icon-white"></i> {{ event.days|tidy }}
 	    	</div>
     {% if request.user.participant == event.participant %}
     	<a href="{% url 'event-update' event.id %}">Edit</a>
     {% endif %}
+    {% if event.photo %}
+      <br />
+      <img src="{{ event.photo.url }}"/>
+    {% endif %}
+
   </div>
   <div class="span4">
   	<h2>What</h2>

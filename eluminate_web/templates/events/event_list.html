@@ -8,6 +8,17 @@ Programme
 {% endblock %}
 
 {% block tab %}
+
+{% comment %}
+This is debug stuff...
+<div style="display: none">
+{% for event_obj in  object_list %}
+<h1>event</h1>
+{{ event_obj }}
+{% endfor %}
+</div>
+{% endcomment %}
+
 	<ul class="nav nav-tabs">
 	  <li><a href="{% url 'events-map' %}">Map</a></li>
 	  <li><a href="{% url 'events-list' %}" class="active">List</a></li>
