@@ -1,26 +1,37 @@
 {% load url from future %}
 
 {% block nav %}
-<div class="nav-collapse">
-	<ul id="menu-main-menu" class="nav"><li id="menu-item-1030" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1024"><a href="http://www.e-luminatefestivals.co.uk/">Home</a></li>
-	<li id="menu-item-1036" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown"><a href="http://www.e-luminatefestivals.co.uk/about-us-2/" class="dropdown-toggle" data-toggle="dropdown">About us<b class="caret"></b></a>
+<div class="nav-collapse"><ul id="menu-main-menu" class="nav"><li id="menu-item-1030" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1024 current_page_item active"><a href="http://www.e-luminatefestivals.co.uk/">Home</a></li>
+<li id="menu-item-1036" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown"><a href="http://www.e-luminatefestivals.co.uk/about-us-2/" class="dropdown-toggle" data-toggle="dropdown">About us<b class="caret"></b></a>
 <ul class="dropdown-menu">
-	<li id="menu-item-1361" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/about-us-2/">About us</a></li>	<li id="menu-item-1041" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/about-us-2/the-e-team/">The e-Team</a></li>	<li id="menu-item-1035" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/about-us-2/e-luminate-vision/">Our Vision and Mission</a></li>	<li id="menu-item-1028" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/what-is-clean-technology/">What is CleanTech?</a></li><!--.dropdown-->
+<li id="menu-item-1361" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/about-us-2/">About us</a></li>
+<li id="menu-item-1041" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/about-us-2/the-e-team/">The e-Team</a></li>
+<li id="menu-item-1035" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/about-us-2/e-luminate-vision/">Our Vision and Mission</a></li>
+<li id="menu-item-1028" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/what-is-clean-technology/">What is CleanTech?</a></li>
 </ul>
-</li><li id="menu-item-1282" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown"><a href="http://www.e-luminatefestivals.co.uk/news/" class="dropdown-toggle" data-toggle="dropdown">News &amp; Events<b class="caret"></b></a>
-<ul class="dropdown-menu">
-	<li id="menu-item-1286" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/news/newsblog/">News</a></li>	<li id="menu-item-1040" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/news/newsletters/">Newsletters</a></li><!--.dropdown-->
+</li>
+<li id="menu-item-2127" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown"><a href="http://www.e-luminatefestivals.co.uk/news/newsblog/" class="dropdown-toggle" data-toggle="dropdown">News &#038; Events<b class="caret"></b></a><ul class="dropdown-menu"><li id="menu-item-1286" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/news/newsblog/">News</a></li>
+ <li id="menu-item-1040" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/news/newsletters/">Newsletters</a></li>
 </ul>
-</li><li id="menu-item-1268" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/sponsors/">Sponsors</a></li>
-<li id="menu-item-1043" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown current_page_item active"><a href="http://2014.e-luminatefestivals.co.uk/events/map" class="dropdown-toggle" data-toggle="dropdown">Festival 2014<b class="caret"></b></a>
-<ul class="dropdown-menu">
-	    <li><a href="{% url "events-map" %}" {% if request.path == '/events/' or request.path == "/events/map" %} class="active"{% endif %}>Programme</a></li>
-    <li><a href="{% url "participant_landing" %}" {% if request.path == '/participants/' %} class="active"{% endif %}>Collaborators</a></li>
-	<li id="menu-item-1335" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/festival/technology-partners-2014/">Technology Partners 2014</a></li>	<li id="menu-item-559" class="menu-item menu-item-type-custom menu-item-object-custom"><a title="Archive of last year’s festival site" target="_blank" href="http://2013.e-luminatefestivals.co.uk">Festival 2013</a></li><!--.dropdown-->
+</li>
+<li id="menu-item-1268" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown"><a href="http://www.e-luminatefestivals.co.uk/sponsors/" class="dropdown-toggle" data-toggle="dropdown">Sponsors<b class="caret"></b></a><ul class="dropdown-menu"><li id="menu-item-2446" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/sponsors/">Sponsors</a></li>
+ <li id="menu-item-1335" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/sponsors/technology-partners-2014/">Technology Partners 2014</a></li>
 </ul>
-</li><li id="menu-item-1038" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/photo-gallery/">Gallery</a></li><li id="menu-item-1031" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown"><a href="http://www.e-luminatefestivals.co.uk/participate/" class="dropdown-toggle" data-toggle="dropdown">Get Involved<b class="caret"></b></a>
-<ul class="dropdown-menu">
-	<li id="menu-item-1032" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/participate/sponsors-and-partners/">Become our sponsor…</a></li>	<li id="menu-item-1033" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/participate/exhibit/">Showcase your technology</a></li>	<li id="menu-item-1042" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/participate/create-a-light-masterpiece/">Create your light installation</a></li>	<li id="menu-item-1034" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/participate/volunteer/">Join our team</a></li><!--.dropdown-->
+</li>
+<li id="menu-item-2128" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children dropdown"><a href="http://2014.e-luminatefestivals.co.uk/events/map" class="dropdown-toggle" data-toggle="dropdown">Festival 2014<b class="caret"></b></a><ul class="dropdown-menu"><li id="menu-item-2089" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="http://2014.e-luminatefestivals.co.uk/events/map">Programme (map)</a></li>
+ <li id="menu-item-2445" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="http://2014.e-luminatefestivals.co.uk/events">Programme (list)</a></li>
+ <li id="menu-item-2090" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="http://2014.e-luminatefestivals.co.uk/participants/">Collaborators</a></li>
+ <li id="menu-item-559" class="menu-item menu-item-type-custom menu-item-object-custom"><a title="Archive of last year&#8217;s festival site" target="_blank" href="http://2013.e-luminatefestivals.co.uk">Pilot Festival (2013)</a></li>
 </ul>
-</li><li id="menu-item-1029" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/contact-us/">Contact</a></li></ul>								</div>
+</li>
+<li id="menu-item-1038" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/photo-gallery/">Gallery</a></li>
+<li id="menu-item-1031" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown"><a href="http://www.e-luminatefestivals.co.uk/participate/" class="dropdown-toggle" data-toggle="dropdown">Get Involved<b class="caret"></b></a><ul class="dropdown-menu"><li id="menu-item-1032" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/participate/sponsors-and-partners/">Become our sponsor&#8230;</a></li>
+ <li id="menu-item-1033" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/participate/exhibit/">Showcase your technology</a></li>
+ <li id="menu-item-1042" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/participate/create-a-light-masterpiece/">Create your light installation</a></li>
+ <li id="menu-item-1034" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/participate/volunteer/">Join our team</a></li>
+</ul>
+</li>
+<li id="menu-item-1029" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.e-luminatefestivals.co.uk/contact-us/">Contact</a></li>
+</ul>
+</div>
 {% endblock %}
