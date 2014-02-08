@@ -25,6 +25,9 @@ class Event(models.Model):
     start_time = models.TimeField(help_text="When it starts, e.g. 12:00")
     end_time = models.TimeField(help_text="When the event finish, e.g. 16:00")
     days = models.ManyToManyField(Day)
+    priority = models.IntegerField(default=0, help_text="Higher priority events appear nearer top")
+    isEvent = models.BooleanField(default = True, help_text="check for events, uncheck for installations")
+    featured = models.BooleanField(default= False, help_text="check to move item to top of list")
     participant = models.ForeignKey(Participant, related_name="own_events")
     collaborators = models.ManyToManyField(Participant, related_name="collaboration_events", 
                                            blank=True, null=True)
