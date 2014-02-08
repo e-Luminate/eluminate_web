@@ -10,25 +10,18 @@
  <div class="span3">
 
     <div><i class="icon-time icon-white"></i> {{event_obj.start_time}} -- {{event_obj.end_time}}</div>
-    <div><a id="marker_item_{{event_obj.id}}" href=""><i class="icon-map-marker icon-white"></i> {{event_obj.location.name}}</a> </div>
-    <script type="text/javascript">
-      $(document).ready(function(){ 
-      $("#marker_item_{{event_obj.id}}")
-      .on("click", {
-      item_id: {{event_obj.id}},
-      item_location_id: {{event_obj.location.id}},
-      },
-      SSOUK.map_handler.onInventoryListClick);
-      });
-    </script>	
-    
+    <div><i class="icon-map-marker icon-white"></i> {{event_obj.location.name}}</div>
+        
     <div>
       <i class="icon-calendar icon-white"></i> {{ event_obj.days|tidy }}
     </div>
   </div>
   <div class="span4">
-    <div>{{event_obj.description|striptags|urlize|linebreaks|truncatewords_html:15}}</div>
-   </div>
+      {% if event_obj.photo %}
+        <img src="{{ event_obj.photo.url }}" style="max-height:80px; width: auto; max-width: 100px; height:auto; float: right"/>
+      {% endif %}
+    {{event_obj.description|striptags|urlize|linebreaks|truncatewords_html:15}}
+  </div>
   <div class="span2">
     <a href="{{ event_obj.get_absolute_url }}" class="btn">See full event details</a>
   </div>
