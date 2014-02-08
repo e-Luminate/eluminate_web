@@ -18,7 +18,7 @@
   </div>
   <div class="span4">
       {% if event_obj.photo %}
-        <img src="{{ event_obj.photo.url }}" style="max-height:80px; width: auto; max-width: 100px; height:auto; float: right"/>
+        <img src="{{ event_obj.photo.url }}" style="max-height:80px; width: auto; max-width: 100px; height:auto; float: right; margin-left:5px"/>
       {% endif %}
     {{event_obj.description|striptags|urlize|linebreaks|truncatewords_html:15}}
   </div>
