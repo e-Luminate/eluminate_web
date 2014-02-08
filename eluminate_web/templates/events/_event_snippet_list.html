@@ -4,7 +4,7 @@
 
 <div class="event row-fluid">
   <div class="span3">
-    <a href="{{ event_obj.get_absolute_url }}" title="See event details"><h2 class="negTopMargin">{{event_obj.name}}</h2></a>
+    <a href="{{ event_obj.get_absolute_url }}" title="See event details"><h2 class="negTopMargin">{% if event_obj.featured %}Featured {% if event_obj.isEvent %}Event{% else %}Installation{% endif %}:<br/>{% endif %}{{event_obj.name}}</h2></a>
     by {% include "events/_event_collaborator_names_snippet.html" with event=event_obj %}
   </div>
  <div class="span3">
