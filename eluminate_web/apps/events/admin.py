@@ -6,7 +6,7 @@ class EventAdmin(admin.ModelAdmin):
     list_editable = ('priority', 'isEvent', 'featured')
     ordering = ('-featured','-isEvent','-priority')
 
-    filter_horizontal = ('days',)
+    filter_horizontal = ('days','collaborators')
 
 admin.site.register(Event, EventAdmin)
 
