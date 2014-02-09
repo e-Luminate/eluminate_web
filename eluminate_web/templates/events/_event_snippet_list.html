@@ -27,5 +27,5 @@
     <a href="{{ event_obj.get_absolute_url }}" class="btn">See full event details</a>
   </div>
 </div>
-{% if event_obj.featured %}<br/> {% else %}<hr/>{% endif %}
+{% if event_obj.featured %}<br class="event row-fluid{{ event_obj.days|makeDateClasses }}" /> {% else %}<hr class="event row-fluid{{ event_obj.days|makeDateClasses }}" />{% endif %}
 
