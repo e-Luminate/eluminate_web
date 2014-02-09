@@ -2,8 +2,8 @@
 {% load tidy from date_tidy %}
 
 
-<div class="event">
-    <h2>{% if event_obj.featured %}Featured {% if event_obj.isEvent %}Event{% else %}Installation{% endif %}:<br/>{% endif %}
+{% if event_obj.featured %}<img src="{{ STATIC_URL }}img/elum_top.png" style="width:100%; height: 5px; vertical-align: bottom;margin-bottom:0"/>{% endif %}<div class="event"{% if event_obj.featured %} style="background-color: rgb(57, 57, 57); padding:0 5px 5px; margin-top:0"{% endif %}>
+    <h2 style="margin-top:0; padding-top:2px">{% if event_obj.featured %}Featured {% if event_obj.isEvent %}Event{% else %}Installation{% endif %}:<br/>{% endif %}
     <a href="{{ event_obj.get_absolute_url }}" title="Go to the event">{{event_obj.name}}</a></h2>
 	<div>
 		by {% include "events/_event_collaborator_names_snippet.html" with event=event_obj %}
@@ -28,4 +28,4 @@
     <a href="{{ event_obj.get_absolute_url }}">See full event details</a>
 	
 </div>
-<hr/>
+{% if event_obj.featured %}<br/> {% else %}<hr/>{% endif %}
