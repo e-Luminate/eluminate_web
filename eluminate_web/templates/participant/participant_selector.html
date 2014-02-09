@@ -1,6 +1,7 @@
 <div class="row-fluid">
     <div class="span12">
         <div id="participant_action_bar" class="lightBackground">
+            {% include 'participant/category_filter.html' with action_url_name='participant_filter' %}
             <div class="row-fluid">
                 <div class="span12">
                     <div id="participant_selector">
@@ -11,12 +12,11 @@
                             </div>
                         </a>
                         {% empty %}
-                        <p>Sorry, no participants matched your query. Try altering the filter below.</p>
+                        <p>Sorry, no participants matched your query. Try altering the filter above.</p>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-            {% include 'participant/category_filter.html' with action_url_name='participant_filter' %}
         </div>
     </div>
 </div>
