@@ -1,4 +1,5 @@
 {% load url from future %}
+{% load tidy from date_tidy %}
 
 <img src="{{ STATIC_URL }}img/elum_top.png" />
 <a href="{{ event.get_absolute_url }}" title="Go to event"><h2>{{ event.name }}</h2></a>
@@ -24,7 +25,7 @@
         Days:
     </div>
     <div class="span8">
-        {% for day in event.days.all %}{{ day.name }}<br/>{% endfor %}
+        {{ event.days|tidy }}
     </div>
 </div>
 <a href="{{ event.get_absolute_url }}" class="btn">Find out more&hellip;</a>
