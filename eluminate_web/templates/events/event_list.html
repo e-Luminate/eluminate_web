@@ -1,5 +1,6 @@
 {% extends "events/event_base.html" %}
 {% load url from future %}
+{% load dateTickBoxes from date_tidy %}
 {% block head_title %}
 Programme
 {% endblock %}
@@ -25,6 +26,7 @@ This is debug stuff...
 	  <li><a href="{% url 'events-list' %}" class="active">List</a></li>
 	</ul>
         {% comment %}{% include 'participant/category_filter.html' with action_url_name='events-list' %}{% endcomment %}
+    <h3>{% dateTickBoxes %}</h3>
 	{% for event_obj in object_list %}
 		{% include "events/_event_snippet_list.html" %}
 	{% endfor %}

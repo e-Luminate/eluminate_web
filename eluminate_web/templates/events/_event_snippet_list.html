@@ -1,9 +1,9 @@
 {% load url from future %}
-{% load tidy from date_tidy %}
+{% load tidy makeDateClasses from date_tidy %}
 
 
-{% if event_obj.featured %}<div class="event row-fluid" style="background-color: rgb(57, 57, 57); "><div class="span12"><img src="{{ STATIC_URL }}img/elum_top.png" style="width:100%; height: 5px; vertical-align: top"/></div></div>{% endif %}
-<div class="event row-fluid"{% if event_obj.featured %} style="background-color: rgb(57, 57, 57); padding-bottom:5px"{% endif %}>
+{% if event_obj.featured %}<div class="event row-fluid{{ event_obj.days|makeDateClasses }}" style="background-color: rgb(57, 57, 57); "><div class="span12"><img src="{{ STATIC_URL }}img/elum_top.png" style="width:100%; height: 5px; vertical-align: top"/></div></div>{% endif %}
+<div class="event row-fluid{{ event_obj.days|makeDateClasses }}"{% if event_obj.featured %} style="background-color: rgb(57, 57, 57); padding-bottom:5px"{% endif %}>
   <div class="span3" style ="padding-left:5px">
     <a href="{{ event_obj.get_absolute_url }}" title="See event details"><h2 class="negTopMargin">{% if event_obj.featured %}Featured {% if event_obj.isEvent %}Event{% else %}Installation{% endif %}:<br/>{% endif %}{{event_obj.name}}</h2></a>
     by {% include "events/_event_collaborator_names_snippet.html" with event=event_obj %}
