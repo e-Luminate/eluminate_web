@@ -1,0 +1,14 @@
+{% load url from future %}
+{% load booleanDates from date_tidy %}
+
+
+
+<tr>
+  <td>
+    <a href="{{ event_obj.get_absolute_url }}" title="See event details">{{event_obj.name}}</a>
+  </td>
+  {% for today in event_obj.days|booleanDates %}
+  <td{% if today %} class="event-on"{% endif %}>&nbsp;
+  </td>
+  {% endfor %}
+</tr>

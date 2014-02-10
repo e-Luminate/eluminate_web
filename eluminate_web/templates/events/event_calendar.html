@@ -1,0 +1,37 @@
+{% extends "events/event_base.html" %}
+{% load url from future %}
+{% load dateTickBoxes dateList from date_tidy %}
+{% block head_title %}
+Calendar
+{% endblock %}
+
+{% block nav_search %}
+{% endblock %}
+
+{% block tab %}
+<style>
+.calendar tr:nth-child(even) {background-color:rgb(57,57,57)}
+.calendar td {border-width: 0 1px; border-style: solid; border-color: grey;padding:0 2px;}
+.calendar td.event-on {background-color:#33b5e5}
+</style>
+	<ul class="nav nav-tabs">
+	  <li><a href="{% url 'events-map' %}">Map</a></li>
+	  <li><a href="{% url 'events-list' %}">List</a></li>
+	  <li><a href="{% url 'events-calendar' %}" class="active">Calendar</a></li>
+	</ul>
+	<table class="calendar">
+	  <tr>
+	  	<td>
+	  	  Event {% dateList as dates %}
+	  	</td>
+		{% for today in dates %}
+		<td>
+		  {{ today }}
+		</td>
+		  {% endfor %}
+	  </tr>
+	{% for event_obj in object_list %}
+		{% include "events/_event_snippet_calendar.html" %}
+	{% endfor %}
+	</table>
+{% endblock %}

@@ -44,6 +44,15 @@ def makeDateClasses(theDaysObj):
         classList += " day"+str(i)
     return classList
 
+@register.assignment_tag
+def dateList():
+    # make an index of days
+    allDays = list(Day.objects.all().order_by('pk'))
+    r=[]
+    for day in allDays:
+        r.append((str(day).split(" "))[1][:-2])
+    return r
+
 @register.simple_tag
 def dateTickBoxes():
     # make an index of days
@@ -73,3 +82,22 @@ $(document).ready(function(){
         r+=" <label style='white-space: nowrap; display: inline'><input type='radio' name='dateTickBoxes' value='day"+str(allDays.index(day))+"'> "+(str(day).split(" "))[1]+"</label>"
     r+="</div>"
     return r
+
+@register.filter(name='booleanDates')
+def booleanDates(theDaysObj):
+    """Compresses dates into a list of True/False"""
+
+    # make an index of days
+    allDays = list(Day.objects.all().order_by('pk'))
+    #return type(theDays.all())
+    theDays = list(theDaysObj.all())
+
+    l = []
+
+    for today in allDays:
+        try:
+            i= theDays.index(today)
+            l.append(True)
+        except:
+            l.append(False)
+    return l
