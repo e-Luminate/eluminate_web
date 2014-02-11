@@ -24,6 +24,7 @@ This is debug stuff...
 	<ul class="nav nav-tabs">
 	  <li><a href="{% url 'events-map' %}">Map</a></li>
 	  <li><a href="{% url 'events-list' %}" class="active">List</a></li>
+	  <li><a href="{% url 'events-calendar' %}" class="active">Calendar</a></li>
 	</ul>
         {% comment %}{% include 'participant/category_filter.html' with action_url_name='events-list' %}{% endcomment %}
     <h3>{% dateTickBoxes %}</h3>
